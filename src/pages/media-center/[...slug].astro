@@ -1,0 +1,292 @@
+---
+// export const prerender = true;
+import type { GetStaticPaths } from "astro";
+import fetchApi from "../../lib/strapi";
+import Markdown from "../../components/features/Markdown";
+
+import MarkdownIt from "markdown-it";
+const md = new MarkdownIt();
+
+// Import Custom Components
+import Layout from "../../layouts/Layout.astro";
+import RelatedArticlesSection from "../../components/partials/media-center/RelatedArticlesSection.astro";
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+  },
+};
+
+const articlesData: any = await fetchApi<any[]>({
+  endpoint: "articles", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+});
+
+const { slug } = Astro.params;
+
+const singleArticle = articlesData.find(
+  (page: any) => page?.attributes?.slug === slug
+);
+
+if (!singleArticle) return Astro.redirect("/404");
+
+console.log(singleArticle, "singleArticle")
+---
+
+<Layout title="Media Single Page">
+  <section class="section hero v11">
+    <div class="container-pd-image---title">
+      <div
+        class="card-section-wrapper bg-secondary-2 pd---none-border-top"
+        style="opacity: 1;"
+      >
+        <div class="container-default w-container">
+          <div
+            data-w-id="66239862-f976-9aa5-4692-104b01ddc9f7"
+            style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+            class="inner-container _856px center"
+          >
+            <div class="inner-container _700px---tablet center">
+              <div class="inner-container _600px---mbl center">
+                <div class="text-center mg-bottom-40px">
+                  <div class="inner-container _250px center">
+                    <div class="mg-bottom-12px">
+                      <div class="flex-horizontal gap-8px">
+                        <div class="text-100 medium color-neutral-800">
+                          {singleArticle?.attributes?.date}
+                        </div>
+
+                        <a
+                          href="/blog-category/articles"
+                          class="badge-primary small white-link w-inline-block"
+                        >
+                          <div class="flex-horizontal start gap-4px">
+                            <img
+                              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65a12e04c59a1723c86ea368_icon-articles-localfinder-x-webflow-template.svg"
+                              loading="eager"
+                              alt="Articles"
+                            />
+
+                            <div>Articles</div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <h1 class="mg-bottom-12px">
+                    {singleArticle?.attributes?.title}
+                  </h1>
+
+                  <div class="max-w-520px center">
+                    <p class="mg-bottom-0">
+                      {singleArticle?.attributes?.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-blog-post">
+            <img
+              data-w-id="66239862-f976-9aa5-4692-104b01ddc9ff"
+              alt="Empowering Farmers for Success"
+              style="opacity: 1;"
+              src={`${singleArticle?.attributes?.media?.image?.data?.attributes?.url}`}
+              sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, (max-width: 1439px) 95vw, 1220px"
+              src={`${singleArticle?.attributes?.media?.image?.data?.attributes?.url}`}
+              class="_w-h-100 fit-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pd-bottom-0px">
+    <div class="container-default w-container">
+      <div class="inner-container _700px---tablet center">
+        <div class="inner-container _600px---mbl center">
+          <div class="w-layout-grid grid-2-columns grid-blog-post-single">
+            <div
+              id="w-node-_14711af8-53f1-aae3-c6b9-fc39db3afb20-c86ea1b0"
+              class="inner-container _388px _100---tablet"
+            >
+              <div
+                id="w-node-_35b6b52e-a1ec-5aee-e25b-2c9d4cf8ced2-c86ea1b0"
+                class="sticky-top _24px-top static-tablet"
+              >
+                <div class="w-layout-grid grid-1-column sidebar-grid">
+                  <div
+                    data-w-id="35045e4d-2624-5ce3-9bf1-955f2623a58a"
+                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                    class="card content-center"
+                  >
+                    <div class="mg-bottom-12px">
+                      <div class="inner-container _64px center">
+                        <img
+                          src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a65e4b8ece87037ed1beec_Untitled%20design%20(40).png"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+
+                    <h2 class="heading-h3-size mg-bottom-8px">
+                      Reef Foundation
+                    </h2>
+
+                    <div class="inner-container _400px---mbl center">
+                      <p class="mg-bottom-24px">
+                        A non-profitable civil institution with a legal
+                        personality that aims to work side by side with the
+                        Ministry of Environment, Water and Agriculture.
+                      </p>
+                    </div>
+
+                    <div class="w-layout-grid flex-horizontal gap-4px">
+                      <a
+                        href="https://facebook.com/"
+                        target="_blank"
+                        class="social-icon-square size-30px w-inline-block"
+                        ><div class="social-icon-font"></div></a
+                      ><a
+                        href="https://twitter.com/"
+                        target="_blank"
+                        class="social-icon-square size-30px w-inline-block"
+                        ><div class="social-icon-font"></div></a
+                      ><a
+                        href="https://www.instagram.com/"
+                        target="_blank"
+                        class="social-icon-square size-30px w-inline-block"
+                        ><div class="social-icon-font"></div></a
+                      ><a
+                        href="https://www.linkedin.com/"
+                        target="_blank"
+                        class="social-icon-square size-30px w-inline-block"
+                        ><div class="social-icon-font"></div></a
+                      >
+                    </div>
+                  </div>
+
+                  <div
+                    data-w-id="43007853-e166-b994-58dd-4fabb6351dd6"
+                    style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                    class="card content-center newsletter-sidebar"
+                  >
+                    <div class="mg-bottom-24px">
+                      <div class="inner-container _64px center">
+                        <img
+                          src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a12e04c59a1723c86ea1f2_icon-send-us-email-localfinder-x-webflow-template.svg"
+                          height="64"
+                          alt="Icon Send Email - Localfinder X Webflow Template"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="max-w-250px">
+                      <h3 class="display-4 color-neutral-100 mg-bottom-24px">
+                        Subscribe to our weekly newsletter
+                      </h3>
+                    </div>
+
+                    <div class="width-100">
+                      <div class="input-and-button-form-block w-form">
+                        <form
+                          action="#"
+                          id="wf-form-Sidebar-Subscribe"
+                          name="wf-form-Sidebar-Subscribe"
+                          data-name="Sidebar Subscribe"
+                          method="get"
+                          data-wf-page-id="65a12e04c59a1723c86ea1b0"
+                          data-wf-element-id="4dfbe78b-efc2-e2bb-3908-1dca061ce8fd"
+                          aria-label="Sidebar Subscribe"
+                        >
+                          <div class="w-layout-grid grid-1-column gap-row-20px">
+                            <input
+                              class="input small w-input"
+                              maxlength="256"
+                              name="Email"
+                              data-name="Email"
+                              placeholder="Enter your email"
+                              type="email"
+                              id="Email"
+                              required=""
+                            />
+
+                            <input
+                              type="submit"
+                              data-wait="Please wait..."
+                              class="btn-primary small w-button"
+                              value="Subscribe"
+                            />
+                          </div>
+                        </form>
+
+                        <div
+                          class="success-message w-form-done"
+                          tabindex="-1"
+                          role="region"
+                          aria-label="Sidebar Subscribe success"
+                        >
+                          <div class="color-neutral-100">
+                            <div
+                              class="line-rounded-icon success-message-check"
+                            >
+                              
+                            </div>
+
+                            <div>Thanks for joining our newsletter.</div>
+                          </div>
+                        </div>
+
+                        <div
+                          class="error-message w-form-fail"
+                          tabindex="-1"
+                          role="region"
+                          aria-label="Sidebar Subscribe failure"
+                        >
+                          <div>Oops! Something went wrong.</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="w-node-_3a8d5ab1-b67d-d0dd-77a5-be916a7689f5-c86ea1b0"
+              data-w-id="3a8d5ab1-b67d-d0dd-77a5-be916a7689f5"
+              style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+              class="mg-bottom--16px"
+            >
+              <div class="rich-text w-richtext">
+                <h2>{singleArticle?.attributes?.title}</h2>
+
+                {
+                  singleArticle?.attributes?.body && (
+                    <Markdown value={md?.render(singleArticle?.attributes?.body)} />
+                  )
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        data-w-id="b2367fee-007f-de48-f3a7-5f2d81edddd9"
+        style="opacity: 1;"
+        class="divider _120px pd-bottom-80px"
+      >
+      </div>
+    </div>
+  </section>
+
+  <RelatedArticlesSection articles={articlesData} />
+</Layout>

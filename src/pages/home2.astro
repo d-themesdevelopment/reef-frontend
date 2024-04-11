@@ -1,0 +1,45 @@
+---
+import fetchApi from "../lib/strapi";
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import RenderSectionBlock from "../components/partials/RenderSectionBlock.astro";
+
+const urlParamsObject = {
+  populate: {
+    blocks: {
+      populate: {
+        image: {
+          populate: "*",
+        },
+        button: {
+          populate: "*",
+        },
+        video: {
+          populate: "*",
+        },
+        heading: {
+          populate: "*",
+        },
+        buttons: {
+          populate: "*",
+        },
+        accordion: {
+          populate: "*",
+        },
+      },
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+const homeData: any = await fetchApi<any[]>({
+  endpoint: "home2", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+---
+
+<Layout title="Home Video">
+  <RenderSectionBlock blocks={homeData?.attributes?.blocks} />
+</Layout>

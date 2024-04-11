@@ -1,0 +1,340 @@
+---
+interface Props {
+  fields: {
+    title: string;
+    desc: string;
+    email: {
+      title: string;
+      value: string;
+    };
+    phone: {
+      title: string;
+      value: string;
+    };
+    nationalAddress: {
+      title: string;
+      value: string;
+    };
+  };
+}
+
+const {
+  fields: { title, desc, email, phone, nationalAddress },
+} = Astro.props;
+
+const locale = Astro.cookies.get("locale")?.value;
+---
+
+<section class="section hero v21">
+  <div class="mg-top--120px alt">
+    <div class="card-section-wrapper bg-secondary-1" style="opacity: 1;">
+      <div class="w-layout-blockcontainer container-default w-container">
+        <div class="mg-bottom--390px">
+          <div class="card contact-main">
+            <div class="w-layout-grid grid-2-columns contact-main-grid">
+              <div
+                id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69245-65b6923e"
+                data-w-id="0194c01e-dfbe-ade8-bdb1-320265b69245"
+                class="inner-container _353px _100---tablet"
+                style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+              >
+                <div>
+                  <div>
+                    <img
+                      src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e14f7e5c64b6e60d81a361_1%20(71).svg"
+                      alt=""
+                      class="subtitle-icon"
+                    />
+                  </div>
+
+                  <h1 class="display-1 mg-bottom-12px">{title}</h1><div
+                    class="inner-container _400px---tablet"
+                  >
+                    <div class="inner-container _300px---mbl">
+                      <p class="mg-bottom-24px">
+                        {desc}
+                      </p>
+
+                      <div class="w-layout-grid social-media-grid-top alt">
+                        <a
+                          href="https://www.facebook.com/"
+                          target="_blank"
+                          class="social-icon-square w-inline-block"
+                          ><div class="social-icon-font"></div></a
+                        ><a
+                          href="https://www.twitter.com/"
+                          target="_blank"
+                          class="social-icon-square w-inline-block"
+                          ><div class="social-icon-font"></div></a
+                        ><a
+                          href="https://www.instagram.com/"
+                          target="_blank"
+                          class="social-icon-square w-inline-block"
+                          ><div class="social-icon-font"></div></a
+                        ><a
+                          href="https://www.linkedin.com/"
+                          target="_blank"
+                          class="social-icon-square w-inline-block"
+                          ><div class="social-icon-font"></div></a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="divider _32px"></div>
+
+                <div>
+                  <div
+                    class="w-layout-grid grid-1-column gap-row-24px contact-links-grid-v2"
+                  >
+                    <a
+                      id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69261-65b6923e"
+                      data-w-id="0194c01e-dfbe-ade8-bdb1-320265b69261"
+                      href="mailto:contact@localfinder.com"
+                      class="card-link-icon color-neutral-800 w-inline-block"
+                    >
+                      <div
+                        class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-2" : "mg-right-11px"}`}
+                      >
+                        <img
+                          src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e15061fe2aee910384f801_1%20(74).svg"
+                          alt=""
+                          class="card-image"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                      </div>
+
+                      <div>
+                        <div class="mg-bottom-6px">
+                          <div class="text-100 medium color-neutral-600">
+                            {email?.title}
+                          </div>
+                        </div>
+
+                        <div class="text-break-all">
+                          <div
+                            class="card-title text-100 bold"
+                            style="color: rgb(0, 45, 51);"
+                          >
+                            {email?.value}
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+
+                    <a
+                      id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b6926b-65b6923e"
+                      data-w-id="0194c01e-dfbe-ade8-bdb1-320265b6926b"
+                      href="tel:(414)905-6043"
+                      class="card-link-icon color-neutral-800 w-inline-block"
+                    >
+                      <div
+                        class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-2" : "mg-right-11px"}`}
+                      >
+                        <img
+                          src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e14fe2b478f8d30590c9ca_1%20(72).svg"
+                          alt=""
+                          class="card-image"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                      </div>
+
+                      <div>
+                        <div class="mg-bottom-6px">
+                          <div class="text-100 medium color-neutral-600">
+                            {phone?.title}
+                          </div>
+                        </div>
+
+                        <div
+                          class="card-title text-100 bold"
+                          style="color: rgb(0, 45, 51);"
+                        >
+                          {phone?.value}
+                        </div>
+                      </div>
+                    </a>
+
+                    <a
+                      id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69274-65b6923e"
+                      data-w-id="0194c01e-dfbe-ade8-bdb1-320265b69274"
+                      href="tel:(414)905-6043"
+                      class="card-link-icon color-neutral-800 w-inline-block"
+                    >
+                      <div
+                        class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-2" : "mg-right-11px"}`}
+                      >
+                        <img
+                          src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e15018f7363ec93d80ab5a_1%20(73).svg"
+                          alt=""
+                          class="card-image"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                      </div>
+
+                      <div>
+                        <div class="mg-bottom-6px">
+                          <div class="text-100 medium color-neutral-600">
+                            {nationalAddress?.title}
+                          </div>
+                        </div>
+
+                        <div
+                          class="card-title text-100 bold"
+                          style="color: rgb(0, 45, 51);"
+                        >
+                          {nationalAddress?.value}
+                        </div>
+                      </div></a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div
+                data-w-id="0194c01e-dfbe-ade8-bdb1-320265b6927d"
+                class="form-container v2"
+                style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+              >
+                <div class="contact-form-block v2 w-form">
+                  <form
+                    action="#"
+                    id="wf-form-Contact-Form"
+                    name="wf-form-Contact-Form"
+                    data-name="Contact Form"
+                    method="get"
+                    data-wf-page-id="65a12e04c59a1723c86ea1ac"
+                    data-wf-element-id="0194c01e-dfbe-ade8-bdb1-320265b6927f"
+                    aria-label="Contact Form"
+                  >
+                    <div class="w-layout-grid grid-2-columns form">
+                      <div
+                        id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69281-65b6923e"
+                      >
+                        <label for="Name-3">Full name</label><div
+                          class="position-relative"
+                        >
+                          <input
+                            class="input w-input"
+                            maxlength="256"
+                            name="name-2"
+                            data-name="Name 2"
+                            placeholder="Full name"
+                            type="text"
+                            id="name-2"
+                            required=""
+                            data-listener-added_7f99a0f0="true"
+                          />
+                        </div>
+                      </div>
+
+                      <div
+                        id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69286-65b6923e"
+                      >
+                        <label for="Email-3">Email address</label><div
+                          class="position-relative"
+                        >
+                          <input
+                            class="input w-input"
+                            maxlength="256"
+                            name="email-2"
+                            data-name="Email 2"
+                            placeholder="example@youremail.com"
+                            type="email"
+                            id="email-2"
+                            required=""
+                          />
+                        </div>
+                      </div><div
+                        id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b6928b-65b6923e"
+                      >
+                        <label for="Phone-3">Phone number</label><div
+                          class="position-relative"
+                        >
+                          <input
+                            class="input w-input"
+                            maxlength="256"
+                            name="phone-2"
+                            data-name="Phone 2"
+                            placeholder="(123) 456 - 7890"
+                            type="tel"
+                            id="phone-2"
+                            required=""
+                          />
+                        </div>
+                      </div><div
+                        id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69290-65b6923e"
+                      >
+                        <label for="Subject-3">Subject</label><div
+                          class="position-relative"
+                        >
+                          <input
+                            class="input w-input"
+                            maxlength="256"
+                            name="subject-2"
+                            data-name="Subject 2"
+                            placeholder="ex. Gardening service"
+                            type="text"
+                            id="subject-2"
+                            required=""
+                          />
+                        </div>
+                      </div><div
+                        id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69295-65b6923e"
+                        class="text-area-wrapper"
+                      >
+                        <label for="message-3">Message</label><textarea
+                          id="message-2"
+                          name="message-2"
+                          maxlength="5000"
+                          data-name="Message 2"
+                          placeholder="Type your message here"
+                          required=""
+                          class="text-area small mg-bottom-8px w-input"
+                        ></textarea>
+                      </div><input
+                        type="submit"
+                        data-wait="Please wait..."
+                        id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69299-65b6923e"
+                        class="btn-primary w-button"
+                        value="Send Message"
+                      />
+                    </div>
+                  </form><div
+                    class="success-message w-form-done"
+                    tabindex="-1"
+                    role="region"
+                    aria-label="Contact Form success"
+                  >
+                    <div>
+                      <div
+                        class="line-rounded-icon success-message-check large"
+                      >
+                        
+                      </div><div class="heading-h3-size mg-bottom-8px">
+                        Thank you
+                      </div><div>
+                        Your message has been submitted.<br />We will get back
+                        to you within 24-48 hours.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="error-message text-center---mbp w-form-fail"
+                    tabindex="-1"
+                    role="region"
+                    aria-label="Contact Form failure"
+                  >
+                    <div>Oops! Something went wrong.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

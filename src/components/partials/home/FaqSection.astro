@@ -1,0 +1,69 @@
+---
+import type Heading from "../../../interfaces/Heading";
+
+interface Props {
+  fields: {
+    heading: Heading;
+    accordion: Array<{ title: string; value: string }>;
+  };
+}
+
+const {
+  fields: { heading, accordion },
+} = Astro.props;
+---
+
+<section class="section newsec3">
+  <div class="container-default w-container">
+    <div
+      data-w-id="cdf601ad-3e57-595d-43e7-0f40d9b1e1c3"
+      class="inner-container _600px center"
+    >
+      <div class="text-center mg-bottom-32px">
+        <img src="/images/1-21.svg" alt="" class="subtitle-icon" />
+        <h2 class="display-2">
+          {heading?.title}
+        </h2>
+        <p class="mg-bottom-0">
+          {heading?.desc}
+        </p>
+      </div>
+    </div>
+
+    <div
+      data-w-id="cdf601ad-3e57-595d-43e7-0f40d9b1e1ce"
+      class="inner-container _1054px center"
+    >
+      <div class="w-layout-grid grid-1-column gap-row-24px">
+        {
+          accordion.map((item, index) => (
+            <Fragment key={index}>
+              <div
+                data-w-id="cdf601ad-3e57-595d-43e7-0f40d9b1e1d0"
+                class="accordion-item-wrapper"
+              >
+                <div class="accordion-content-wrapper width-608px">
+                  <div class="accordion-header">
+                    <h3 class="accordion-title">
+                      <>{item.title}</>
+                    </h3>
+                  </div>
+                  <div class="acordion-body">
+                    <div class="accordion-spacer" />
+                    <p class="mg-bottom-0">{item.value}</p>
+                  </div>
+                </div>
+                <div class="accordion-side right-side">
+                  <div class="btn-circle-secondary small accordion-btn">
+                    <div class="accordion-btn-line vertical" />
+                    <div class="accordion-btn-line horizontal" />
+                  </div>
+                </div>
+              </div>
+            </Fragment>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

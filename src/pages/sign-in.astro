@@ -1,0 +1,168 @@
+---
+// export const prerender = true;
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import SignInForm from "../components/partials/auth/SignInForm";
+---
+
+<Layout title="Our Services">
+  <div class="page-wrapper-2 flex-vertical">
+    <div class="section-10 hero sign-in">
+      <div class="container-default-3 w-container">
+        <div class="position-relative z-index-1">
+          <div class="inner-container _622px center">
+            <div class="inner-container _500px---mbl center">
+              <div
+                data-w-id="c4efb870-0447-4e1d-dd16-c798f678d1cb"
+                class="card5 sign-in"
+              >
+                <div class="mg-bottom-46px">
+                  <div
+                    data-w-id="c4efb870-0447-4e1d-dd16-c798f678d1cd"
+                    style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+                    class="text-center-5"
+                  >
+                    <h1 class="display-6 mg-bottom-4px">Welcome back</h1><p
+                      class="mg-bottom-3"
+                    >
+                      Please fill your email and password <span
+                        class="text-no-wrap">to sign in.</span
+                      >
+                    </p>
+                  </div>
+                </div>
+
+                <div
+                  class="sign-in-form-block w-form"
+                >
+                  <SignInForm
+                    apiUrl={import.meta.env.STRAPI_URL}
+                    apiToken={import.meta.env.STRAPI_Token}
+                    client:load
+                  />
+
+                  <div
+                    class="success-message-2 w-form-done"
+                    tabindex="-1"
+                    role="region"
+                    aria-label="Sign In Form success"
+                  >
+                    <div>
+                      <div
+                        class="line-rounded-icon success-message-check large"
+                      >
+                        
+                      </div>
+
+                      <div>Welcome back!</div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="error-message-2 w-form-fail"
+                    tabindex="-1"
+                    role="region"
+                    aria-label="Sign In Form failure"
+                  >
+                    <div>Oops! Something went wrong.</div>
+                  </div>
+                </div>
+
+                <div
+                  data-w-id="c4efb870-0447-4e1d-dd16-c798f678d1f3"
+                  style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+                >
+                  <div class="text-center-5 mt-5">
+                    <div>
+                      Don’t have an account? <a
+                        href="/sign-up"
+                        class="text-decoration-none text-no-wrap"
+                        >Sign up today</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        data-w-id="c4efb870-0447-4e1d-dd16-c798f678d20c"
+        style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+        class="position-absolute sign-in-bg"
+      >
+        <div class="position-absolute full overflow-hidden circle-center">
+          <div class="position-absolute circle-bg-top-default"></div>
+        </div>
+
+        <div
+          data-w-id="c4efb870-0447-4e1d-dd16-c798f678d20f"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          class="position-absolute sign-in-shape---01"
+        >
+        </div>
+
+        <div
+          data-w-id="c4efb870-0447-4e1d-dd16-c798f678d210"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          class="position-absolute sign-in-shape---03"
+        >
+        </div>
+
+        <div
+          data-w-id="c4efb870-0447-4e1d-dd16-c798f678d211"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          class="position-absolute sign-in-shape---02"
+        >
+        </div>
+
+        <div
+          data-w-id="c4efb870-0447-4e1d-dd16-c798f678d212"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          class="position-absolute sign-in-shape---04"
+        >
+        </div>
+      </div>
+    </div>
+
+    <div class="mg-top-auto">
+      <footer class="footer-wrapper-2 bg-neutral-100">
+        <div class="container-default-3 w-container">
+          <div class="footer-bottom-2 small">
+            <div class="w-layout-grid grid-footer-logo---paragraph">
+              <a
+                href="#"
+                id="w-node-c4efb870-0447-4e1d-dd16-c798f678d218-72fbc747"
+                class="footer-logo-wrapper-2 mg-bottom-0 w-inline-block"
+              >
+                <img
+                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a146f5f085c77e87a354b7_reef.webp"
+                  alt=""
+                  sizes="(max-width: 1439px) 185px, 220px"
+                  srcset="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a146f5f085c77e87a354b7_reef-p-500.png 500w, https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a146f5f085c77e87a354b7_reef-p-800.png 800w, https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a146f5f085c77e87a354b7_reef-p-1080.png 1080w, https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a146f5f085c77e87a354b7_reef.webp 1584w"
+                  class="footer-logo-2"
+                />
+              </a>
+
+              <p class="color-neutral-803 mg-bottom-0">
+                Copyright © Copyright © Reef National Foundation
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import Cookies from "js-cookie";
+  const isloggedIn = Cookies.get("reef_token");
+
+  if (isloggedIn) {
+          window.location.href = "/profile";
+  }
+</script>

@@ -1,0 +1,122 @@
+---
+import fetchApi from "../../../lib/strapi";
+import type Heading from "../../../interfaces/Heading";
+
+interface Props {
+  fields: {
+    heading: Heading;
+  };
+}
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+  },
+};
+
+const reportsData: any = await fetchApi<any[]>({
+  endpoint: "reports", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+});
+
+const {
+  fields: { heading },
+} = Astro.props;
+---
+
+<section id="reports" class="section-4 pd-200px">
+  <div class="container-default-2 w-container">
+    <div class="inner-container _500px---tablet center">
+      <div class="inner-container _400px---mbl center">
+        <div class="mg-bottom-60px-2">
+          <div class="text-center-tablet">
+            <div
+              data-w-id="9379c657-d9ac-9c34-56bf-7b878493a3c0"
+              class="w-layout-grid grid-2-columns title-and-paragraph _1-col-tablet"
+              style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+            >
+              <div
+                id="w-node-_9379c657-d9ac-9c34-56bf-7b878493a3c1-8493a3ba"
+                class="inner-container _568px"
+              >
+                <div class="mg-bottom-10px">
+                  <div class="text-401 bold color-accent-1 text-uppercase">
+                    {heading?.subtitle}
+                  </div>
+                </div>
+
+                <h2 class="display-5 mg-bottom-0">{heading?.title}</h2>
+              </div>
+
+              <div
+                id="w-node-_9379c657-d9ac-9c34-56bf-7b878493a3c7-8493a3ba"
+                class="inner-container _522px"
+              >
+                <p class="mg-bottom-2">
+                  {heading?.desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-layout-grid grid-3-columns-2 gap-40px _1-col-tablet">
+          {
+            reportsData?.map((item: any, index: number) => (
+              <a
+                href={item?.attributes?.docUrl}
+                target="_blank"
+                class="card-3 link-card blog-post-v1 w-inline-block"
+              >
+                <div class="image-wrapper card-blog-post-v1-image">
+                  <img
+                    loading="eager"
+                    sizes="(max-width: 767px) 83vw, (max-width: 991px) 65vw, (max-width: 1439px) 30vw, 393.0625px"
+                    srcset="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65deb1ba4d5bb659c32ccde7_Untitled%20design%20(63)-p-500.png 500w, https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65deb1ba4d5bb659c32ccde7_Untitled%20design%20(63).png 610w"
+                    src={`${item?.attributes?.media?.image?.data?.attributes?.url}`}
+                    src={`${item?.attributes?.media?.alt}`}
+                    class="image-8 cover"
+                    data-xblocker="passed"
+                    style="visibility: visible; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                  />
+
+                  <div class="badge-secondary-2 small card-blog-post-v1-category" />
+                </div>
+
+                <div class="card-blog-post-v1-content">
+                  <h3
+                    class="heading-h4-size-2 mg-bottom-12px"
+                    style="color: rgb(1, 57, 65);"
+                  >
+                    {item?.attributes?.title}
+                  </h3>
+
+                  <p class="mg-bottom-3">{item?.attributes?.desc}</p>
+
+                  <div class="mg-top-auto">
+                    <div class="mg-top-32px">
+                      <div class="card-blog-post-v1-content-bottom">
+                        <div class="text-403 bold color-neutral-800">
+                          {item?.attributes?.date}
+                        </div>
+
+                        <div
+                          class="btn-circle-primary-2 small card-blog-post-arrow"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        >
+                          <div class="line-rounded-icon"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

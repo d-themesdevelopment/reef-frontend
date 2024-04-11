@@ -1,0 +1,279 @@
+---
+import type VideoType from "../../../interfaces/VideoType";
+import type Link from "../../../interfaces/Link";
+
+interface Props {
+  fields: {
+    subtitle: string;
+    title: string;
+    desc: string;
+    button: Link;
+    video: VideoType;
+  };
+}
+
+const {
+  fields: { subtitle, title, desc, button, video },
+} = Astro.props;
+---
+
+<div class="home-hero home2">
+  <div class="grid-wrapper-2">
+    <div
+      id="w-node-_42a7767c-1717-1c75-bcd9-21f1478a489d-b58716ca"
+      class="home-hero-content"
+    >
+      <div
+        id="w-node-_42a7767c-1717-1c75-bcd9-21f1478a489e-b58716ca"
+        style="opacity: 1;"
+        class="home-hero-intro"
+      >
+        <div class="home-hero-title">
+          <div class="subtitle-2">{subtitle}</div>
+
+          <h1
+            id="w-node-_42a7767c-1717-1c75-bcd9-21f1478a48a2-b58716ca"
+            class="xxl-heading-2"
+          >
+            {title}
+          </h1>
+
+          <p class="mg-bottom-24px newh4">
+            {desc}
+          </p>
+        </div>
+        <a
+          href={button?.value}
+          id="w-node-_42a7767c-1717-1c75-bcd9-21f1478a48a4-b58716ca"
+          class="button white w-inline-block"
+          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+        >
+          <div id="w-node-_42a7767c-1717-1c75-bcd9-21f1478a48a5-b58716ca">
+            {button?.title}
+          </div>
+        </a>
+      </div>
+
+      <div
+        id="w-node-_42a7767c-1717-1c75-bcd9-21f1478a48a7-b58716ca"
+        class="hero-video-button"
+      >
+        <div
+          data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48a8"
+          class="video-button-verlay"
+          style="opacity: 0; display: none;"
+        >
+        </div>
+
+        <div
+          data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48a9"
+          class="video-button-background"
+          style="transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; display: none;"
+        >
+          <div
+            data-poster-url="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-poster-00001.jpg"
+            data-video-urls="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-transcode.mp4,https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-transcode.webm"
+            data-autoplay="true"
+            data-loop="true"
+            data-wf-ignore="true"
+            data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48aa"
+            class="button-video w-background-video w-background-video-atom"
+            style="transform: translate3d(0px, 0px, 0px) scale3d(2, 2, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          >
+            <video
+              id="42a7767c-1717-1c75-bcd9-21f1478a48aa-video"
+              autoplay=""
+              loop=""
+              style='background-image:url("https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-poster-00001.jpg")'
+              muted=""
+              playsinline=""
+              data-wf-ignore="true"
+              data-object-fit="cover"
+            >
+              <source src={video?.videoUrl} data-wf-ignore="true" /><source
+                src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-transcode.webm"
+                data-wf-ignore="true"
+              />
+            </video>
+            <div class="overlay-2 light"></div>
+          </div>
+        </div>
+
+        <div
+          data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48ac"
+          class="video-hover-button"
+          style="border-color: rgba(192, 192, 211, 0.3); transform: translate3d(0.0048px, 0.0048px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; background-color: rgba(255, 255, 255, 0);"
+        >
+          <div
+            data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48ad"
+            class="video-icon-wrapper"
+            style="border-color: rgba(192, 192, 211, 0.3); background-color: rgba(192, 192, 211, 0.2);"
+          >
+            <img
+              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bf6143f39a3740b13f301c_play-icon.svg"
+              loading="lazy"
+              width="14"
+              alt=""
+              class="video-icon-2"
+            />
+          </div>
+        </div>
+
+        <div
+          data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48af"
+          class="video-button-waves"
+          style="display: none; transform: translate3d(0px, 0px, 0px) scale3d(0, 0, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+        >
+          <div
+            data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48b0"
+            class="wave-one"
+            style="opacity: 0; transform: translate3d(0px, 0px, 0px) scale3d(0.998416, 0.998416, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;"
+          >
+          </div><div
+            data-w-id="42a7767c-1717-1c75-bcd9-21f1478a48b1"
+            class="wave-two"
+            style="opacity: 0; transform: translate3d(0px, 0px, 0px) scale3d(0.999334, 0.999334, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; will-change: transform;"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slider-background">
+      <div
+        data-poster-url="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-poster-00001.jpg"
+        data-video-urls="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-transcode.mp4,https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-transcode.webm"
+        data-autoplay="true"
+        data-loop="true"
+        data-wf-ignore="true"
+        class="background-video w-background-video w-background-video-atom"
+      >
+        <video
+          id="9753bced-ffdd-2321-0478-956a3ff35baa-video"
+          autoplay=""
+          loop=""
+          style='background-image:url("https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-poster-00001.jpg")'
+          muted=""
+          playsinline=""
+          data-wf-ignore="true"
+          data-object-fit="cover"
+          ><source src={video?.videoUrl} data-wf-ignore="true" /><source
+            src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65bfb949ab3fd8f47ca3fa84_Untitled video - Made with Clipchamp (12) (1) (1)-transcode.webm"
+            data-wf-ignore="true"
+          />
+        </video>
+
+        <div class="overlay gradient"></div>
+      </div>
+    </div>
+
+    <div
+      data-delay="4000"
+      data-animation="over"
+      class="hero-slider w-slider"
+      data-autoplay="false"
+      data-easing="ease"
+      data-hide-arrows="false"
+      data-disable-swipe="true"
+      data-autoplay-limit="0"
+      data-nav-spacing="3"
+      data-duration="0"
+      data-infinite="true"
+      id="w-node-_42a7767c-1717-1c75-bcd9-21f1478a48b6-b58716ca"
+      role="region"
+      aria-label="carousel"
+    >
+      <div class="hero-slider-mask w-slider-mask" id="w-slider-mask-0">
+        <div
+          class="hero-slide w-slide"
+          aria-label="1 of 3"
+          role="group"
+          style="transform: translateX(0px); opacity: 1;"
+        >
+          <div class="hero-collection-wrapper w-dyn-list">
+            <div role="list" class="w-dyn-items">
+              <div role="listitem" class="collection-item w-dyn-item">
+                <div class="slider-background-wrapper hero-wrapper"></div>
+              </div><div role="listitem" class="collection-item w-dyn-item">
+                <div class="slider-background-wrapper hero-wrapper"></div>
+              </div><div role="listitem" class="collection-item w-dyn-item">
+                <div class="slider-background-wrapper hero-wrapper"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="hero-slide w-slide"
+          aria-label="2 of 3"
+          role="group"
+          aria-hidden="true"
+          style="transform: translateX(0px); opacity: 1; visibility: hidden;"
+        >
+          <div class="hero-collection-wrapper w-dyn-list" aria-hidden="true">
+            <div class="w-dyn-empty" aria-hidden="true">
+              <div aria-hidden="true">No items found.</div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="hero-slide w-slide"
+          aria-label="3 of 3"
+          role="group"
+          aria-hidden="true"
+          style="transform: translateX(0px); opacity: 1; visibility: hidden;"
+        >
+          <div class="hero-collection-wrapper w-dyn-list" aria-hidden="true">
+            <div class="w-dyn-empty" aria-hidden="true">
+              <div aria-hidden="true">No items found.</div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          aria-live="off"
+          aria-atomic="true"
+          class="w-slider-aria-label"
+          data-wf-ignore=""
+        >
+        </div>
+      </div>
+
+      <div class="slide-nav-2 w-slider-nav w-round">
+        <div
+          class="w-slider-dot w-active"
+          data-wf-ignore=""
+          aria-label="Show slide 1 of 3"
+          aria-pressed="true"
+          role="button"
+          tabindex="0"
+          style="margin-left: 3px; margin-right: 3px;"
+        >
+        </div>
+
+        <div
+          class="w-slider-dot"
+          data-wf-ignore=""
+          aria-label="Show slide 2 of 3"
+          aria-pressed="false"
+          role="button"
+          tabindex="-1"
+          style="margin-left: 3px; margin-right: 3px;"
+        >
+        </div>
+
+        <div
+          class="w-slider-dot"
+          data-wf-ignore=""
+          aria-label="Show slide 3 of 3"
+          aria-pressed="false"
+          role="button"
+          tabindex="-1"
+          style="margin-left: 3px; margin-right: 3px;"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

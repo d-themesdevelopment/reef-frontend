@@ -1,0 +1,184 @@
+---
+import fetchApi from "../../../lib/strapi";
+
+interface Props {
+  fields: {
+    title: string;
+  };
+}
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+  },
+};
+
+const articlesData: any = await fetchApi<any[]>({
+  endpoint: "articles", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+});
+
+const { fields } = Astro.props;
+---
+
+<section class="section">
+  <div class="container-default w-container">
+    <div>
+      <div
+        data-w-id="e059cf3f-0606-688e-0362-65e8223c36a9"
+        class="text-center---tablet"
+      >
+        <div
+          data-w-id="c1c48b00-f8a0-ce0f-68ae-855a436a494c"
+          style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+          class="w-layout-grid grid-2-columns title-and-categories"
+        >
+          <h2 class="display-2 mg-bottom-0">{fields?.title}</h2><div
+            class="w-dyn-list"
+          >
+            <div
+              role="list"
+              class="categories-badges-wrapper center---tablet w-dyn-items"
+            >
+              <div
+                role="listitem"
+                class="categories-badges-item-wrapper center---tablet w-dyn-item"
+              >
+                <a
+                  href="/media-center"
+                  aria-current="page"
+                  class="badge-secondary small category-badges center---tablet w-inline-block w--current"
+                  ><div>All</div></a
+                ><a
+                  href="/blog-category/articles"
+                  class="badge-secondary small category-badges center---tablet w-inline-block"
+                  ><div class="flex-horizontal gap-4px">
+                    <div>Articles</div>
+                  </div>
+                </a>
+              </div>
+
+              <div
+                role="listitem"
+                class="categories-badges-item-wrapper center---tablet w-dyn-item"
+              >
+                <a
+                  href="/blog-pages/blog-v1"
+                  aria-current="page"
+                  class="badge-secondary small category-badges center---tablet w-inline-block w-condition-invisible w--current"
+                  ><div>All</div></a
+                ><a
+                  href="/blog-category/tips"
+                  class="badge-secondary small category-badges center---tablet w-inline-block"
+                  ><div class="flex-horizontal gap-4px">
+                    <div>Tips</div>
+                  </div></a
+                >
+              </div>
+              
+              <div
+                role="listitem"
+                class="categories-badges-item-wrapper center---tablet w-dyn-item"
+              >
+                <a
+                  href="/blog-pages/blog-v1"
+                  aria-current="page"
+                  class="badge-secondary small category-badges center---tablet w-inline-block w-condition-invisible w--current"
+                  ><div>All</div></a
+                ><a
+                  href="/blog-category/resources"
+                  class="badge-secondary small category-badges center---tablet w-inline-block"
+                  ><div class="flex-horizontal gap-4px">
+                    <div>Resources</div>
+                  </div></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        data-w-id="e3e4c45c-9fee-c86e-0109-eb5870a962e3"
+        style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+        class="height-100 w-dyn-list"
+      >
+        <div role="list" class="grid-3-columns gap-row-32px w-dyn-items">
+          {
+            articlesData?.map((item: any, index: number) => (
+              <div role="listitem" class="height-100 w-dyn-item">
+                <a
+                  data-w-id="25ed672e-4005-5ca9-e265-eea155b996eb"
+                  href={`/media-center/${item?.attributes?.slug}`}
+                  class="card card-blog w-inline-block"
+                >
+                  <>
+                    <div class="card-picture image-wrapper---br-top">
+                      <>
+                        <img
+                          src={`${item?.attributes?.media?.image?.data?.attributes?.url}`}
+                          alt="Empowering Farmers for Success"
+                          sizes="(max-width: 767px) 90vw, (max-width: 991px) 45vw, (max-width: 1279px) 30vw, 388px"
+                          src={`${item?.attributes?.media?.image?.data?.attributes?.url}`}
+                          class="card-image"
+                          data-xblocker="passed"
+                          style="visibility: visible; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                        <div class="blog-card-badge-wrapper-top" />
+                      </>
+                    </div>
+                    <div class="pd---content-inside-card pd-blog-wrapper">
+                      <>
+                        <div class="inner-container _350px---mbl">
+                          <h3
+                            class="card-title heading-h4-size mg-bottom-24px"
+                            style="color: rgb(0, 45, 51);"
+                          >
+                            {item?.attributes?.title}
+                          </h3>
+                        </div>
+                        <div class="flex-horizontal space-between">
+                          <>
+                            <div class="text-100 medium color-neutral-800">
+                              {item?.attributes?.date}
+                            </div>
+                            <div
+                              data-w-id="25ed672e-4005-5ca9-e265-eea155b996f8"
+                              class="card-link"
+                              style="color: rgb(0, 64, 79);"
+                            >
+                              <>
+                                <div class="link-text">Read more</div>
+                                <div
+                                  class="line-rounded-icon card-arrow-right"
+                                  style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                                >
+                                  
+                                </div>
+                              </>
+                            </div>
+                          </>
+                        </div>
+                      </>
+                    </div>
+                  </>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+
+        <div
+          data-w-id="ebda5586-3115-b9a1-d2fc-1e046901205c"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          role="navigation"
+          aria-label="List"
+          class="w-pagination-wrapper pagination"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

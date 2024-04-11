@@ -1,0 +1,304 @@
+---
+// export const prerender = true;
+import fetchApi from "../lib/strapi";
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+    category: {
+      populate: "*",
+    },
+  },
+};
+
+const pageUrlParamsObject = {
+  populate: {
+    heading: {
+      populate: "*",
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+const servicesData: any = await fetchApi<any[]>({
+  endpoint: "services", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale
+});
+
+const servicePageData: any = await fetchApi<any[]>({
+  endpoint: "service-page", // the content type to fetch
+  query: pageUrlParamsObject, // the key to unwrap the response
+  locale: locale
+});
+---
+
+<Layout title="Our Services">
+  <section class="section hero v7">
+    <div class="container-default newcont5 w-container">
+      <div class="z-index-1">
+        <div class="mg-bottom-32px">
+          <div class="w-layout-grid grid-2-columns title-and-btn">
+            <div class="text-center---tablet">
+              <img
+                src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e1272924faf17c03eeafee_1%20(67).svg"
+                alt=""
+                class="subtitle-icon"
+              />
+
+              <h1 class="display-1 mg-bottom-12px">
+                {servicePageData?.attributes?.heading?.title}
+              </h1>
+
+              <p class="mg-bottom-0">
+                {servicePageData?.attributes?.heading?.desc}
+              </p>
+            </div>
+
+            <div
+              id="w-node-a19b8cd7-7550-eafd-cbe5-3e30e31dce6d-e31dce60"
+              class="inner-container _588px width-100-tablet"
+            >
+              <div
+                id="w-node-a19b8cd7-7550-eafd-cbe5-3e30e31dce6e-e31dce60"
+                class="grid-input-search---category"
+              >
+                <form action="/search" class="mg-bottom-0 width-100 w-form">
+                  <div class="position-relative">
+                    <div class="line-rounded-icon search-header default">
+                      
+                    </div>
+                    
+                    <input
+                      class="input search w-input"
+                      maxlength="256"
+                      name="query"
+                      placeholder="Search for..."
+                      type="search"
+                      id="search"
+                      required=""
+                    />
+                  </div>
+                  
+                  <input
+                    type="submit"
+                    class="hidden-on-desktop w-button"
+                    value="Search"
+                  />
+                </form>
+                
+                <div
+                  id="w-node-a19b8cd7-7550-eafd-cbe5-3e30e31dce75-e31dce60"
+                >
+                  <div
+                    data-hover="false"
+                    data-delay="0"
+                    data-w-id="a19b8cd7-7550-eafd-cbe5-3e30e31dce76"
+                    class="professional-dropdown-wrapper w-dropdown"
+                  >
+                    <div
+                      class="professional-dropdown-toggle w-dropdown-toggle"
+                      id="w-dropdown-toggle-2"
+                      aria-controls="w-dropdown-list-2"
+                      aria-haspopup="menu"
+                      aria-expanded="false"
+                      role="button"
+                      tabindex="0"
+                    >
+                      <div class="flex-horizontal start gap-8px">
+                        <img
+                          src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a12e04c59a1723c86ea1f3_icon-select-category-localfinder-x-webflow-template.svg"
+                          alt="Icon Select Category - Localfinder X Webflow Template"
+                        /><div>Select category</div>
+                      </div><div class="line-rounded-icon arrow-down"></div>
+                    </div>
+                    
+                    <nav
+                      class="card professional-dropdown-card w-dropdown-list"
+                      style="display: none; transform: translate3d(0px, 0px, 0px) scale3d(0.95, 0.95, 1.01) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"
+                      id="w-dropdown-list-2"
+                      aria-labelledby="w-dropdown-toggle-2"
+                    >
+                      <div class="height-100 w-dyn-list">
+                        <div
+                          role="list"
+                          class="grid-1-column gap-row-0 w-dyn-items"
+                        >
+                          <div role="listitem" class="height-100 w-dyn-item">
+                            <a
+                              data-w-id="a19b8cd7-7550-eafd-cbe5-3e30e31dce82"
+                              href="/services-categories/small-farmers"
+                              class="card professional-category-dropdown w-inline-block"
+                              tabindex="0"
+                              style="display: none; transform: translate3d(0px, 0px, 0px) scale3d(0.95, 0.95, 1.01) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"
+                              ><div class="flex-horizontal start gap-4px">
+                                <div class="card-picture">
+                                  <img
+                                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65dd3d4bee3822b9d04e4902_22.svg"
+                                    alt="Small farmers"
+                                    class="card-image size-26px"
+                                    data-xblocker="passed"
+                                    style="visibility: visible;"
+                                  />
+                                </div><div class="card-title text-100">
+                                  Small farmers
+                                </div>
+                              </div></a
+                            >
+                          </div>
+                          
+                          <div
+                            role="listitem"
+                            class="height-100 w-dyn-item"
+                          >
+                            <a
+                              data-w-id="a19b8cd7-7550-eafd-cbe5-3e30e31dce82"
+                              href="/services-categories/agricultural-artisans"
+                              class="card professional-category-dropdown w-inline-block"
+                              tabindex="0"
+                              style="display: none; transform: translate3d(0px, 0px, 0px) scale3d(0.95, 0.95, 1.01) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"
+                              ><div class="flex-horizontal start gap-4px">
+                                <div class="card-picture">
+                                  <img
+                                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65dd3d6f837cf79bb642e8dc_23.svg"
+                                    alt="Agricultural Artisans"
+                                    class="card-image size-26px"
+                                    data-xblocker="passed"
+                                    style="visibility: visible;"
+                                  />
+                                </div><div class="card-title text-100">
+                                  Agricultural Artisans
+                                </div>
+                              </div></a
+                            >
+                          </div>
+                          
+                          <div
+                            role="listitem"
+                            class="height-100 w-dyn-item"
+                          >
+                            <a
+                              data-w-id="a19b8cd7-7550-eafd-cbe5-3e30e31dce82"
+                              href="/services-categories/productive-households"
+                              class="card professional-category-dropdown w-inline-block"
+                              tabindex="0"
+                              style="display: none; transform: translate3d(0px, 0px, 0px) scale3d(0.95, 0.95, 1.01) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0;"
+                              ><div class="flex-horizontal start gap-4px">
+                                <div class="card-picture">
+                                  <img
+                                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65dd3d7b93fb91fc01feb474_21.svg"
+                                    alt="Productive Households"
+                                    class="card-image size-26px"
+                                    data-xblocker="passed"
+                                    style="visibility: visible;"
+                                  />
+                                </div><div class="card-title text-100">
+                                  Productive Households
+                                </div>
+                              </div></a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div
+        data-w-id="a19b8cd7-7550-eafd-cbe5-3e30e31dce8a"
+        class="w-dyn-list"
+        style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+      >
+        <div role="list" class="grid-3-columns gap-row-32px w-dyn-items">
+          {
+            servicesData?.map((item: any, index: number) => (
+              <Fragment key={index}>
+                <div role="listitem" class="w-dyn-item">
+                  <a
+                    data-w-id="a19b8cd7-7550-eafd-cbe5-3e30e31dce8d"
+                    href={`/services/${item?.attributes?.slug}`}
+                    class="card card-team-member w-inline-block"
+                  >
+                    <div class="card-picture card-team-member---image">
+                      <div
+                        class="lottie-animation"
+                        data-w-id="ecc40607-317a-e6f6-9d86-6e59c07a54fb"
+                        data-animation-type="lottie"
+                        data-src="/documents/Animation---1707959104600.json"
+                        data-loop="1"
+                        data-direction="1"
+                        data-autoplay="1"
+                        data-is-ix2-target="0"
+                        data-renderer="svg"
+                        data-default-duration="9.366666666666667"
+                        data-duration="0"
+                      />
+                    </div>
+
+                    <div class="pd---content-inside-card card-team-member---content">
+                      <>
+                        <div class="flex-horizontal space-between align-top">
+                          <>
+                            <div class="inner-container _350px---mbl">
+                              <>
+                                <h2
+                                  class="card-title display-4 mg-bottom-6px"
+                                  style="color: rgb(0, 45, 51);"
+                                >
+                                  {item?.attributes?.title}
+                                </h2>
+                                <p>{item?.attributes?.desc}</p>
+                              </>
+                            </div>
+                            <div class="mg-left-6px">
+                              <div
+                                class="btn-circle-wrapper"
+                                style="color: rgb(0, 64, 79); border-color: rgb(0, 64, 79); background-color: rgb(255, 255, 255);"
+                              >
+                                <div class="line-rounded-icon"></div>
+                              </div>
+                            </div>
+                          </>
+                        </div>
+                        <div class="flex-horizontal start flex-wrap---gap-12px">
+                          <>
+                            <div class="badge-v1">
+                              <>
+                                <img
+                                  alt="Small farmers"
+                                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65dd3d4bee3822b9d04e4902_22.svg"
+                                  width="30"
+                                  class="image"
+                                />
+                                <div>
+                                  {
+                                    item?.attributes?.category?.data?.attributes?.title
+                                  }
+                                </div>
+                              </>
+                            </div>
+                            <div class="badge-v1">0 SAR</div>
+                          </>
+                        </div>
+                      </>
+                    </div>
+                  </a>
+                </div>
+              </Fragment>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

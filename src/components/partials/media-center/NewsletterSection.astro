@@ -1,0 +1,99 @@
+---
+interface Props {
+  fields: {
+    title: string;
+  };
+}
+
+const { fields } = Astro.props;
+---
+
+<section>
+  <div class="container-default w-container">
+    <div
+      data-w-id="b5038187-e91d-66d3-860b-15480a92aa19"
+      style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+      class="cta-card cta-newsletter-v1"
+    >
+      <div class="w-layout-grid grid-2-columns cta-v3">
+        <div
+          id="w-node-_2159e6af-9afc-0827-81d4-2e95866f3b3f-c86ea1a2"
+          class="flex-icon---title alt"
+        >
+          <img
+            src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e15061fe2aee910384f801_1%20(74).svg"
+            width="64"
+            height="64"
+            alt=""
+          /><h2
+            id="w-node-b5038187-e91d-66d3-860b-15480a92aa1d-c86ea1a2"
+            data-w-id="b5038187-e91d-66d3-860b-15480a92aa1d"
+            style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+            class="display-2 color-neutral-100 mg-bottom-0"
+          >
+            {fields?.title}
+          </h2>
+        </div><div
+          id="w-node-b5038187-e91d-66d3-860b-15480a92aa1f-c86ea1a2"
+          data-w-id="b5038187-e91d-66d3-860b-15480a92aa1f"
+          style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+          class="inner-container _540px width-100"
+        >
+          <div class="input-and-button-form-block small w-form">
+            <form
+              action="#"
+              id="wf-form-Footer-Subscribe"
+              name="wf-form-Footer-Subscribe"
+              data-name="Footer Subscribe"
+              method="get"
+              data-wf-page-id="65a12e04c59a1723c86ea1a2"
+              data-wf-element-id="b5038187-e91d-66d3-860b-15480a92aa21"
+              aria-label="Footer Subscribe"
+            >
+              <div class="grid-input---btn">
+                <div class="position-relative">
+                  <input
+                    class="input w-input"
+                    maxlength="256"
+                    name="Email"
+                    data-name="Email"
+                    placeholder="Enter your email..."
+                    type="email"
+                    id="Email"
+                    required=""
+                  />
+                </div><input
+                  type="submit"
+                  data-wait="Please wait..."
+                  id="w-node-b5038187-e91d-66d3-860b-15480a92aa24-c86ea1a2"
+                  class="btn-primary grid-input---button w-button"
+                  value="Subscribe"
+                />
+              </div>
+            </form><div
+              class="success-message w-form-done"
+              tabindex="-1"
+              role="region"
+              aria-label="Footer Subscribe success"
+            >
+              <div class="color-neutral-100">
+                <div class="flex-horizontal success-message-horizontal">
+                  <div class="line-rounded-icon success-message-check---left">
+                    
+                  </div><div>Thanks for joining our newsletter.</div>
+                </div>
+              </div>
+            </div><div
+              class="error-message text-center---tablet w-form-fail"
+              tabindex="-1"
+              role="region"
+              aria-label="Footer Subscribe failure"
+            >
+              <div>Oops! Something went wrong.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

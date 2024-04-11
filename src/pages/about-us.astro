@@ -1,0 +1,37 @@
+---
+// export const prerender = true;
+import fetchApi from "../lib/strapi";
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import RenderSectionBlock from "../components/partials/RenderSectionBlock.astro";
+
+const urlParamsObject = {
+  populate: {
+    blocks: {
+      populate: {
+        heading: {
+          populate: "*",
+        },
+        accordion: {
+          populate: "*",
+        }
+      },
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const aboutUsData: any = await fetchApi<any[]>({
+  endpoint: "about-us", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale
+});
+
+console.log(aboutUsData, "aboutUsDataaboutUsData")
+---
+
+<Layout title="About Us">
+  <RenderSectionBlock blocks={aboutUsData?.attributes?.blocks} />
+</Layout>

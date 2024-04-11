@@ -1,0 +1,36 @@
+---
+// export const prerender = true;
+import fetchApi from "../lib/strapi";
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import RenderSectionBlock from "../components/partials/RenderSectionBlock.astro";
+
+const pageUrlParamsObject = {
+  populate: {
+    blocks: {
+      populate: {
+        heading: {
+          populate: "*",
+        },
+      },
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+
+console.log(locale, "localelocale")
+
+const careerPageData: any = await fetchApi<any[]>({
+  endpoint: "career", // the content type to fetch
+  query: pageUrlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+
+console.log(careerPageData, "careerPageData")
+---
+
+<Layout title="Our Career">
+  <RenderSectionBlock blocks={careerPageData?.attributes?.blocks} />
+</Layout>

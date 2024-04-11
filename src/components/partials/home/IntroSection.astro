@@ -1,0 +1,83 @@
+---
+import type Media from "../../../interfaces/Media";
+import type Heading from "../../../interfaces/Heading";
+interface Props {
+  fields: {
+    heading: Heading;
+    media: Media;
+  };
+}
+
+const {
+  fields: { heading, media },
+} = Astro.props;
+---
+
+<section id="talented-experts" class="section overviewdesktop">
+  <div class="container-default w-container">
+    <div>
+      <div class="w-layout-grid grid-2-columns text-left-short">
+        <div
+          id="w-node-f5b53007-5890-c5fb-32cf-baca4cd2f70f-4cd2f70b"
+          data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f70f"
+          class="inner-container _596px _100---tablet"
+        >
+          <div
+            data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f710"
+            class="border-radius-24px overflow-hidden height-100"
+          >
+            <div class="position-relative height-100">
+              <img
+                src={`${media?.image?.data?.attributes?.url}`}
+                alt={media?.alt}
+                class="video-bg-image"
+                data-xblocker="passed"
+              /><div class="bg-overlay">
+                <a
+                  href="#"
+                  data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f714"
+                  class="lightbox-video-icon-wrapper w-inline-block w-lightbox"
+                  aria-label="open lightbox"
+                  aria-haspopup="dialog"
+                  ><img
+                    src="/images/1-2.svg"
+                    alt=""
+                    data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f715"
+                    class="play-button-large"
+                    data-xblocker="passed"
+                    style="visibility: visible; opacity: 1;"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="w-node-f5b53007-5890-c5fb-32cf-baca4cd2f716-4cd2f70b"
+          data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f716"
+          class="inner-container _548px _100---mbl"
+        >
+          <div class="text-center---tablet">
+            <div class="inner-container _500px---mbl center">
+              <img
+                src="/images/1-6.svg"
+                height="40"
+                alt=""
+                class="subtitle-icon"
+              />
+
+              <h2 class="display-2">{heading?.title}</h2>
+            </div>
+
+            <div class="max-w-520px center---tablet">
+              <p class="mg-bottom-48px">
+                {heading?.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

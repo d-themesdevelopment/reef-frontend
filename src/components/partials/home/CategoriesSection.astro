@@ -1,0 +1,187 @@
+---
+import type Heading from "../../../interfaces/Heading";
+import type CategoryBox from "../../../interfaces/CategoryBox";
+
+interface Props {
+  fields: {
+    heading: Heading;
+    categoryBox: Array<CategoryBox>;
+  };
+}
+
+const {
+  fields: { heading, categoryBox },
+} = Astro.props;
+---
+
+<div
+  class="position-relative overflow-hidden newsection"
+  style="margin-top: 28px;"
+>
+  <section class="section hero v2">
+    <div class="container-default w-container">
+      <div class="mg-bottom-40px-tablet mgboxehid">
+        <div
+          data-w-id="12d49549-d020-de1a-37a2-21e499fb0477"
+          class="inner-container _630px center"
+        >
+          <div class="text-center">
+            <img src="/images/1-19.svg" alt="" class="subtitle-icon" />
+
+            <h1 class="display-1 mg-bottom-12px">
+              {heading?.title}
+            </h1>
+
+            <div class="max-w-520px center">
+              <p class="mg-bottom-24px newmg">
+                {heading?.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      data-w-id="12d49549-d020-de1a-37a2-21e499fb0486"
+      class="about-box-wrapper"
+    >
+      <div class="container-default w-container">
+        <div class="div-block-4">
+          <div class="hero-v2-images-wrapper">
+            <div class="w-layout-grid grid-3-columns hero-v2-grid-3-col">
+              <div
+                id="w-node-_12d49549-d020-de1a-37a2-21e499fb048b-99fb0473"
+                class="hero-v2-image-box"
+              >
+                <div
+                  data-w-id="12d49549-d020-de1a-37a2-21e499fb048d"
+                  class="feature-card"
+                  style={`background-image: url(${categoryBox[0]?.background?.image?.data?.attributes?.url}), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0))`}
+                >
+                  <div class="feature-line"></div>
+
+                  <div class="feature-heading">
+                    <div class="icon-wrap">
+                      <img
+                        src={`${categoryBox[0]?.logo?.image?.data?.attributes?.url}`}
+                        loading="lazy"
+                        width="22"
+                        alt=""
+                        class="feature-icon"
+                      />
+
+                      <img
+                        src="/images/Icon-Blur.svg"
+                        loading="lazy"
+                        alt=""
+                        class="icon-blur"
+                      />
+                    </div><div class="wrap-v-x-small">
+                      <div class="h6-heading">{categoryBox[0]?.title}</div><p
+                        class="paragraph-regular"
+                      >
+                        {categoryBox[0]?.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="w-node-_12d49549-d020-de1a-37a2-21e499fb0498-99fb0473"
+                class="hero-v2-image-box center"
+              >
+                <div
+                  data-w-id="12d49549-d020-de1a-37a2-21e499fb049a"
+                  class="feature-card feature-card2"
+                  style={`background-image: url(${categoryBox[1]?.background?.image?.data?.attributes?.url}), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0));`}
+                >
+                  <div class="feature-line"></div>
+
+                  <div class="feature-heading">
+                    <div class="icon-wrap">
+                      <img
+                        src={`${categoryBox[1]?.logo?.image?.data?.attributes?.url}`}
+                        loading="lazy"
+                        width="22"
+                        alt=""
+                        class="feature-icon"
+                      />
+
+                      <img
+                        src="/images/Icon-Blur.svg"
+                        loading="lazy"
+                        alt=""
+                        class="icon-blur"
+                      />
+                    </div>
+
+                    <div class="wrap-v-x-small">
+                      <div class="h6-heading">{categoryBox[1]?.title}</div><p
+                        class="paragraph-regular"
+                      >
+                        {categoryBox[1]?.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="w-node-_12d49549-d020-de1a-37a2-21e499fb04a5-99fb0473"
+                class="hero-v2-image-box right"
+              >
+                <div
+                  data-w-id="12d49549-d020-de1a-37a2-21e499fb04a6"
+                  class="feature-card feature-card3"
+                  style={`background-image: url(${categoryBox[2]?.background?.image?.data?.attributes?.url}), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0));`}
+                >
+                  <div class="feature-line"></div>
+
+                  <div class="feature-heading">
+                    <div class="icon-wrap">
+                      <img
+                        src={`${categoryBox[2]?.logo?.image?.data?.attributes?.url}`}
+                        loading="lazy"
+                        width="22"
+                        alt=""
+                        class="feature-icon"
+                      />
+
+                      <img
+                        src="/images/Icon-Blur.svg"
+                        loading="lazy"
+                        alt=""
+                        class="icon-blur"
+                      />
+                    </div>
+
+                    <div class="wrap-v-x-small">
+                      <div class="h6-heading">
+                        {categoryBox[2]?.title}
+                      </div>
+
+                      <p class="paragraph-regular">
+                        {categoryBox[2]?.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <img
+              src="/images/Untitled-design-15.svg"
+              loading="eager"
+              alt=""
+              class="hero-v2-line-bg"
+              data-xblocker="passed"
+              style="visibility: visible;"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

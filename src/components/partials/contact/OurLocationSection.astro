@@ -1,0 +1,256 @@
+---
+import type Link from "../../../interfaces/Link";
+import type Heading from "../../../interfaces/Heading";
+import type Media from "../../../interfaces/Media";
+
+interface Props {
+  fields: {
+    heading: Heading;
+    button: Link;
+    contactAddress: {
+      capital: string;
+      address: string;
+      email: {
+        title: string;
+        value: string;
+      };
+      phone: {
+        title: string;
+        value: string;
+      };
+      nationalAddress: {
+        title: string;
+        value: string;
+      };
+      media: Media;
+    };
+  };
+}
+
+const {
+  fields: { heading, button, contactAddress },
+} = Astro.props;
+
+const locale = Astro.cookies.get("locale")?.value;
+---
+
+<section class="overflow-hidden">
+  <div class="card-section-wrapper bg-secondary-2" style="opacity: 1;">
+    <div class="container-default w-container">
+      <div>
+        <div
+          data-w-id="d88920a9-bb6f-789a-96d8-8e9925557275"
+          class="mg-bottom-40px"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+        >
+          <div class="div-block-3">
+            <div
+              class="w-layout-grid grid-2-columns title-and-btn center---tablet"
+            >
+              <div>
+                <img
+                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e150ec4a798055c3ec9291_1%20(75).svg"
+                  alt=""
+                  class="subtitle-icon"
+                />
+
+                <h2 class="display-2">
+                  {heading?.title}
+                </h2>
+
+                <p class="mg-bottom-0">
+                  {heading?.desc}
+                </p>
+              </div>
+
+              <div id="w-node-d88920a9-bb6f-789a-96d8-8e992555728b-25557271">
+                <a
+                  data-w-id="d88920a9-bb6f-789a-96d8-8e992555728c"
+                  href={button?.value}
+                  target="_blank"
+                  class="btn-primary w-button"
+                >
+                  {button?.title}<span class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2" : ""}`}
+                    ></span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          data-delay="4000"
+          data-animation="slide"
+          class="slider-wrapper arrow-top-slider w-slider"
+          data-autoplay="false"
+          data-easing="ease"
+          data-hide-arrows="false"
+          data-disable-swipe="false"
+          data-w-id="d88920a9-bb6f-789a-96d8-8e9925557290"
+          data-autoplay-limit="0"
+          data-nav-spacing="3"
+          data-duration="500"
+          data-infinite="true"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          role="region"
+          aria-label="carousel"
+        >
+          <div
+            class="slider-mask width-804px w-slider-mask"
+            id="w-slider-mask-0"
+          >
+            <div
+              class="mg-right-28px w-slide"
+              aria-label="1 of 1"
+              role="group"
+              style="transform: translateX(0px); opacity: 1;"
+            >
+              <div class="card card-services horizontal-item">
+                <div class="pd---content-inside-card horizontal-item">
+                  <div class={`${locale === "ar" ? "text-right" : ""}`}>
+                    <div class="inner-container _400px---mbl">
+                      <h3 class="card-title display-4 mg-bottom-12px">
+                        {contactAddress?.capital}
+                      </h3>
+
+                      <p class="mg-bottom-20px">
+                        {contactAddress?.address}
+                      </p>
+                    </div>
+
+                    <div class="w-layout-grid grid-1-column gap-row-32px">
+                      <a
+                        id="w-node-d88920a9-bb6f-789a-96d8-8e992555729c-25557271"
+                        data-w-id="d88920a9-bb6f-789a-96d8-8e992555729c"
+                        href="mailto:losangeles@localfinder.com"
+                        class="card-link-icon color-neutral-800 top w-inline-block"
+                      >
+                        <div
+                          class={`card-picture circle-icon-contact---small  ${locale === "ar" ? "ml-2" : "mg-right-11px"}`}
+                        >
+                          <img
+                            src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e15061fe2aee910384f801_1%20(74).svg"
+                            alt=""
+                            class="card-image"
+                          />
+                        </div>
+
+                        <div>
+                          <div class="mg-bottom-6px">
+                            <div class="text-100 medium color-neutral-600">
+                              {contactAddress?.email?.title}
+                            </div>
+                          </div>
+
+                          <div class="text-break-all">
+                            <div class="card-title text-200 bold">
+                              {contactAddress?.email?.value}
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+
+                      <a
+                        id="w-node-d88920a9-bb6f-789a-96d8-8e99255572a6-25557271"
+                        data-w-id="d88920a9-bb6f-789a-96d8-8e99255572a6"
+                        href="tel:(415)856-9236"
+                        class="card-link-icon color-neutral-800 top w-inline-block"
+                      >
+                        <div
+                          class={`card-picture circle-icon-contact---small  ${locale === "ar" ? "ml-2" : "mg-right-11px"}`}
+                        >
+                          <img
+                            src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e14fe2b478f8d30590c9ca_1%20(72).svg"
+                            alt=""
+                            class="card-image"
+                          />
+                        </div>
+
+                        <div>
+                          <div class="mg-bottom-6px">
+                            <div class="text-100 medium color-neutral-600">
+                              {contactAddress?.phone?.title}
+                            </div>
+                          </div>
+
+                          <div class="card-title text-200 bold">
+                            <strong>{contactAddress?.phone?.value}</strong>
+                          </div>
+                        </div>
+                      </a>
+
+                      <a
+                        id="w-node-d88920a9-bb6f-789a-96d8-8e99255572b1-25557271"
+                        data-w-id="d88920a9-bb6f-789a-96d8-8e99255572b1"
+                        href="tel:(414)905-6043"
+                        class="card-link-icon color-neutral-800 top w-inline-block"
+                      >
+                        <div
+                          class={`card-picture circle-icon-contact---small  ${locale === "ar" ? "ml-2" : "mg-right-11px"}`}
+                        >
+                          <img
+                            src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e15018f7363ec93d80ab5a_1%20(73).svg"
+                            alt=""
+                            class="card-image"
+                          />
+                        </div>
+
+                        <div>
+                          <div class="mg-bottom-6px">
+                            <div class="text-100 medium color-neutral-600">
+                              {contactAddress?.nationalAddress?.title}
+                            </div>
+                          </div>
+
+                          <div class="card-title text-100 bold">
+                            {contactAddress?.nationalAddress?.value}
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="card-picture image-wrapper---br-bottom horizontal-item"
+                >
+                  <img
+                    src={`${contactAddress?.media?.image?.data?.attributes?.url}`}
+                    alt=""
+                    sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, (max-width: 991px) 44vw, 440px"
+                    src={`${contactAddress?.media?.image?.data?.attributes?.url}`}
+                    class="card-image"
+                    data-xblocker="passed"
+                    style="visibility: visible;"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              aria-live="off"
+              aria-atomic="true"
+              class="w-slider-aria-label"
+              data-wf-ignore=""
+            >
+            </div>
+          </div>
+
+          <div class="hidden-on-desktop w-slider-nav">
+            <div
+              class="w-slider-dot w-active"
+              data-wf-ignore=""
+              aria-label="Show slide 1 of 1"
+              aria-pressed="true"
+              role="button"
+              tabindex="0"
+              style="margin-left: 3px; margin-right: 3px;"
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

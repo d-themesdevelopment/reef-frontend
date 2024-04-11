@@ -1,0 +1,280 @@
+---
+import fetchApi from "../../lib/strapi";
+import type Link from "../../interfaces/Link";
+import LoginButton from "./partials/LoginButton";
+import LanguageButton from "./partials/LanguageButton";
+
+const urlParamsObject = {
+  populate: {
+    logo: {
+      populate: "*",
+    },
+    image: {
+      populate: "*",
+    },
+    menu: {
+      populate: {
+        subMenu: {
+          populate: "*",
+        },
+      },
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const headerData: any = await fetchApi<any[]>({
+  endpoint: "header", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+
+const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
+---
+
+<div
+  data-w-id="3e4eae5f-c9fd-c051-dc9f-9317b4043bae"
+  data-animation="default"
+  data-collapse="medium"
+  data-duration="400"
+  data-easing="ease"
+  data-easing2="ease"
+  role="banner"
+  class="header-wrapper header-v1"
+>
+  <div>
+    <!-- Upper Nav -->
+    <div class="container-default w-container">
+      <div class="header-content-wrapper">
+        <a
+          href="/"
+          aria-current="page"
+          class="header-logo-link w-nav-brand w--current"
+        >
+          <img
+            src="/images/Untitled-design-40.png"
+            loading="lazy"
+            width="54"
+            alt=""
+            class="image-5 phoneim"
+          />
+
+          <img
+            src={`${headerData?.attributes?.logo?.image?.data?.attributes?.url}`}
+            loading="lazy"
+            width="198"
+            sizes="(max-width: 479px) 100vw, 198px"
+            alt=""
+            srcset="/images/reef-p-500.png 500w, /images/reef-p-800.png 800w, /images/reef-p-1080.png 1080w, /images/reef.webp 1584w"
+            class="image-5 desktopim"
+          />
+        </a>
+
+        <div class="header-middle" style="max-width: 578px; width: 100%;">
+          <div class="tablet-display-none">
+            <form action="/search" class="mg-bottom-0 width-100 w-form">
+              <div class="position-relative">
+                <div class="line-rounded-icon search-header default"></div>
+
+                <input
+                  class="input search w-input"
+                  maxlength="256"
+                  name="query"
+                  placeholder={headerData?.attributes?.searchText}
+                  type="search"
+                  id="search-Header"
+                  required=""
+                />
+              </div>
+
+              <input
+                type="submit"
+                class="hidden-on-desktop w-button"
+                value="Search"
+              />
+            </form>
+          </div>
+        </div>
+
+        <div class="show-in-tablet">
+          <nav role="navigation" class="header-nav-menu-wrapper w-nav-menu">
+            <ul role="list" class="header-nav-menu-list">
+              {
+                headerData?.attributes?.menu.map((item: any, index: number) => (
+                  <Fragment key={index}>
+                    <li class="header-nav-list-item middle">
+                      {item?.subMenu?.length > 0 ? (
+                        <div
+                          data-hover="true"
+                          data-delay="0"
+                          data-w-id="fae87ae8-8cb9-e266-bef5-008f32fa3e7e"
+                          class="dropdown-wrapper w-dropdown"
+                        >
+                          <div class="dropdown-toggle w-dropdown-toggle">
+                            <div class="title-dropdown">{item.title}</div>
+                            <div class="line-rounded-icon dropdown-arrow">
+                              
+                            </div>
+                          </div>
+                          <nav class="dropdown-column-wrapper w-dropdown-list">
+                            <div class="dropdown-pd dropdown-card">
+                              <div class="w-layout-grid grid-2-columns header-dropdown-grid-2-col">
+                                <div>
+                                  <div class="w-layout-grid grid-3-columns header-dropdown-grid-3-col">
+                                    <ul
+                                      id="w-node-bf5e5a5a-22b4-30d1-3cdf-41da9f9560dc-b4043bae"
+                                      role="list"
+                                      class="dropdown-list"
+                                    >
+                                      {item?.subMenu.map(
+                                        (subItem: Link, subIndex: number) => (
+                                          <Fragment key={subIndex}>
+                                            <li class="dropdown-list-item">
+                                              <a
+                                                href={subItem.value}
+                                                class="dropdown-link w-dropdown-link"
+                                              >
+                                                {subItem.title}
+                                              </a>
+                                            </li>
+                                          </Fragment>
+                                        )
+                                      )}
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </nav>
+                        </div>
+                      ) : (
+                        <a
+                          href={`${item.value}`}
+                          class="header-nav-link w-nav-link"
+                        >
+                          {item.title}
+                        </a>
+                      )}
+                    </li>
+                  </Fragment>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
+        <!-- Right side of Header Lang + Login -->
+        <div
+          class={`header-right-side ${locale === "ar" ? "row-reverse" : ""}`}
+        >
+          <div class="show-in-tablet"></div>
+          <LoginButton
+            logoText={headerData?.attributes?.loginButtonText}
+            isLoggedIn={$isLoggedIn}
+            client:load
+          />
+
+          <LanguageButton client:load />
+          <div class="hamburger-menu-wrapper w-nav-button">
+            <div class="hamburger-menu-bar top"></div>
+            <div class="hamburger-menu-bar bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider header-divider"></div>
+
+    <!-- Bottom Nav -->
+    <div class="header-bottom-wrapper hidden-on-tablet">
+      <div class="container-default w-container">
+        <div class="header-bottom">
+          <div class="header-nav-menu-flex">
+            <ul role="list" class="header-nav-menu-list">
+              {
+                headerData?.attributes?.menu.map((item: any, index: number) => (
+                  <Fragment key={index}>
+                    <li class="header-nav-list-item middle">
+                      {item?.subMenu?.length > 0 ? (
+                        <a
+                          href={`${item.value}`}
+                          class="dropdown-wrapper w-dropdown"
+                        >
+                        <div class="dropdown-toggle w-dropdown-toggle">
+                            <div class="title-dropdown">{item.title}</div>
+                            <div class="line-rounded-icon dropdown-arrow">
+                              
+                            </div>
+                          </div>
+                        </a>
+
+                
+                          <nav class="dropdown-column-wrapper w-dropdown-list">
+                            <div class="dropdown-pd dropdown-card">
+                              <div class="w-layout-grid grid-3-columns header-dropdown-grid-3-col">
+                                <ul
+                                  id="w-node-bf5e5a5a-22b4-30d1-3cdf-41da9f9560dc-b4043bae"
+                                  role="list"
+                                  class="dropdown-list"
+                                >
+                                  {item?.subMenu.map(
+                                    (subItem: Link, subIndex: number) => (
+                                      <Fragment key={subIndex}>
+                                        <li class="dropdown-list-item">
+                                          <a
+                                            href={subItem.value}
+                                            class="dropdown-link w-dropdown-link"
+                                          >
+                                            {subItem.title}
+                                          </a>
+                                        </li>
+                                      </Fragment>
+                                    )
+                                  )}
+                                </ul>
+                              </div>
+                            </div>
+                          </nav>
+                      ) : (
+                        <a
+                          href={`${item.value}`}
+                          class="header-nav-link w-nav-link"
+                        >
+                          {item.title}
+                        </a>
+                      )}
+                    </li>
+                  </Fragment>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div class="social-media-flex">
+            <a
+              href="https://www.twitter.com/"
+              target="_blank"
+              class="social-icon-square size-30px w-inline-block"
+            >
+              <div class="social-icon-font"></div>
+            </a>
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              class="social-icon-square size-30px w-inline-block"
+            >
+              <div class="social-icon-font"></div>
+            </a>
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              class="social-icon-square size-30px w-inline-block"
+            >
+              <div class="social-icon-font"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

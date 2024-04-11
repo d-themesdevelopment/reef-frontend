@@ -1,0 +1,258 @@
+---
+import type Heading from "@/interfaces/Heading";
+import fetchApi from "../../../lib/strapi";
+
+interface Props {
+  fields: {
+    heading: Heading;
+  };
+}
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+  },
+};
+
+const articlesData: any = await fetchApi<any[]>({
+  endpoint: "articles", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+});
+
+const { fields } = Astro.props;
+---
+
+<section class="section hero v10">
+  <div class="container-default w-container">
+    <div>
+      <div
+        data-w-id="959dd999-64ec-cb28-4473-3e5cf2dd03b8"
+        style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+      >
+        <div
+          class="w-layout-grid grid-2-columns title-and-input mg-bottom-40px"
+        >
+          <div>
+            <img
+              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e2f8f1b9ddb1c6aa7b71cb_1%20(84).svg"
+              alt=""
+              class="subtitle-icon"
+            />
+
+            <h1 class="display-1 mg-bottom-12px">
+              {fields?.heading?.title}
+            </h1>
+
+            <p class="mg-bottom-0">
+              {fields?.heading?.desc}
+            </p>
+          </div>
+
+          <div
+            id="w-node-_959dd999-64ec-cb28-4473-3e5cf2dd03bf-c86ea1a2"
+            class="width-364px---mbl-100"
+          >
+            <form action="/search" class="mg-bottom-0 width-100 w-form">
+              <div class="position-relative">
+                <div class="line-rounded-icon search-header default">
+                  
+                </div><input
+                  class="input search w-input"
+                  maxlength="256"
+                  name="query"
+                  placeholder="Search articles..."
+                  type="search"
+                  id="search"
+                  required=""
+                />
+              </div><input
+                type="submit"
+                class="hidden-on-desktop w-button"
+                value="Search"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-layout-grid grid-2-columns _1-col-tablet">
+        <div
+          id="w-node-a58b72e8-b2e3-482b-f210-e0455423e2c1-c86ea1a2"
+          data-w-id="a58b72e8-b2e3-482b-f210-e0455423e2c1"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          class="height-100 w-dyn-list"
+        >
+          <div role="list" class="height-100 w-dyn-items">
+            <div role="listitem" class="height-100 w-dyn-item">
+              <a
+                data-w-id="e0fec2b8-5911-81ca-928a-28777f294f5e"
+                href={`/media-center/${articlesData[0]?.attributes?.slug}`}
+                class="card card-blog w-inline-block"
+              >
+                <div class="card-picture image-wrapper---br-top image-featured">
+                  <img
+                    src={`${articlesData[0]?.attributes?.media?.image?.data?.attributes?.url}`}
+                    alt="Empowering Farmers for Success"
+                    sizes="(max-width: 991px) 94vw, (max-width: 1279px) 47vw, 596px"
+                    src={`${articlesData[0]?.attributes?.media?.image?.data?.attributes?.url}`}
+                    class="card-image"
+                    data-xblocker="passed"
+                    style="visibility: visible; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                  />
+                </div>
+
+                <div class="pd---content-inside-card pd-blog-wrapper">
+                  <div class="inner-container _600px---tablet">
+                    <div>
+                      <div class="max-w-440px">
+                        <div class="inner-container _400px---mbl">
+                          <h2
+                            class="card-title display-4"
+                            style="color: rgb(0, 45, 51);"
+                          >
+                            {articlesData[0]?.attributes?.title}
+                          </h2>
+                        </div>
+                      </div>
+
+                      <p class="mg-bottom-32px color-neutral-600">
+                        {articlesData[0]?.attributes?.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex-horizontal space-between">
+                    <div class="text-100 medium color-neutral-800">
+                      {articlesData[0]?.attributes?.date}
+                    </div>
+
+                    <div
+                      data-w-id="ef5d1139-2fe3-8162-e41a-86687fd057aa"
+                      class="card-link"
+                      style="color: rgb(0, 64, 79);"
+                    >
+                      <div class="link-text">Read more</div><div
+                        class="line-rounded-icon card-arrow-right"
+                        style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                      >
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="w-node-_8f1d128d-fb20-b4ea-fcdc-a88ba49298f2-c86ea1a2"
+          data-w-id="8f1d128d-fb20-b4ea-fcdc-a88ba49298f2"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          class="w-dyn-list"
+        >
+          <div
+            role="list"
+            class="grid-1-column gap-row-24px blog-featured w-dyn-items"
+          >
+            <div role="listitem" class="w-dyn-item">
+              <a
+                data-w-id="09af2bfc-dae7-dec9-235a-e2be220f6a6a"
+                href={`/media-center/${articlesData[1]?.attributes?.slug}`}
+                class="card card-blog w-inline-block"
+              >
+                <div class="blog-card-featured-inner-content featured">
+                  <div
+                    id="w-node-_3b7825e0-fe96-c624-08e5-938a3630c7dc-c86ea1a2"
+                    class="max-w-350px _100---mbl"
+                  >
+                    <div class="inner-container _400px---mbl">
+                      <h2
+                        class="card-title display-4"
+                        style="color: rgb(0, 45, 51);"
+                      >
+                        {articlesData[1]?.attributes?.title}
+                      </h2>
+
+                      <p class="color-neutral-600 mg-bottom-0">
+                        {articlesData[1]?.attributes?.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    id="w-node-e8113f34-16c2-8e4a-3e65-9d2876bbddc1-c86ea1a2"
+                    class="mg-left-16px"
+                  >
+                    <div
+                      class="btn-circle-wrapper"
+                      style="color: rgb(0, 64, 79); border-color: rgb(0, 64, 79); background-color: rgb(255, 255, 255);"
+                    >
+                      <div class="line-rounded-icon"></div>
+                    </div>
+                  </div>
+
+                  <div
+                    id="w-node-_09af2bfc-dae7-dec9-235a-e2be220f6a6c-c86ea1a2"
+                    class="flex-horizontal start"
+                  >
+                    <div class="mg-right-16px">
+                      <div class="text-100 medium color-neutral-800">
+                        {articlesData[1]?.attributes?.date}
+                      </div>
+                    </div>
+                  </div>
+                </div></a
+              >
+            </div>
+
+            <div role="listitem" class="w-dyn-item">
+              <a
+                data-w-id="09af2bfc-dae7-dec9-235a-e2be220f6a6a"
+                href={`/media-center/${articlesData[2]?.attributes?.slug}`}
+                class="card card-blog w-inline-block"
+              >
+                <div class="blog-card-featured-inner-content featured">
+                  <div
+                    id="w-node-_3b7825e0-fe96-c624-08e5-938a3630c7dc-c86ea1a2"
+                    class="max-w-350px _100---mbl"
+                  >
+                    <div class="inner-container _400px---mbl">
+                      <h2 class="card-title display-4">
+                        {articlesData[2]?.attributes?.title}
+                      </h2>
+
+                      <p class="color-neutral-600 mg-bottom-0">
+                        {articlesData[2]?.attributes?.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    id="w-node-e8113f34-16c2-8e4a-3e65-9d2876bbddc1-c86ea1a2"
+                    class="mg-left-16px"
+                  >
+                    <div class="btn-circle-wrapper">
+                      <div class="line-rounded-icon"></div>
+                    </div>
+                  </div><div
+                    id="w-node-_09af2bfc-dae7-dec9-235a-e2be220f6a6c-c86ea1a2"
+                    class="flex-horizontal start"
+                  >
+                    <div class="mg-right-16px">
+                      <div class="text-100 medium color-neutral-800">
+                        Jan 18, 2022
+                      </div>
+                    </div>
+                  </div>
+                </div></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

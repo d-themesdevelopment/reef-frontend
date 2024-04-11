@@ -1,0 +1,162 @@
+---
+import type Heading from "../../../interfaces/Heading";
+import type InfoBox from "../../../interfaces/InfoBox";
+interface Props {
+  fields: {
+    heading: Heading;
+    infoBoxes: Array<InfoBox>;
+    buttons: Array<{ title: string; value: string }>;
+  };
+}
+
+const {
+  fields: { heading, infoBoxes, buttons },
+} = Astro.props;
+
+const locale = Astro.cookies.get("locale")?.value;
+---
+
+<section class="section-2 phonebenf">
+  <div class="card-section-wrapper bg-secondary-1 newben">
+    <div class="container-default newbenf w-container">
+      <div>
+        <div
+          data-w-id="12d49549-d020-de1a-37a2-21e499fb04e7"
+          class="inner-container _600px center newb"
+        >
+          <div class="text-center mg-bottom-32px">
+            <img
+              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65cb9051807f5fe36b8d3823_1%20(24).svg"
+              alt=""
+              class="subtitle-icon"
+            />
+
+            <h2 class="display-2 color-neutral-100">{heading?.title}</h2>
+            <p class="color-neutral-300 mg-bottom-0">
+              {heading?.desc}
+            </p>
+          </div>
+        </div>
+
+        <div
+          data-w-id="12d49549-d020-de1a-37a2-21e499fb04ee"
+          class="w-layout-grid grid-5-col---line-space"
+        >
+          <div
+            id="w-node-_12d49549-d020-de1a-37a2-21e499fb04ef-99fb0473"
+            class="inner-container _500px---mbl center"
+          >
+            <div
+              id="w-node-_12d49549-d020-de1a-37a2-21e499fb04f0-99fb0473"
+              class="text-center"
+            >
+              <div class="mg-bottom-24px">
+                <div class="inner-container icon-88px">
+                  <img
+                    src={`${infoBoxes[0]?.media?.image?.data?.attributes?.url}`}
+                    alt=""
+                    width="70"
+                  />
+                </div>
+              </div>
+
+              <h3 class="display-4 color-neutral-100">
+                {infoBoxes[0]?.title}
+              </h3>
+
+              <p class="color-neutral-300 mg-bottom-0">
+                {infoBoxes[0]?.desc}
+              </p>
+            </div>
+          </div>
+
+          <div
+            id="w-node-_12d49549-d020-de1a-37a2-21e499fb04f9-99fb0473"
+            class="line-divider-vertical horizontal---mbl"
+          >
+          </div>
+
+          <div
+            id="w-node-_12d49549-d020-de1a-37a2-21e499fb04fa-99fb0473"
+            class="inner-container _500px---mbl center"
+          >
+            <div
+              id="w-node-_12d49549-d020-de1a-37a2-21e499fb04fb-99fb0473"
+              class="text-center"
+            >
+              <div class="mg-bottom-24px">
+                <div class="inner-container icon-88px">
+                  <img
+                    src={`${infoBoxes[1]?.media?.image?.data?.attributes?.url}`}
+                    alt=""
+                    width="70"
+                  />
+                </div>
+              </div>
+
+              <h3 class="display-4 color-neutral-100">
+                {infoBoxes[1]?.title}
+              </h3>
+
+              <p class="color-neutral-300 mg-bottom-0">
+                {infoBoxes[1]?.desc}
+              </p>
+            </div>
+          </div>
+
+          <div
+            id="w-node-_12d49549-d020-de1a-37a2-21e499fb0503-99fb0473"
+            class="line-divider-vertical horizontal---mbl"
+          >
+          </div>
+
+          <div
+            id="w-node-_12d49549-d020-de1a-37a2-21e499fb0504-99fb0473"
+            class="inner-container _500px---mbl center"
+          >
+            <div
+              id="w-node-_12d49549-d020-de1a-37a2-21e499fb0505-99fb0473"
+              class="text-center"
+            >
+              <div class="mg-bottom-24px">
+                <div class="inner-container icon-88px">
+                  <img
+                    src={`${infoBoxes[2]?.media?.image?.data?.attributes?.url}`}
+                    alt=""
+                    width="70"
+                  />
+                </div>
+              </div>
+
+              <h3 class="display-4 color-neutral-100">
+                {infoBoxes[2]?.title}
+              </h3>
+
+              <p class="color-neutral-300 mg-bottom-0">
+                {infoBoxes[2]?.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          data-w-id="12d49549-d020-de1a-37a2-21e499fb050d"
+          class="buttons-row center mg-top-40px newclick"
+        >
+          <a
+            data-w-id="12d49549-d020-de1a-37a2-21e499fb050e"
+            href={buttons[0]?.value}
+            class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : ""}`}
+            >{buttons[0]?.title}<span class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2" : ""}`}
+              ></span
+            >
+          </a>
+
+          <a href={buttons[1]?.value} class="btn-secondary white w-button"
+            >{buttons[1]?.title}</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

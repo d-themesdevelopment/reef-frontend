@@ -1,0 +1,257 @@
+---
+import fetchApi from "../../lib/strapi";
+import type Link from "../../interfaces/Link";
+
+const urlParamsObject = {
+  populate: {
+    footerLogo: {
+      populate: "*",
+    },
+    image: {
+      populate: "*",
+    },
+    mainMenu: {
+      populate: "*",
+    },
+    utilityMenu: {
+      populate: "*",
+    },
+    contactUsForm: {
+      populate: {
+        icon: {
+          populate: "*",
+        },
+        contactButton: {
+          populate: "*",
+        },
+        addressButton: {
+          populate: "*",
+        },
+      },
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const footerData: any = await fetchApi<any[]>({
+  endpoint: "footer", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+
+console.log(footerData, "footerDatafooterData");
+---
+
+<footer class="footer">
+  <div class="position-relative">
+    <div class="container-default z-index-1 w-container">
+      <div
+        data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c19"
+        class="cta-card cta-v2"
+      >
+        <div class="inner-container _600px center">
+          <div class="text-center">
+            <img src="images/1-23.svg" alt="" class="subtitle-icon" />
+            <div class="inner-container _500px---tablet center">
+              <div class="inner-container _400px---mbl center">
+                <h2
+                  data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c1d"
+                  class="display-2 color-neutral-100 mg-bottom-24px"
+                >
+                  {footerData?.attributes?.contactUsForm?.title}
+                </h2>
+              </div>
+            </div>
+            <div
+              data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c1f"
+              class={`buttons-row center`}
+            >
+              <a
+                data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c20"
+                href={footerData?.attributes?.contactUsForm?.contactButton
+                  ?.value}
+                class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : ""}`}
+                >{
+                  footerData?.attributes?.contactUsForm?.contactButton?.title
+                }<span
+                  class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2" : ""}`}
+                  ></span
+                ></a
+              >
+              <a
+                href={footerData?.attributes?.contactUsForm?.addressButton
+                  ?.value}
+                class="btn-secondary white w-button"
+                >{
+                  footerData?.attributes?.contactUsForm?.addressButton?.title
+                }</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-wrapper z-index-1">
+      <footer
+        data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c27"
+        class="z-index-1"
+      >
+        <div class="container-default w-container">
+          <div class="footer-top newfooter">
+            <div class="w-layout-grid grid-footer-3-col">
+              <div
+                id="w-node-_7003ae01-3690-713f-a2ae-f7c090a04c2b-91dd5701"
+                data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c2b"
+                class="max-w-415px tablet-100"
+              >
+                <div class="inner-container _500px---tablet">
+                  <div class="mg-bottom-16px">
+                    <a href="#" class="footer-logo-wrapper w-inline-block"
+                      ><img
+                        src={`${footerData?.attributes?.footerLogo?.image?.data?.attributes?.url}`}
+                        alt=""
+                        sizes="(max-width: 479px) 185px, (max-width: 767px) 39vw, (max-width: 991px) 27vw, 219px"
+                        srcset="images/reef-p-500.png 500w, images/reef-p-800.png 800w, images/reef-p-1080.png 1080w, images/reef.webp 1584w"
+                        class="footer-logo"
+                      /></a
+                    >
+                  </div>
+                  <p class="mg-bottom-20px">
+                    {footerData?.attributes?.desc}
+                  </p>
+                </div>
+                <div class="inner-container _402px _100---tablet">
+                  <form action="/search" class="mg-bottom-0 width-100 w-form">
+                    <div class="position-relative">
+                      <div class="line-rounded-icon search-header default">
+                        
+                      </div><input
+                        class="input search w-input"
+                        maxlength="256"
+                        name="query"
+                        placeholder={footerData?.attributes?.searchText}
+                        type="search"
+                        id="search-Footer"
+                        required=""
+                      />
+                    </div>
+
+                    <input
+                      type="submit"
+                      class="hidden-on-desktop w-button"
+                      value="Search"
+                    />
+                  </form>
+                </div>
+                <div class="w-layout-grid social-media-grid-top mg-top-24px">
+                  <a
+                    href="https://www.facebook.com/"
+                    target="_blank"
+                    class="social-icon-square size-30px w-inline-block"
+                  >
+                    <div class="social-icon-font"></div>
+                  </a>
+                  <a
+                    href="https://www.twitter.com/"
+                    target="_blank"
+                    class="social-icon-square size-30px w-inline-block"
+                  >
+                    <div class="social-icon-font"></div>
+                  </a>
+                  <a
+                    href="https://www.instagram.com/"
+                    target="_blank"
+                    class="social-icon-square size-30px w-inline-block"
+                  >
+                    <div class="social-icon-font"></div>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/"
+                    target="_blank"
+                    class="social-icon-square size-30px w-inline-block"
+                  >
+                    <div class="social-icon-font"></div>
+                  </a>
+                </div>
+              </div>
+              <div
+                data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c44"
+                class="inner-container _493px"
+              >
+                <div class="text-300 bold footer-title">
+                  {footerData?.attributes?.mainMenuTitle}
+                </div>
+
+                <div class="w-layout-grid grid-3-columns footer-menu-grid">
+                  <ul role="list" class="footer-list-wrapper">
+                    {
+                      footerData?.attributes?.mainMenu
+                        ?.slice(0, 4)
+                        .map((item: Link, index: number) => (
+                          <li class="footer-list-item">
+                            <a href={item?.value} class="footer-link">
+                              {item?.title}
+                            </a>
+                          </li>
+                        ))
+                    }
+                  </ul>
+                  <ul
+                    id="w-node-_7003ae01-3690-713f-a2ae-f7c090a04c61-91dd5701"
+                    role="list"
+                    class="footer-list-wrapper"
+                  >
+                    {
+                      footerData?.attributes?.mainMenu
+                        ?.slice(4, 8)
+                        .map((item: Link, index: number) => (
+                          <li class="footer-list-item">
+                            <a href={item?.value} class="footer-link">
+                              {item?.title}
+                            </a>
+                          </li>
+                        ))
+                    }
+                  </ul>
+                </div>
+              </div>
+
+              <div data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c7a">
+                <div class="text-300 bold footer-title">
+                  {footerData?.attributes?.utilityMenuTitle}
+                </div>
+
+                <ul role="list" class="footer-list-wrapper">
+                  {
+                    footerData?.attributes?.utilityMenu.map(
+                      (item: Link, index: number) => (
+                        <li class="footer-list-item">
+                          <a href={item?.value} class="footer-link">
+                            {item?.title}
+                          </a>
+                        </li>
+                      )
+                    )
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div
+            data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c93"
+            class="footer-bottom"
+          >
+            <div class="text-center">
+              <p class="mg-bottom-0 paragraph prh2">
+                {footerData?.attributes?.footerBottomTitle}
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </footer>
+    <div class="half-bg-bottom floating-banner footer-banner"></div>
+  </div>
+</footer>

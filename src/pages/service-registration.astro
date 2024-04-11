@@ -1,0 +1,74 @@
+---
+// export const prerender = true;
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import Loading from "../components/features/Loading";
+import ServiceRegistrationSection from "../components/partials/service/ServiceRegistration";
+import fetchApi from "../lib/strapi";
+import { user } from "../store/users";
+import { service } from "../store/service";
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+    logo: {
+      populate: "*",
+    },
+    background: {
+      populate: "*",
+    },
+    services: {
+      populate: "*",
+    },
+    specialties: {
+      populate: "*",
+    },
+  },
+};
+
+const res: any = await fetchApi<any[]>({
+  endpoint: "categories", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+});
+
+const $user: any = user?.get();
+
+const urlParamsObjectTwo = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+    category: {
+      populate: "*",
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+const servicesData: any = await fetchApi<any[]>({
+  endpoint: "services", // the content type to fetch
+  query: urlParamsObjectTwo, // the key to unwrap the response
+  locale: locale
+});
+
+const reafToken = Astro.cookies.get("reef_token")?.value;
+
+const $service = service.get();
+
+console.log($service, "$service$service")
+---
+
+<Layout title="Service Registration">
+  <ServiceRegistrationSection
+    user={$user}
+    currentService={$service}
+    services={servicesData}
+    data={res}
+    apiUrl={import.meta.env.STRAPI_URL}
+    reafToken={reafToken}
+    client:load
+  />
+</Layout>

@@ -1,0 +1,65 @@
+---
+// export const prerender = true;
+import fetchApi from "../lib/strapi";
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import RenderSectionBlock from "../components/partials/RenderSectionBlock.astro";
+
+const urlParamsObject = {
+  populate: {
+    blocks: {
+      populate: {
+        heading: {
+          populate: "*",
+        },
+        accordion: {
+          populate: "*",
+        },
+        email: {
+          populate: "*",
+        },
+        phone: {
+          populate: "*",
+        },
+        nationalAddress: {
+          populate: "*",
+        },
+        button: {
+          populate: "*",
+        },
+        contactAddress: {
+          populate: {
+            email: {
+              populate: "*",
+            },
+            phone: {
+              populate: "*",
+            },
+            nationalAddress: {
+              populate: "*",
+            },
+            media: {
+              populate: "*",
+            }
+          },
+        },
+      },
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const contactUsData: any = await fetchApi<any[]>({
+  endpoint: "contact-us", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale
+});
+
+console.log(contactUsData?.attributes?.blocks, "Contact Us Page Data");
+---
+
+<Layout title="Contact Us">
+  <RenderSectionBlock blocks={contactUsData?.attributes?.blocks} />
+</Layout>

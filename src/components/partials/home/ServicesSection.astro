@@ -1,0 +1,153 @@
+---
+import fetchApi from "../../../lib/strapi";
+import type Heading from "../../../interfaces/Heading";
+
+interface Props {
+  fields: {
+    heading: Heading;
+    button: {
+      title: string;
+      value: string;
+    };
+  };
+}
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+    category: {
+      populate: "*",
+    },
+  },
+};
+
+const servicesData: any = await fetchApi<any[]>({
+  endpoint: "services", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+});
+
+const {
+  fields: { heading, button },
+} = Astro.props;
+---
+
+<section class="section hero v7">
+  <div class="container-default w-container">
+    <div class="z-index-1">
+      <div class="mg-bottom-32px">
+        <div class="w-layout-grid grid-2-columns title-and-btn">
+          <div class="text-center---tablet servicestext">
+            <img
+              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e128d15d60589e5036847e_1%20(70).svg"
+              alt=""
+              class="subtitle-icon"
+            /><h1 class="display-1 mg-bottom-12px">{heading?.title}</h1>
+          </div>
+
+          <div
+            id="w-node-_4ef36aa9-69ab-043c-c626-baafa095a565-a095a558"
+            class="inner-container _588px width-100-tablet"
+          >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      data-w-id="4ef36aa9-69ab-043c-c626-baafa095a582"
+      class="w-dyn-list"
+      style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+    >
+      <div role="list" class="grid-3-columns gap-row-32px servhome w-dyn-items">
+        {
+          servicesData.map((item: any, index: number) => (
+            <Fragment key={index}>
+              <div role="listitem" class="w-dyn-item">
+                <a
+                  data-w-id="4ef36aa9-69ab-043c-c626-baafa095a585"
+                  href={`/services/${item.attributes.slug}`}
+                  class="card card-team-member w-inline-block"
+                >
+                  <>
+                    <div class="card-picture card-team-member---image">
+                      <div
+                        class="lottie-animation"
+                        data-w-id="ecc40607-317a-e6f6-9d86-6e59c07a54fb"
+                        data-animation-type="lottie"
+                        data-src="/documents/Animation---1707959104600.json"
+                        data-loop="1"
+                        data-direction="1"
+                        data-autoplay="1"
+                        data-is-ix2-target="0"
+                        data-renderer="svg"
+                        data-default-duration="9.366666666666667"
+                        data-duration="0"
+                      />
+                    </div>
+                    <div class="pd---content-inside-card card-team-member---content">
+                      <>
+                        <div class="flex-horizontal space-between align-top">
+                          <>
+                            <div class="inner-container _350px---mbl">
+                              <>
+                                <h2 class="mg-bottom-6px display-4">
+                                  {item.attributes.title}
+                                </h2>
+                                <p>{item.attributes.desc}</p>
+                              </>
+                            </div>
+                            <div class="mg-left-6px">
+                              <div
+                                class="btn-circle-wrapper"
+                                style="color: rgb(0, 64, 79); border-color: rgb(0, 64, 79); background-color: rgb(255, 255, 255);"
+                              >
+                                <div class="line-rounded-icon"></div>
+                              </div>
+                            </div>
+                          </>
+                        </div>
+                        <div class="flex-horizontal start flex-wrap---gap-12px">
+                          <>
+                            <div class="badge-v1">
+                              <>
+                                <img
+                                  alt="Small farmers"
+                                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65dd3d4bee3822b9d04e4902_22.svg"
+                                  width="30"
+                                  class="image"
+                                />
+                                <div>{item.attributes.category.data.attributes.title}</div>
+                              </>
+                            </div>
+                            <div class="badge-v1">0 SAR</div>
+                          </>
+                        </div>
+                      </>
+                    </div>
+                  </>
+                </a>
+              </div>
+            </Fragment>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="new8">
+      <a
+        data-w-id="4ef36aa9-69ab-043c-c626-baafa095a59b"
+        href={button.value}
+        class="btn-primary newc5 w-button"
+      >
+        {button.title}
+        <span
+          class="line-rounded-icon link-icon-right"
+          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          >
+        </span>
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,144 @@
+---
+import fetchApi from "../../../lib/strapi";
+import type Heading from "../../../interfaces/Heading";
+import type Link from "../../../interfaces/Link";
+
+interface Props {
+  fields: {
+    heading: Heading;
+    button: Link;
+  };
+}
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+  },
+};
+
+const articleData: any = await fetchApi<any[]>({
+  endpoint: "articles", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+});
+
+const {
+  fields: { heading, button },
+} = Astro.props;
+---
+
+<section class="section newsection2">
+  <div class="container-default w-container">
+    <div>
+      <div
+        data-w-id="d377d7fc-6b1d-bf1e-8b0d-8619725b7407"
+        style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+        class="inner-container _574px center"
+      >
+        <div class="text-center mg-bottom-32px">
+          <img
+            src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a12e04c59a1723c86ea1be_icon-browse-articles-news-localfinder-x-webflow-template.svg"
+            alt="Icon Browse Articles News - Localfinder X Webflow Template"
+            class="subtitle-icon"
+          />
+
+          <h2 class="display-2">
+            {heading?.title}
+          </h2>
+        </div>
+      </div>
+
+      <div
+        data-w-id="d377d7fc-6b1d-bf1e-8b0d-8619725b740e"
+        style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
+        class="height-100 w-dyn-list"
+      >
+        <div
+          role="list"
+          class="grid-3-columns gap-row-32px _1-col-tablet newblog2 w-dyn-items"
+        >
+          {
+            articleData?.map((article: any, index: number) => (
+              <Fragment key={index}>
+                <div role="listitem" class="height-100 w-dyn-item">
+                  <a
+                    data-w-id="d377d7fc-6b1d-bf1e-8b0d-8619725b7411"
+                    href={`/${article?.attributes?.slug}`}
+                    class="card card-blog _3-posts-item w-inline-block"
+                  >
+                    <div class="card-picture image-wrapper---br-top _3-posts-item">
+                      <img
+                        src={`${article?.attributes?.media?.image?.data.attributes.url}`}
+                        alt="Empowering Farmers for Success"
+                        sizes="(max-width: 479px) 100vw, (max-width: 767px) 90vw, (max-width: 991px) 47vw, (max-width: 1279px) 30vw, 386.3999938964844px"
+                        srcset={`${article?.attributes?.media?.image?.data.attributes.url}`}
+                        class="card-image blognew"
+                        style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                      />
+                      <div class="blog-card-badge-wrapper-top">
+                        <div class="badge-primary small white">
+                          <div class="flex-horizontal start gap-4px">
+                            <>
+                              <img
+                                src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65a12e04c59a1723c86ea368_icon-articles-localfinder-x-webflow-template.svg"
+                                loading="eager"
+                                alt="Articles"
+                              />
+                              <div class="color-neutral-800">Articles</div>
+                            </>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="pd---content-inside-card pd-blog-wrapper _3-posts-item">
+                      <div class="inner-container _350px---mbl">
+                        <h3
+                          class="card-title heading-h4-size mg-bottom-24px"
+                          style="color: rgb(0, 45, 51);"
+                        >
+                          {article?.attributes?.title}
+                        </h3>
+                      </div>
+
+                      <div class="flex-horizontal space-between">
+                        <div class="text-100 medium color-neutral-800">
+                          {article?.attributes?.date}
+                        </div>
+
+                        <div
+                          data-w-id="d377d7fc-6b1d-bf1e-8b0d-8619725b741e"
+                          class="card-link"
+                          style="color: rgb(0, 64, 79);"
+                        >
+                          <>
+                            <div class="link-text">Read more</div>
+                            <div
+                              class="line-rounded-icon card-arrow-right"
+                              style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                            >
+                              
+                            </div>
+                          </>
+                        </div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </Fragment>
+            ))
+          }
+        </div>
+      </div>
+
+      <div
+        data-w-id="d377d7fc-6b1d-bf1e-8b0d-8619725b7426"
+        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+        class="buttons-row center mg-top-40px"
+      >
+        <a href={button?.value} class="btn-secondary w-button">{button?.title}</a>
+      </div>
+    </div>
+  </div>
+</section>

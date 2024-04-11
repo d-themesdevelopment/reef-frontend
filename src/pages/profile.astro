@@ -1,0 +1,31 @@
+---
+// export const prerender = true;
+import { user } from "../store/users";
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import ProfilePageContent from "..//components/partials/others/ProfilePageContent";
+import { getCurrentUser } from "../utils/user";
+
+const $user: any = await getCurrentUser(Astro.cookies.get("reef_token")?.value as string);
+user.set($user);
+---
+
+<Layout title="Profile Page">
+  <div class="dash_content">
+    <div class="dash_contain">
+      <div class="relative">
+        <ProfilePageContent user={$user ?? {}} client:load/>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import Cookies from "js-cookie";
+  const isloggedIn = Cookies.get("reef_token");
+
+  if (!isloggedIn) {
+          window.location.href = "/sign-in";
+  }
+</script>

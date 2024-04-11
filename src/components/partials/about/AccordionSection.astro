@@ -1,0 +1,197 @@
+---
+interface Props {
+  fields: {
+    accordion: Array<{ title: string; value: string }>;
+  };
+}
+
+const {
+  fields: { accordion },
+} = Astro.props;
+---
+
+<section class="section-8 pd-top-140px">
+  <div class="container-default-55 w-container">
+    <div class="inner-container _600px---tablet center">
+      <div class="inner-container _500px---mbl center">
+        <div
+          data-w-id="1681017d-b8fb-36c1-e5ed-e124140f74b5"
+          data-current=""
+          data-easing="ease"
+          data-duration-in="300"
+          data-duration-out="100"
+          class="tabs-menu-left-wrapper w-tabs"
+          style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+        >
+          <div class="tabs-menu-left newt2 w-tab-menu" role="tablist">
+            <a
+              data-w-tab="Tab 1"
+              href="#tab1"
+              class="tab-menu-left-link first w-inline-block w-tab-link"
+              tabindex="-1"
+            >
+              <div class="tab-menu-left-link-icon">
+                <div class="inner-container _48px">
+                  <div class="image-wrapper">
+                    <img
+                      loading="eager"
+                      src="images/1-53.svg"
+                      alt=""
+                      class="image-11 cover"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-menu-left-link-content">
+                <div class="tab-menu-left-link-content-top">
+                  <h3 class="heading-h4-size-3 mg-bottom-0">
+                    {accordion[0]?.title}
+                  </h3>
+                  <div
+                    class="line-rounded-icon tab-menu-left-link-arrow"
+                    style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                  >
+                    
+                  </div>
+                </div>
+
+                <div
+                  id="tab1"
+                  class="tab-menu-link-content"
+                  style="transform: translate3d(0px, 100%, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0; height: 0px; display: none;"
+                >
+                  <div class="accordion-spacer-2"></div>
+                  <p class="newmgbottom">
+                    {accordion[0]?.value}
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            <a
+              data-w-tab="Tab 2"
+              class="tab-menu-left-link w-inline-block w-tab-link"
+              tabindex="-1"
+            >
+              <div class="tab-menu-left-link-icon">
+                <div class="inner-container _48px">
+                  <div class="image-wrapper">
+                    <img
+                      loading="eager"
+                      src="images/1-54.svg"
+                      alt=""
+                      class="image-11 cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="tab-menu-left-link-content">
+                <div class="tab-menu-left-link-content-top">
+                  <h3 class="heading-h4-size-3 mg-bottom-0">
+                    {accordion[1]?.title}
+                  </h3>
+                  <div
+                    class="line-rounded-icon tab-menu-left-link-arrow"
+                    style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                  >
+                    
+                  </div>
+                </div>
+                <div
+                  class="tab-menu-link-content"
+                  style="transform: translate3d(0px, 100%, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0; height: 0px; display: none;"
+                >
+                  <div class="accordion-spacer-2"></div>
+                  <p class="newmgbottom">
+                    {accordion[1]?.value}
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a
+              data-w-tab="Tab 4"
+              class="tab-menu-left-link w-inline-block w-tab-link"
+              tabindex="-1"
+            >
+              <div class="tab-menu-left-link-icon">
+                <div class="inner-container _48px">
+                  <div class="image-wrapper">
+                    <img
+                      loading="eager"
+                      src="images/1-56.svg"
+                      alt=""
+                      class="image-11 cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="tab-menu-left-link-content">
+                <div class="tab-menu-left-link-content-top">
+                  <h3 class="heading-h4-size-3 mg-bottom-0">
+                    {accordion[2]?.title}
+                  </h3>
+                  <div
+                    class="line-rounded-icon tab-menu-left-link-arrow"
+                    style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                  >
+                    
+                  </div>
+                </div>
+                <div
+                  class="tab-menu-link-content"
+                  style="transform: translate3d(0px, 100%, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0; height: 0px; display: none;"
+                >
+                  <div class="accordion-spacer-2"></div>
+                  <p class="newmgbottom">
+                    {accordion[2]?.value}
+                  </p>
+                </div>
+              </div>
+            </a>
+            <a
+              data-w-tab="Tab 3"
+              class="tab-menu-left-link w-inline-block w-tab-link"
+              tabindex="-1"
+            >
+              <div class="tab-menu-left-link-icon">
+                <div class="inner-container _48px">
+                  <div class="image-wrapper">
+                    <img
+                      loading="eager"
+                      src="images/1-55.svg"
+                      alt=""
+                      class="image-11 cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="tab-menu-left-link-content">
+                <div class="tab-menu-left-link-content-top">
+                  <h3 class="heading-h4-size-3 mg-bottom-0">
+                    {accordion[3]?.title}
+                  </h3>
+                  <div
+                    class="line-rounded-icon tab-menu-left-link-arrow"
+                    style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                  >
+                    
+                  </div>
+                </div>
+                <div
+                  class="tab-menu-link-content"
+                  style="transform: translate3d(0px, 100%, 0px) scale3d(0.8, 0.8, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 0; height: 0px; display: none;"
+                >
+                  <div class="accordion-spacer-2"></div>
+                  <p class="newmgbottom">
+                    {accordion[3]?.value}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

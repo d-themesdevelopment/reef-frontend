@@ -1,0 +1,160 @@
+---
+interface Props {
+  blocks: Array<any>;
+}
+
+import IntroSection from "./home/IntroSection.astro";
+import IntroVideoBannerSection from "./home/IntroVideoBannerSection.astro";
+import CategoriesSection from "./home/CategoriesSection.astro";
+import CategoriesTwoSection from "./home/CategoriesTwoSection.astro";
+import StakeholdersSection from "./home/StakeholdersSection.astro";
+import ServicesSection from "./home/ServicesSection.astro";
+import ServicesTwoSection from "./home/ServicesTwoSection.astro";
+import ArticleSection from "./home/ArticleSection.astro";
+import FaqSection from "./home/FaqSection.astro";
+import PageHeaders from "./about/PageHeaders.astro";
+import AccordionSection from "./about/AccordionSection.astro";
+import TeamSection from "./about/TeamSection.astro";
+import ReportsSection from "./about/ReportsSection.astro";
+import RegulationPolicySection from "./about/RegulationPolicySection.astro";
+import ContactFormSection from "./contact/ContactFormSection.astro";
+import FaqTwoSection from "./contact/FaqTwoSection.astro";
+import OurLocationSection from "./contact/OurLocationSection.astro";
+import MediaHeroSection from "./media-center/MediaHeroSection.astro";
+import NewsletterSection from "./media-center/NewsletterSection.astro";
+import LatestArticlesSection from "./media-center/LatestArticlesSection.astro";
+import JobSection from "./career/JobSection.astro";
+
+const { blocks } = Astro.props;
+---
+
+{
+  blocks?.map(({ __component, type = "", ...rest }, index) => {
+    switch (__component) {
+      case "partials.intro":
+        return (
+          <Fragment key={index}>
+            <IntroSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.intro-video-banner":
+        return (
+          <Fragment key={index}>
+            <IntroVideoBannerSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.categories":
+        return (
+          <Fragment key={index}>
+            <CategoriesSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.categories-two":
+        return (
+          <Fragment key={index}>
+            <CategoriesTwoSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.stakeholders":
+        return (
+          <Fragment key={index}>
+            <StakeholdersSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.services":
+        return (
+          <Fragment key={index}>
+            <ServicesSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.services-two":
+        return (
+          <Fragment key={index}>
+            <ServicesTwoSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.article":
+        return (
+          <Fragment key={index}>
+            <ArticleSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.faq":
+        return (
+          <Fragment key={index}>
+            {type !== "type2" ? (
+              <FaqSection fields={{ ...rest }} />
+            ) : (
+              <FaqTwoSection fields={{ ...rest }} />
+            )}
+          </Fragment>
+        );
+      case "partials.page-header":
+        return (
+          <Fragment key={index}>
+            <PageHeaders fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "features.accordion":
+        return (
+          <Fragment key={index}>
+            <AccordionSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.members":
+        return (
+          <Fragment key={index}>
+            <TeamSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.reports":
+        return (
+          <Fragment key={index}>
+            <ReportsSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.regulations-and-policies":
+        return (
+          <Fragment key={index}>
+            <RegulationPolicySection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.contact-form":
+        return (
+          <Fragment key={index}>
+            <ContactFormSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.our-location-info":
+        return (
+          <Fragment key={index}>
+            <OurLocationSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.intro-articles":
+        return (
+          <Fragment key={index}>
+            <MediaHeroSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.newsletter":
+        return (
+          <Fragment key={index}>
+            <NewsletterSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.latest-articles":
+        return (
+          <Fragment key={index}>
+            <LatestArticlesSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.jobs":
+        return (
+          <Fragment key={index}>
+            <JobSection fields={{ ...rest }} />
+          </Fragment>
+        );
+    }
+  })
+}
