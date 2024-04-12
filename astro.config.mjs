@@ -9,6 +9,7 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'never'
   },
+  outDir: '../../dist/packages/my-app',
   output: 'server',
   adapter: vercel(),
 });
