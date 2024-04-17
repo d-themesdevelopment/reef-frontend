@@ -7,9 +7,10 @@ import { toast } from "react-toastify";
 interface Props {
   isLoggedIn: any;
   logoText: string;
+  locale: any;
 }
 
-const LoginButton = ({ isLoggedIn, logoText }: Props) => {
+const LoginButton = ({locale, isLoggedIn, logoText }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleLogout = (e: any) => {
@@ -76,7 +77,7 @@ const LoginButton = ({ isLoggedIn, logoText }: Props) => {
           className="btn-primary small header-btn-hidde-on-tablet w-button"
         >
           {logoText}
-          <span className="line-rounded-icon link-icon-right"></span>
+          <span className={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2 rotate-180" : ""}`}></span>
         </a>
       )}
     </>
