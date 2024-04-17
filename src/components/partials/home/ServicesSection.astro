@@ -31,19 +31,19 @@ const servicesData: any = await fetchApi<any[]>({
 const {
   fields: { heading, button },
 } = Astro.props;
+
+const locale = Astro.cookies.get("locale")?.value;
 ---
 
 <section class="section hero v7">
-  <div class="container-default w-container">
+  <div
+    class={`container-default w-container ${locale == "en" ? "direction-ltr" : ""}`}
+  >
     <div class="z-index-1">
       <div class="mg-bottom-32px">
         <div class="w-layout-grid grid-2-columns title-and-btn">
           <div class="text-center---tablet servicestext">
-            <img
-              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e128d15d60589e5036847e_1%20(70).svg"
-              alt=""
-              class="subtitle-icon"
-            /><h1 class="display-1 mg-bottom-12px">{heading?.title}</h1>
+            <h1 class="display-1 mg-bottom-12px">{heading?.title}</h1>
           </div>
 
           <div
@@ -95,7 +95,9 @@ const {
                                 <h2 class="mg-bottom-6px display-4">
                                   {item.attributes.title}
                                 </h2>
-                                <p>{item.attributes.desc}</p>
+                                <p class="paragraph-5 paragraph-445">
+                                  {item.attributes.desc}
+                                </p>
                               </>
                             </div>
                             <div class="mg-left-6px">
@@ -103,25 +105,20 @@ const {
                                 class="btn-circle-wrapper"
                                 style="color: rgb(0, 64, 79); border-color: rgb(0, 64, 79); background-color: rgb(255, 255, 255);"
                               >
-                                <div class="line-rounded-icon"></div>
+                                <div class="line-rounded-icon">
+                                  <strong></strong>
+                                </div>
                               </div>
                             </div>
                           </>
                         </div>
+
                         <div class="flex-horizontal start flex-wrap---gap-12px">
                           <>
                             <div class="badge-v1">
-                              <>
-                                <img
-                                  alt="Small farmers"
-                                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65dd3d4bee3822b9d04e4902_22.svg"
-                                  width="30"
-                                  class="image"
-                                />
-                                <div>{item.attributes.category.data.attributes.title}</div>
-                              </>
+                              <div>5 أيام عمل</div>
                             </div>
-                            <div class="badge-v1">0 SAR</div>
+                            <div class="badge-v1">مجاناً</div>
                           </>
                         </div>
                       </>
@@ -138,10 +135,10 @@ const {
     <div class="new8">
       <a
         data-w-id="4ef36aa9-69ab-043c-c626-baafa095a59b"
-        href={button.value}
+        href={button?.value}
         class="btn-primary newc5 w-button"
       >
-        {button.title}
+        {button?.title}
         <span
           class="line-rounded-icon link-icon-right"
           style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"

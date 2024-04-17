@@ -17,7 +17,7 @@ const locale = Astro.cookies.get("locale")?.value;
 ---
 
 <section class="section">
-  <div class="container-default w-container">
+  <div class={`container-default w-container ${locale == "en" ? "direction-ltr" : ""}`}>
     <div class="inner-container _680px---tablet center _100---mbl">
       <div
         data-w-id="5f5bf0f8-a334-1cb8-34ee-b7fb8d9fca67"

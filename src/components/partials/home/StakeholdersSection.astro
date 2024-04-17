@@ -25,7 +25,7 @@ const locale = Astro.cookies.get("locale")?.value;
           class="inner-container _600px center newb"
         >
           <div class="text-center mg-bottom-32px">
-            <img
+            <!-- <img
               src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65cb9051807f5fe36b8d3823_1%20(24).svg"
               alt=""
               class="subtitle-icon"
@@ -34,7 +34,10 @@ const locale = Astro.cookies.get("locale")?.value;
             <h2 class="display-2 color-neutral-100">{heading?.title}</h2>
             <p class="color-neutral-300 mg-bottom-0">
               {heading?.desc}
-            </p>
+            </p> -->
+            <h2 class="display-2 color-neutral-100 texth2 heading-9">
+              {heading?.title}
+            </h2>
           </div>
         </div>
 
@@ -52,6 +55,12 @@ const locale = Astro.cookies.get("locale")?.value;
             >
               <div class="mg-bottom-24px">
                 <div class="inner-container icon-88px">
+                  <!-- <img
+                    src={`${infoBoxes[0]?.media?.image?.data?.attributes?.url}`}
+                    alt=""
+                    width="70"
+                  /> -->
+
                   <img
                     src={`${infoBoxes[0]?.media?.image?.data?.attributes?.url}`}
                     alt=""
@@ -143,18 +152,19 @@ const locale = Astro.cookies.get("locale")?.value;
           data-w-id="12d49549-d020-de1a-37a2-21e499fb050d"
           class="buttons-row center mg-top-40px newclick"
         >
+          <a href={buttons[1]?.value} class="btn-secondary white w-button"
+            >{buttons[1]?.title}</a
+          >
+
           <a
             data-w-id="12d49549-d020-de1a-37a2-21e499fb050e"
             href={buttons[0]?.value}
             class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : ""}`}
-            >{buttons[0]?.title}<span class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2" : ""}`}
+            >{buttons[0]?.title}<span
+              class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2 rotate-90" : ""}`}
               ></span
             >
           </a>
-
-          <a href={buttons[1]?.value} class="btn-secondary white w-button"
-            >{buttons[1]?.title}</a
-          >
         </div>
       </div>
     </div>

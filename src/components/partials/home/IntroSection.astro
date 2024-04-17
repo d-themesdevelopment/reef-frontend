@@ -11,20 +11,59 @@ interface Props {
 const {
   fields: { heading, media },
 } = Astro.props;
+
+const locale = Astro.cookies.get("locale")?.value;
 ---
 
 <section id="talented-experts" class="section overviewdesktop">
-  <div class="container-default w-container">
+  <div
+    class={`container-default w-container ${locale == "en" ? "direction-ltr" : ""}`}
+  >
     <div>
-      <div class="w-layout-grid grid-2-columns text-left-short">
+      <div class="w-layout-grid grid-2-columns text-left-short edit22">
+        <div
+          id="w-node-f5b53007-5890-c5fb-32cf-baca4cd2f716-4cd2f70b"
+          data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f716"
+          class="inner-container _548px _100---mbl"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+        >
+          <div class="text-center---tablet">
+            <div class="inner-container _500px---mbl center">
+              <a
+                href="#"
+                data-w-id="092e865b-6d5d-2152-0592-c86f201aac6e"
+                class="lightbox-video-icon-wrapper w-inline-block w-lightbox"
+                aria-label="open lightbox"
+                aria-haspopup="dialog"
+                ><img
+                  src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec41_1%20(6).svg"
+                  alt=""
+                  width="72"
+                  height="40"
+                  class="subtitle-icon subtitle-icon33 icon22"
+                /></a
+              >
+              <h2 class="display-2 heading-2">{heading?.title}</h2>
+            </div>
+
+            <div class="max-w-520px center---tablet">
+              <p class="mg-bottom-48px newmg444">
+                {heading?.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div
           id="w-node-f5b53007-5890-c5fb-32cf-baca4cd2f70f-4cd2f70b"
           data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f70f"
           class="inner-container _596px _100---tablet"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
         >
           <div
             data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f710"
             class="border-radius-24px overflow-hidden height-100"
+            style="opacity: 1;"
           >
             <div class="position-relative height-100">
               <img
@@ -32,7 +71,9 @@ const {
                 alt={media?.alt}
                 class="video-bg-image"
                 data-xblocker="passed"
-              /><div class="bg-overlay">
+              />
+
+              <div class="bg-overlay">
                 <a
                   href="#"
                   data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f714"
@@ -40,40 +81,14 @@ const {
                   aria-label="open lightbox"
                   aria-haspopup="dialog"
                   ><img
-                    src="/images/1-2.svg"
+                    src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec28_1%20(2).svg"
                     alt=""
                     data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f715"
                     class="play-button-large"
-                    data-xblocker="passed"
-                    style="visibility: visible; opacity: 1;"
+                    style="opacity: 1;"
                   />
                 </a>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="w-node-f5b53007-5890-c5fb-32cf-baca4cd2f716-4cd2f70b"
-          data-w-id="f5b53007-5890-c5fb-32cf-baca4cd2f716"
-          class="inner-container _548px _100---mbl"
-        >
-          <div class="text-center---tablet">
-            <div class="inner-container _500px---mbl center">
-              <img
-                src="/images/1-6.svg"
-                height="40"
-                alt=""
-                class="subtitle-icon"
-              />
-
-              <h2 class="display-2">{heading?.title}</h2>
-            </div>
-
-            <div class="max-w-520px center---tablet">
-              <p class="mg-bottom-48px">
-                {heading?.desc}
-              </p>
             </div>
           </div>
         </div>

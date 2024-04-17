@@ -45,28 +45,40 @@ console.log(footerData, "footerDatafooterData");
 
 <footer class="footer">
   <div class="position-relative">
-    <div class="container-default z-index-1 w-container">
+    <div
+      class={`container-default z-index-1 w-container ${locale == "en" ? "direction-ltr" : ""}`}
+    >
       <div
         data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c19"
         class="cta-card cta-v2"
       >
         <div class="inner-container _600px center">
           <div class="text-center">
-            <img src="images/1-23.svg" alt="" class="subtitle-icon" />
+            <!-- <img src="images/1-23.svg" alt="" class="subtitle-icon" /> -->
             <div class="inner-container _500px---tablet center">
               <div class="inner-container _400px---mbl center">
                 <h2
                   data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c1d"
-                  class="display-2 color-neutral-100 mg-bottom-24px"
+                  class="display-2 color-neutral-100 mg-bottom-24px fontnew heading-3 heading-5"
                 >
                   {footerData?.attributes?.contactUsForm?.title}
                 </h2>
               </div>
             </div>
+
             <div
               data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c1f"
               class={`buttons-row center`}
             >
+              <a
+                href={footerData?.attributes?.contactUsForm?.addressButton
+                  ?.value}
+                class="btn-secondary white w-button"
+                >{
+                  footerData?.attributes?.contactUsForm?.addressButton?.title
+                }</a
+              >
+
               <a
                 data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c20"
                 href={footerData?.attributes?.contactUsForm?.contactButton
@@ -75,17 +87,9 @@ console.log(footerData, "footerDatafooterData");
                 >{
                   footerData?.attributes?.contactUsForm?.contactButton?.title
                 }<span
-                  class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2" : ""}`}
+                  class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2 rotate-180" : ""}`}
                   ></span
                 ></a
-              >
-              <a
-                href={footerData?.attributes?.contactUsForm?.addressButton
-                  ?.value}
-                class="btn-secondary white w-button"
-                >{
-                  footerData?.attributes?.contactUsForm?.addressButton?.title
-                }</a
               >
             </div>
           </div>
@@ -98,7 +102,9 @@ console.log(footerData, "footerDatafooterData");
         data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c27"
         class="z-index-1"
       >
-        <div class="container-default w-container">
+        <div
+          class={`container-default w-container ${locale == "en" ? "direction-ltr" : ""}`}
+        >
           <div class="footer-top newfooter">
             <div class="w-layout-grid grid-footer-3-col">
               <div

@@ -45,12 +45,10 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
 >
   <div>
     <!-- Upper Nav -->
-    <div class="container-default w-container">
+    <div class={`container-default w-container ${locale == "en" ? "direction-ltr" : ""}`}>
       <div class="header-content-wrapper">
         <a
           href="/"
-          aria-current="page"
-          class="header-logo-link w-nav-brand w--current"
         >
           <img
             src="/images/Untitled-design-40.png"
@@ -62,23 +60,20 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
 
           <img
             src={`${headerData?.attributes?.logo?.image?.data?.attributes?.url}`}
-            loading="lazy"
             width="198"
-            sizes="(max-width: 479px) 100vw, 198px"
             alt=""
-            srcset="/images/reef-p-500.png 500w, /images/reef-p-800.png 800w, /images/reef-p-1080.png 1080w, /images/reef.webp 1584w"
             class="image-5 desktopim"
           />
         </a>
 
         <div class="header-middle" style="max-width: 578px; width: 100%;">
           <div class="tablet-display-none">
-            <form action="/search" class="mg-bottom-0 width-100 w-form">
+            <form action="/search" class={`mg-bottom-0 width-100 w-form ${locale == "en" ? "direction-ltr" : ""}`}>
               <div class="position-relative">
                 <div class="line-rounded-icon search-header default"></div>
 
                 <input
-                  class="input search w-input"
+                  class={`input search w-input ${locale == "en" ? "direction-ltr" : ""}`}
                   maxlength="256"
                   name="query"
                   placeholder={headerData?.attributes?.searchText}
@@ -165,7 +160,7 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
         </div>
         <!-- Right side of Header Lang + Login -->
         <div
-          class={`header-right-side ${locale === "ar" ? "row-reverse" : ""}`}
+          class={`header-right-side`}
         >
           <div class="show-in-tablet"></div>
           <LoginButton
@@ -187,8 +182,8 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
 
     <!-- Bottom Nav -->
     <div class="header-bottom-wrapper hidden-on-tablet">
-      <div class="container-default w-container">
-        <div class="header-bottom">
+      <div class={`container-default w-container ${locale == "en" ? "direction-ltr" : ""}`}>
+        <div class={`header-bottom ${locale == "en" ? "direction-ltr" : ""}`}>
           <div class="header-nav-menu-flex">
             <ul role="list" class="header-nav-menu-list">
               {
@@ -198,13 +193,11 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
                       {item?.subMenu?.length > 0 ? (
                         <a
                           href={`${item.value}`}
-                          class="dropdown-wrapper w-dropdown"
+                          class="dropdown-wrapper w-dropdown header-nav-link"
                         >
                         <div class="dropdown-toggle w-dropdown-toggle">
-                            <div class="title-dropdown">{item.title}</div>
-                            <div class="line-rounded-icon dropdown-arrow">
-                              
-                            </div>
+                          <div class="line-rounded-icon dropdown-arrow"><strong></strong></div>
+                          <div class="title-dropdown">{item.title}</div>
                           </div>
                         </a>
 
@@ -250,7 +243,7 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
             </ul>
           </div>
 
-          <div class="social-media-flex">
+          <!-- <div class="social-media-flex">
             <a
               href="https://www.twitter.com/"
               target="_blank"
@@ -272,7 +265,7 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
             >
               <div class="social-icon-font"></div>
             </a>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ interface Props {
 export default async function fetchApi<T>({
   endpoint,
   query,
-  locale = "en",
+  locale = "ar",
 }: Props): Promise<T> {
   const mergedOptions = {
     next: { revalidate: 10 },
