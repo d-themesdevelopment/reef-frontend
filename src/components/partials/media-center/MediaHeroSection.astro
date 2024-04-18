@@ -13,15 +13,33 @@ const urlParamsObject = {
     media: {
       populate: "*",
     },
+    icon: {
+      populate: "*",
+    },
+    article_category: {
+      populate: "*",
+    },
+    browseBtn: {
+      populate: "*",
+    },
   },
 };
 
 const locale = Astro.cookies.get("locale")?.value;
+
+const articlesCategoryData: any = await fetchApi<any[]>({
+  endpoint: "article-categories", // the content type to fetch
+  query: {}, // the key to unwrap the response
+  locale: locale,
+});
+
 const articlesData: any = await fetchApi<any[]>({
   endpoint: "articles", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
   locale: locale,
 });
+
+console.log(articlesCategoryData, "articlesCategoryData");
 
 const { fields } = Astro.props;
 ---
@@ -33,566 +51,146 @@ const { fields } = Astro.props;
       style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
       class="w-layout-grid grid-2-columns title-and-categories"
     >
-      <h2 class="display-2 mg-bottom-0 mg223 new22346">المركز الإعلامي</h2><div
-        class="w-dyn-list"
-      >
+      <h2 class="display-2 mg-bottom-0 mg223 new22346">
+        {fields?.heading?.title}
+      </h2>
+
+      <div class="w-dyn-list">
         <div
           role="list"
           class="categories-badges-wrapper center---tablet w-dyn-items"
         >
-          <div
-            role="listitem"
-            class="categories-badges-item-wrapper center---tablet w-dyn-item"
-          >
-            <a
-              href="/blog-pages/blog-v1"
-              class="badge-secondary small category-badges center---tablet w-inline-block w-condition-invisible"
-              ><div>All</div></a
-            ><a
-              href="/blog-category/news"
-              class="badge-secondary small category-badges center---tablet w-inline-block"
-              ><div class="flex-horizontal gap-4px">
-                <div class="text-block-22">الأخبار</div>
-              </div></a>
-          </div><div
-            role="listitem"
-            class="categories-badges-item-wrapper center---tablet w-dyn-item"
-          >
-            <a
-              href="/blog-pages/blog-v1"
-              class="badge-secondary small category-badges center---tablet w-inline-block w-condition-invisible"
-              ><div>All</div></a
-            ><a
-              href="/blog-category/multimedia-library"
-              class="badge-secondary small category-badges center---tablet w-inline-block"
-              ><div class="flex-horizontal gap-4px">
-                <div class="text-block-22">مكتبة الوسائط المتعددة</div>
-              </div></a>
-          </div><div
-            role="listitem"
-            class="categories-badges-item-wrapper center---tablet w-dyn-item"
-          >
-            <a
-              href="/blog-pages/blog-v1"
-              class="badge-secondary small category-badges center---tablet w-inline-block w-condition-invisible"
-              ><div>All</div></a
-            ><a
-              href="/blog-category/events"
-              class="badge-secondary small category-badges center---tablet w-inline-block"
-              ><div class="flex-horizontal gap-4px">
-                <div class="text-block-22">الفعاليات</div>
-              </div></a>
-          </div>
-        </div>
-      </div>
-    </div><h2 class="display-2 mg-bottom-32px">المركز الإعلامي</h2><div>
-      <div class="mg-bottom-40px">
-        <div
-          data-w-id="e059cf3f-0606-688e-0362-65e8223c36a9"
-          style="transform: translate3d(0px, 10%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 0; transform-style: preserve-3d;"
-          class="text-center text-center33"
-        >
-          <div class="collection-list-wrapper-4 w-dyn-list">
-            <div
-              role="list"
-              class="categories-badges-wrapper center w-dyn-items"
-            >
+          {
+            articlesCategoryData?.map((item: any) => (
               <div
                 role="listitem"
-                class="categories-badges-item-wrapper center w-dyn-item"
+                class="categories-badges-item-wrapper center---tablet w-dyn-item"
               >
                 <a
-                  href="/blog-pages/blog-v3"
-                  aria-current="page"
-                  class="badge-secondary small category-badges center w-inline-block w-condition-invisible w--current"
-                  ><div>All</div></a
-                ><a
-                  href="/blog-category/news"
-                  class="badge-secondary small category-badges center w-inline-block"
-                  ><div class="flex-horizontal gap-4px">
-                    <img
-                      alt="الأخبار"
-                      loading="eager"
-                      width="16"
-                      src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65f74cddf33ea969ede1fb7d_1%20(98).svg"
-                    /><div class="text-block-20">الأخبار</div>
-                  </div></a>
-              </div><div
-                role="listitem"
-                class="categories-badges-item-wrapper center w-dyn-item"
-              >
-                <a
-                  href="/blog-pages/blog-v3"
-                  aria-current="page"
-                  class="badge-secondary small category-badges center w-inline-block w-condition-invisible w--current"
-                  ><div>All</div></a
-                ><a
-                  href="/blog-category/multimedia-library"
-                  class="badge-secondary small category-badges center w-inline-block"
-                  ><div class="flex-horizontal gap-4px">
-                    <img
-                      alt="مكتبة الوسائط المتعددة"
-                      loading="eager"
-                      width="16"
-                      src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65f74eba044c97db55ff8891_1%20(100).svg"
-                    /><div class="text-block-20">مكتبة الوسائط المتعددة</div>
-                  </div></a>
-              </div><div
-                role="listitem"
-                class="categories-badges-item-wrapper center w-dyn-item"
-              >
-                <a
-                  href="/blog-pages/blog-v3"
-                  aria-current="page"
-                  class="badge-secondary small category-badges center w-inline-block w-condition-invisible w--current"
-                  ><div>All</div></a
-                ><a
-                  href="/blog-category/events"
-                  class="badge-secondary small category-badges center w-inline-block"
-                  ><div class="flex-horizontal gap-4px">
-                    <img
-                      alt="الفعاليات"
-                      loading="eager"
-                      width="16"
-                      src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65f74df021e5ea2f015d5170_1%20(99).svg"
-                    /><div class="text-block-20">الفعاليات</div>
-                  </div></a>
+                  href="#"
+                  class="badge-secondary small category-badges center---tablet w-inline-block"
+                >
+                  <div class="flex-horizontal gap-4px">
+                    <div class="text-block-22">{item?.attributes?.title}</div>
+                  </div>
+                </a>
               </div>
-            </div>
-          </div>
+            ))
+          }
         </div>
-      </div><div
+      </div>
+    </div>
+
+    <div>
+      <div
         data-w-id="e3e4c45c-9fee-c86e-0109-eb5870a962e3"
         style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
         class="height-100 w-dyn-list"
       >
         <div role="list" class="grid-2-columns gap-row-32px w-dyn-items">
-          <div role="listitem" class="height-100 w-dyn-item">
-            <a
-              data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e192"
-              href="/blog/empowering-farmers-for-success"
-              class="card card-blog-v3 w-inline-block"
-              ><div class="card-picture image-wrapper---br-top---v3">
-                <img
-                  src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbb15120ce918307790e6_GI22fcxW0AA80R7.jpeg"
-                  alt="جائزة سيدة الباحة"
-                  sizes="(max-width: 767px) 90vw, (max-width: 991px) 46vw, (max-width: 1279px) 47vw, 596px"
-                  srcset="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbb15120ce918307790e6_GI22fcxW0AA80R7-p-500.jpeg 500w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbb15120ce918307790e6_GI22fcxW0AA80R7-p-800.jpeg 800w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbb15120ce918307790e6_GI22fcxW0AA80R7-p-1080.jpeg 1080w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbb15120ce918307790e6_GI22fcxW0AA80R7-p-1600.jpeg 1600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbb15120ce918307790e6_GI22fcxW0AA80R7-p-2000.jpeg 2000w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbb15120ce918307790e6_GI22fcxW0AA80R7.jpeg 2048w"
-                  class="card-image image-wrapper---v3"
-                  style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                /><div class="blog-card-badge-wrapper-top">
-                  <div class="badge-primary small white">
-                    <div class="flex-horizontal start gap-4px">
-                      <img
-                        alt="الأخبار"
-                        loading="eager"
-                        width="21"
-                        src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65f74cddf33ea969ede1fb7d_1%20(98).svg"
-                      /><div class="color-neutral-800">الأخبار</div>
+          {
+            articlesData?.map((article: any) => (
+              <div role="listitem" class="height-100 w-dyn-item">
+                <a
+                  data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e192"
+                  href={`/media-center/${article?.attributes?.slug}`}
+                  class="card card-blog-v3 w-inline-block"
+                >
+                  <>
+                    <div class="card-picture image-wrapper---br-top---v3">
+                      <>
+                        <img
+                          src={`${article?.attributes?.media?.image?.data?.attributes?.url}`}
+                          alt="تشرفنا بزيارة كريمة "
+                          sizes="(max-width: 767px) 90vw, (max-width: 991px) 46vw, (max-width: 1279px) 47vw, 596px"
+                          class="card-image image-wrapper---v3"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                        <div class="blog-card-badge-wrapper-top">
+                          <div class="badge-primary small white">
+                            <div class="flex-horizontal start gap-4px">
+                              <>
+                                <img
+                                  alt="مكتبة الوسائط المتعددة"
+                                  loading="eager"
+                                  width="21"
+                                  src={`${article?.attributes?.icon?.image?.data?.attributes?.url}`}
+                                />
+                                <div class="color-neutral-800">
+                                  {
+                                    article?.attributes?.article_category?.data
+                                      ?.attributes?.title
+                                  }
+                                </div>
+                              </>
+                            </div>
+                          </div>
+                        </div>
+                      </>
                     </div>
-                  </div>
-                </div>
-              </div><div class="pd---content-inside-card pd-blog-wrapper---v3">
-                <div class="inner-container _550px---mbl">
-                  <div class="inner-container _381px">
-                    <h3
-                      class="card-title heading-h3-size mg-bottom-8px"
-                      style="color: rgb(0, 45, 51);"
-                    >
-                      جائزة سيدة الباحة
-                    </h3>
-                  </div><p class="mg-bottom-0 mgnew4">
-                    تحت رعاية صاحبة السمو الملكي الأميرة سارة بنت مساعد آل سعود
-                    حرم أمير منطقة الباحة نعلن في #مؤسسة_ريف_الأهلية عن مشاركتنا
-                    في #جائزة_س
-                  </p>
-                </div><div class="div-block-14">
-                  <div class="divider _24px"></div><div
-                    class="flex-horizontal space-between gap-16px---flex-wrap"
-                  >
-                    <div class="flex-horizontal start gap-8px">
-                      <div class="text-100 medium color-neutral-800">
-                        Mar 23, 2024
-                      </div>
-                    </div><div
-                      data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e1a3"
-                      class="card-link"
-                      style="color: rgb(0, 64, 79);"
-                    >
-                      <div class="link-text">تصفح</div><div
-                        class="line-rounded-icon card-arrow-right"
-                        style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                      >
-                        
-                      </div>
+                    <div class="pd---content-inside-card pd-blog-wrapper---v3">
+                      <>
+                        <div class="inner-container _550px---mbl">
+                          <>
+                            <div class="inner-container _381px">
+                              <h3
+                                class="card-title heading-h3-size mg-bottom-8px"
+                                style="color: rgb(0, 45, 51);"
+                              >
+                                {article?.attributes?.title}
+                              </h3>
+                            </div>
+                            <p class="mb-0 mgnew4">
+                              {article?.attributes?.desc}
+                            </p>
+                          </>
+                        </div>
+                        <div class="div-block-14">
+                          <>
+                            <div class="divider _24px" />
+                            <div class="flex-horizontal space-between gap-16px---flex-wrap">
+                              <>
+                                <div class="flex-horizontal start gap-8px">
+                                  <div class="text-100 medium color-neutral-800">
+                                    {article?.attributes?.date}
+                                  </div>
+                                </div>
+                                <div
+                                  data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e1a3"
+                                  class="card-link"
+                                  style="color: rgb(0, 64, 79);"
+                                >
+                                  <>
+                                    <div class="link-text">
+                                      {article?.attributes?.browseBtn?.title}
+                                    </div>
+                                    <div
+                                      class={`line-rounded-icon card-arrow-right ${locale === "en" ? "rotate-180" : ""}`}
+                                    >
+                                      
+                                    </div>
+                                  </>
+                                </div>
+                              </>
+                            </div>
+                          </>
+                        </div>
+                      </>
                     </div>
-                  </div>
-                </div>
-              </div></a>
-          </div><div role="listitem" class="height-100 w-dyn-item">
-            <a
-              data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e192"
-              href="/blog/nurturing-a-greener-tomorrow-in-rural-communities"
-              class="card card-blog-v3 w-inline-block"
-              ><div class="card-picture image-wrapper---br-top---v3">
-                <img
-                  src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbd5f4e83ddea53d68426_GHa8EoNWEAAE06o.jpeg"
-                  alt="تشرفنا بزيارة كريمة "
-                  sizes="(max-width: 767px) 90vw, (max-width: 991px) 46vw, (max-width: 1279px) 47vw, 596px"
-                  srcset="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbd5f4e83ddea53d68426_GHa8EoNWEAAE06o-p-500.jpeg 500w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbd5f4e83ddea53d68426_GHa8EoNWEAAE06o-p-800.jpeg 800w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbd5f4e83ddea53d68426_GHa8EoNWEAAE06o-p-1080.jpeg 1080w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbd5f4e83ddea53d68426_GHa8EoNWEAAE06o-p-1600.jpeg 1600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbd5f4e83ddea53d68426_GHa8EoNWEAAE06o-p-2000.jpeg 2000w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbd5f4e83ddea53d68426_GHa8EoNWEAAE06o.jpeg 2048w"
-                  class="card-image image-wrapper---v3"
-                  style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                /><div class="blog-card-badge-wrapper-top">
-                  <div class="badge-primary small white">
-                    <div class="flex-horizontal start gap-4px">
-                      <img
-                        alt="مكتبة الوسائط المتعددة"
-                        loading="eager"
-                        width="21"
-                        src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65f74eba044c97db55ff8891_1%20(100).svg"
-                      /><div class="color-neutral-800">
-                        مكتبة الوسائط المتعددة
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div><div class="pd---content-inside-card pd-blog-wrapper---v3">
-                <div class="inner-container _550px---mbl">
-                  <div class="inner-container _381px">
-                    <h3
-                      class="card-title heading-h3-size mg-bottom-8px"
-                      style="color: rgb(0, 45, 51);"
-                    >
-                      تشرفنا بزيارة كريمة
-                    </h3>
-                  </div><p class="mg-bottom-0 mgnew4">
-                    تشرفنا بزيارة كريمة من صاحب السمو الملكي الامير فهد بن منصور
-                    بن ناصر بن عبدالعزيز
-                  </p>
-                </div><div class="div-block-14">
-                  <div class="divider _24px"></div><div
-                    class="flex-horizontal space-between gap-16px---flex-wrap"
-                  >
-                    <div class="flex-horizontal start gap-8px">
-                      <div class="text-100 medium color-neutral-800">
-                        Mar 24, 2024
-                      </div>
-                    </div><div
-                      data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e1a3"
-                      class="card-link"
-                      style="color: rgb(0, 64, 79);"
-                    >
-                      <div class="link-text">تصفح</div><div
-                        class="line-rounded-icon card-arrow-right"
-                        style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                      >
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div></a>
-          </div><div role="listitem" class="height-100 w-dyn-item">
-            <a
-              data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e192"
-              href="/blog/empowering-rural-entrepreneurs"
-              class="card card-blog-v3 w-inline-block"
-              ><div class="card-picture image-wrapper---br-top---v3">
-                <img
-                  src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8.jpeg"
-                  alt="ورشة عمل حقلية للجمعية التعاونيه "
-                  sizes="(max-width: 767px) 90vw, (max-width: 991px) 46vw, (max-width: 1279px) 47vw, 596px"
-                  srcset="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8-p-500.jpeg 500w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8-p-800.jpeg 800w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8-p-1080.jpeg 1080w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8-p-1600.jpeg 1600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8-p-2000.jpeg 2000w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8-p-2600.jpeg 2600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8-p-3200.jpeg 3200w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65ffbe81df41a1eae7f4950f_GGCj4p5WgAAyCK8.jpeg 3438w"
-                  class="card-image image-wrapper---v3"
-                  style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                /><div class="blog-card-badge-wrapper-top">
-                  <div class="badge-primary small white">
-                    <div class="flex-horizontal start gap-4px">
-                      <img
-                        alt="الفعاليات"
-                        loading="eager"
-                        width="21"
-                        src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e97d/65f74df021e5ea2f015d5170_1%20(99).svg"
-                      /><div class="color-neutral-800">الفعاليات</div>
-                    </div>
-                  </div>
-                </div>
-              </div><div class="pd---content-inside-card pd-blog-wrapper---v3">
-                <div class="inner-container _550px---mbl">
-                  <div class="inner-container _381px">
-                    <h3
-                      class="card-title heading-h3-size mg-bottom-8px"
-                      style="color: rgb(0, 45, 51);"
-                    >
-                      ورشة عمل حقلية للجمعية التعاونيه
-                    </h3>
-                  </div><p class="mg-bottom-0 mgnew4">
-                    ورشة عمل حقلية للجمعية التعاونيه
-                  </p>
-                </div><div class="div-block-14">
-                  <div class="divider _24px"></div><div
-                    class="flex-horizontal space-between gap-16px---flex-wrap"
-                  >
-                    <div class="flex-horizontal start gap-8px">
-                      <div class="text-100 medium color-neutral-800">
-                        Mar 23, 2024
-                      </div>
-                    </div><div
-                      data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e1a3"
-                      class="card-link"
-                      style="color: rgb(0, 64, 79);"
-                    >
-                      <div class="link-text">تصفح</div><div
-                        class="line-rounded-icon card-arrow-right"
-                        style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                      >
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div></a>
-          </div>
-        </div><div
+                  </>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+
+        <div
           data-w-id="ebda5586-3115-b9a1-d2fc-1e046901205c"
           style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
           role="navigation"
           aria-label="List"
           class="w-pagination-wrapper pagination"
         >
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section hero v10">
-  <div class="container-default w-container">
-    <div>
-      <div
-        data-w-id="959dd999-64ec-cb28-4473-3e5cf2dd03b8"
-        style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
-      >
-        <div
-          class="w-layout-grid grid-2-columns title-and-input mg-bottom-40px"
-        >
-          <div>
-            <img
-              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e2f8f1b9ddb1c6aa7b71cb_1%20(84).svg"
-              alt=""
-              class="subtitle-icon"
-            />
-
-            <h1 class="display-1 mg-bottom-12px">
-              {fields?.heading?.title}
-            </h1>
-
-            <p class="mg-bottom-0">
-              {fields?.heading?.desc}
-            </p>
-          </div>
-
-          <div
-            id="w-node-_959dd999-64ec-cb28-4473-3e5cf2dd03bf-c86ea1a2"
-            class="width-364px---mbl-100"
-          >
-            <form action="/search" class="mg-bottom-0 width-100 w-form">
-              <div class="position-relative">
-                <div class="line-rounded-icon search-header default">
-                  
-                </div><input
-                  class="input search w-input"
-                  maxlength="256"
-                  name="query"
-                  placeholder="Search articles..."
-                  type="search"
-                  id="search"
-                  required=""
-                />
-              </div><input
-                type="submit"
-                class="hidden-on-desktop w-button"
-                value="Search"
-              />
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="w-layout-grid grid-2-columns _1-col-tablet">
-        <div
-          id="w-node-a58b72e8-b2e3-482b-f210-e0455423e2c1-c86ea1a2"
-          data-w-id="a58b72e8-b2e3-482b-f210-e0455423e2c1"
-          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-          class="height-100 w-dyn-list"
-        >
-          <div role="list" class="height-100 w-dyn-items">
-            <div role="listitem" class="height-100 w-dyn-item">
-              <a
-                data-w-id="e0fec2b8-5911-81ca-928a-28777f294f5e"
-                href={`/media-center/${articlesData[0]?.attributes?.slug}`}
-                class="card card-blog w-inline-block"
-              >
-                <div class="card-picture image-wrapper---br-top image-featured">
-                  <img
-                    src={`${articlesData[0]?.attributes?.media?.image?.data?.attributes?.url}`}
-                    alt="Empowering Farmers for Success"
-                    sizes="(max-width: 991px) 94vw, (max-width: 1279px) 47vw, 596px"
-                    src={`${articlesData[0]?.attributes?.media?.image?.data?.attributes?.url}`}
-                    class="card-image"
-                    data-xblocker="passed"
-                    style="visibility: visible; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                  />
-                </div>
-
-                <div class="pd---content-inside-card pd-blog-wrapper">
-                  <div class="inner-container _600px---tablet">
-                    <div>
-                      <div class="max-w-440px">
-                        <div class="inner-container _400px---mbl">
-                          <h2
-                            class="card-title display-4"
-                            style="color: rgb(0, 45, 51);"
-                          >
-                            {articlesData[0]?.attributes?.title}
-                          </h2>
-                        </div>
-                      </div>
-
-                      <p class="mg-bottom-32px color-neutral-600">
-                        {articlesData[0]?.attributes?.desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex-horizontal space-between">
-                    <div class="text-100 medium color-neutral-800">
-                      {articlesData[0]?.attributes?.date}
-                    </div>
-
-                    <div
-                      data-w-id="ef5d1139-2fe3-8162-e41a-86687fd057aa"
-                      class="card-link"
-                      style="color: rgb(0, 64, 79);"
-                    >
-                      <div class="link-text">Read more</div><div
-                        class="line-rounded-icon card-arrow-right"
-                        style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                      >
-                        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div
-          id="w-node-_8f1d128d-fb20-b4ea-fcdc-a88ba49298f2-c86ea1a2"
-          data-w-id="8f1d128d-fb20-b4ea-fcdc-a88ba49298f2"
-          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-          class="w-dyn-list"
-        >
-          <div
-            role="list"
-            class="grid-1-column gap-row-24px blog-featured w-dyn-items"
-          >
-            <div role="listitem" class="w-dyn-item">
-              <a
-                data-w-id="09af2bfc-dae7-dec9-235a-e2be220f6a6a"
-                href={`/media-center/${articlesData[1]?.attributes?.slug}`}
-                class="card card-blog w-inline-block"
-              >
-                <div class="blog-card-featured-inner-content featured">
-                  <div
-                    id="w-node-_3b7825e0-fe96-c624-08e5-938a3630c7dc-c86ea1a2"
-                    class="max-w-350px _100---mbl"
-                  >
-                    <div class="inner-container _400px---mbl">
-                      <h2
-                        class="card-title display-4"
-                        style="color: rgb(0, 45, 51);"
-                      >
-                        {articlesData[1]?.attributes?.title}
-                      </h2>
-
-                      <p class="color-neutral-600 mg-bottom-0">
-                        {articlesData[1]?.attributes?.desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div
-                    id="w-node-e8113f34-16c2-8e4a-3e65-9d2876bbddc1-c86ea1a2"
-                    class="mg-left-16px"
-                  >
-                    <div
-                      class="btn-circle-wrapper"
-                      style="color: rgb(0, 64, 79); border-color: rgb(0, 64, 79); background-color: rgb(255, 255, 255);"
-                    >
-                      <div class="line-rounded-icon"></div>
-                    </div>
-                  </div>
-
-                  <div
-                    id="w-node-_09af2bfc-dae7-dec9-235a-e2be220f6a6c-c86ea1a2"
-                    class="flex-horizontal start"
-                  >
-                    <div class="mg-right-16px">
-                      <div class="text-100 medium color-neutral-800">
-                        {articlesData[1]?.attributes?.date}
-                      </div>
-                    </div>
-                  </div>
-                </div></a
-              >
-            </div>
-
-            <div role="listitem" class="w-dyn-item">
-              <a
-                data-w-id="09af2bfc-dae7-dec9-235a-e2be220f6a6a"
-                href={`/media-center/${articlesData[2]?.attributes?.slug}`}
-                class="card card-blog w-inline-block"
-              >
-                <div class="blog-card-featured-inner-content featured">
-                  <div
-                    id="w-node-_3b7825e0-fe96-c624-08e5-938a3630c7dc-c86ea1a2"
-                    class="max-w-350px _100---mbl"
-                  >
-                    <div class="inner-container _400px---mbl">
-                      <h2 class="card-title display-4">
-                        {articlesData[2]?.attributes?.title}
-                      </h2>
-
-                      <p class="color-neutral-600 mg-bottom-0">
-                        {articlesData[2]?.attributes?.desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div
-                    id="w-node-e8113f34-16c2-8e4a-3e65-9d2876bbddc1-c86ea1a2"
-                    class="mg-left-16px"
-                  >
-                    <div class="btn-circle-wrapper">
-                      <div class="line-rounded-icon"></div>
-                    </div>
-                  </div><div
-                    id="w-node-_09af2bfc-dae7-dec9-235a-e2be220f6a6c-c86ea1a2"
-                    class="flex-horizontal start"
-                  >
-                    <div class="mg-right-16px">
-                      <div class="text-100 medium color-neutral-800">
-                        Jan 18, 2022
-                      </div>
-                    </div>
-                  </div>
-                </div></a
-              >
-            </div>
-          </div>
         </div>
       </div>
     </div>

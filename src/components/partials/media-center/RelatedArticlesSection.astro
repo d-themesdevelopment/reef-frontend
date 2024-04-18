@@ -1,9 +1,14 @@
 ---
+import type Link from "../../../interfaces/Link";
+
 interface Props {
   articles: any;
+  title: string;
+  articleButton: Link;
 }
 
-const { articles } = Astro.props;
+const locale = Astro.cookies.get("locale")?.value;
+const { articles, title, articleButton } = Astro.props;
 ---
 
 <section class="section pd-80px pd-top-0px">
@@ -14,9 +19,10 @@ const { articles } = Astro.props;
         style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); opacity: 1; transform-style: preserve-3d;"
       >
         <div class="w-layout-grid grid-2-columns title-and-btn keep---tablet">
-          <h2 class="display-2 mg-bottom-0">Related articles</h2><a
-            href="/blog-pages/blog-v1"
-            class="btn-secondary w-button">Browse all articles</a
+          <h2 class="display-2 mg-bottom-0">{title}</h2>
+
+          <a href={articleButton?.value} class="btn-secondary w-button"
+            >{articleButton?.title}</a
           >
         </div>
       </div>
@@ -31,74 +37,91 @@ const { articles } = Astro.props;
           class="grid-3-columns gap-row-32px _1-col-tablet w-dyn-items"
         >
           {
-            articles?.map((item: any, index: number) => (
+            articles?.map((article: any) => (
               <div role="listitem" class="height-100 w-dyn-item">
                 <a
-                  data-w-id="040ed093-3a73-0bab-b15b-74791063b2a6"
-                  href={`/media-center/${item?.attributes?.slug}`}
-                  class="card card-blog _3-posts-item w-inline-block"
+                  data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e192"
+                  href={`/media-center/${article?.attributes?.slug}`}
+                  class="card card-blog-v3 w-inline-block"
                 >
-                  <div class="card-picture image-wrapper---br-top _3-posts-item">
-                    <>
-                      <img
-                        src={`${item?.attributes?.media?.image?.data?.attributes?.url}`}
-                        alt="Nurturing a Greener Tomorrow in Rural Communities"
-                        sizes="(max-width: 767px) 90vw, (max-width: 991px) 47vw, (max-width: 1439px) 30vw, 386.3999938964844px"
-                        src={`${item?.attributes?.media?.image?.data?.attributes?.url}`}
-                        class="card-image"
-                        style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                      />
-                      <div class="blog-card-badge-wrapper-top">
-                        <div class="badge-primary small white">
-                          <div class="flex-horizontal start gap-4px">
-                            <>
-                              <img
-                                src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65a12e04c59a1723c86ea367_icon-tips-localfinder-x-webflow-template.svg"
-                                loading="eager"
-                                alt="Tips"
-                              />
-                              <div class="color-neutral-800">Tips</div>
-                            </>
+                  <>
+                    <div class="card-picture image-wrapper---br-top---v3">
+                      <>
+                        <img
+                          src={`${article?.attributes?.media?.image?.data?.attributes?.url}`}
+                          alt="تشرفنا بزيارة كريمة "
+                          sizes="(max-width: 767px) 90vw, (max-width: 991px) 46vw, (max-width: 1279px) 47vw, 596px"
+                          class="card-image image-wrapper---v3"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                        <div class="blog-card-badge-wrapper-top">
+                          <div class="badge-primary small white">
+                            <div class="flex-horizontal start gap-4px">
+                              <>
+                                <img
+                                  alt="مكتبة الوسائط المتعددة"
+                                  loading="eager"
+                                  width="21"
+                                  src={`${article?.attributes?.icon?.image?.data?.attributes?.url}`}
+                                />
+                                <div class="color-neutral-800">
+                                  {
+                                    article?.attributes?.article_category?.data
+                                      ?.attributes?.title
+                                  }
+                                </div>
+                              </>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </>
-                  </div>
-
-                  <div class="pd---content-inside-card pd-blog-wrapper _3-posts-item">
-                    <>
-                      <div class="inner-container _350px---mbl">
-                        <h3
-                          class="card-title heading-h4-size mg-bottom-24px"
-                          style="color: rgb(0, 45, 51);"
-                        >
-                          {item?.attributes?.title}
-                        </h3>
-                      </div>
-                      <div class="flex-horizontal space-between">
-                        <>
-                          <div class="text-100 medium color-neutral-800">
-                            {item?.attributes?.date}
-                          </div>
-                          <div
-                            data-w-id="040ed093-3a73-0bab-b15b-74791063b2b3"
-                            class="card-link"
-                            style="color: rgb(0, 64, 79);"
-                          >
-                            <>
-                              <div class="link-text">Read more</div>
-                              <div
-                                class="line-rounded-icon card-arrow-right"
-                                style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                      </>
+                    </div>
+                    <div class="pd---content-inside-card pd-blog-wrapper---v3">
+                      <>
+                        <div class="inner-container _550px---mbl">
+                          <>
+                            <div class="inner-container _381px">
+                              <h3
+                                class="card-title heading-h3-size mg-bottom-8px"
+                                style="color: rgb(0, 45, 51);"
                               >
-                                
-                              </div>
-                            </>
-                          </div>
-                        </>
-                      </div>
-                    </>
-                  </div>
+                                {article?.attributes?.title}
+                              </h3>
+                            </div>
+                          </>
+                        </div>
+                        <div class="div-block-14">
+                          <>
+                            <div class="flex-horizontal space-between gap-16px---flex-wrap">
+                              <>
+                                <div class="flex-horizontal start gap-8px">
+                                  <div class="text-100 medium color-neutral-800">
+                                    {article?.attributes?.date}
+                                  </div>
+                                </div>
+                                <div
+                                  data-w-id="bb0fddd1-8c46-fd26-429d-e7a8d4b9e1a3"
+                                  class="card-link"
+                                  style="color: rgb(0, 64, 79);"
+                                >
+                                  <>
+                                    <div class="link-text">
+                                      {article?.attributes?.browseBtn?.title}
+                                    </div>
+                                    <div
+                                      class={`line-rounded-icon card-arrow-right ${locale === "en" ? "rotate-180" : ""}`}
+                                    >
+                                      
+                                    </div>
+                                  </>
+                                </div>
+                              </>
+                            </div>
+                          </>
+                        </div>
+                      </>
+                    </div>
+                  </>
                 </a>
               </div>
             ))

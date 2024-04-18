@@ -1616,7 +1616,7 @@ figcaption {
 
 .grid-2-columns.grid-blog-post-single {
   grid-column-gap: 40px;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 2fr 1fr;
   align-items: start;
   position: relative;
 }

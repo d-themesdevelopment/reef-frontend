@@ -18,12 +18,34 @@ const urlParamsObject = {
     media: {
       populate: "*",
     },
+    icon: {
+      populate: "*",
+    },
+    article_category: {
+      populate: "*",
+    },
+    browseBtn: {
+      populate: "*",
+    },
   },
 };
 
 const articlesData: any = await fetchApi<any[]>({
   endpoint: "articles", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+
+const sidebarData: any = await fetchApi<any[]>({
+  endpoint: "media-left-sidebar", // the content type to fetch
+  query: {
+    populate: {
+      articleButton: {
+        populate: "*",
+      },
+    },
+  }, // the key to unwrap the response
+  locale: locale,
 });
 
 const { slug } = Astro.params;
@@ -34,7 +56,7 @@ const singleArticle = articlesData.find(
 
 if (!singleArticle) return Astro.redirect("/404");
 
-console.log(singleArticle, "singleArticle")
+console.log(sidebarData, "singleArticle");
 ---
 
 <Layout title="Media Single Page">
@@ -71,7 +93,12 @@ console.log(singleArticle, "singleArticle")
                               alt="Articles"
                             />
 
-                            <div>Articles</div>
+                            <div>
+                              {
+                                singleArticle?.attributes?.article_category
+                                  ?.data?.attributes?.title
+                              }
+                            </div>
                           </div>
                         </a>
                       </div>
@@ -114,6 +141,23 @@ console.log(singleArticle, "singleArticle")
         <div class="inner-container _600px---mbl center">
           <div class="w-layout-grid grid-2-columns grid-blog-post-single">
             <div
+              id="w-node-_3a8d5ab1-b67d-d0dd-77a5-be916a7689f5-c86ea1b0"
+              data-w-id="3a8d5ab1-b67d-d0dd-77a5-be916a7689f5"
+              style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+              class="mg-bottom--16px"
+            >
+              <div class="rich-text w-richtext">
+                {
+                  singleArticle?.attributes?.body && (
+                    <Markdown
+                      value={md?.render(singleArticle?.attributes?.body)}
+                    />
+                  )
+                }
+              </div>
+            </div>
+
+            <div
               id="w-node-_14711af8-53f1-aae3-c6b9-fc39db3afb20-c86ea1b0"
               class="inner-container _388px _100---tablet"
             >
@@ -137,14 +181,12 @@ console.log(singleArticle, "singleArticle")
                     </div>
 
                     <h2 class="heading-h3-size mg-bottom-8px">
-                      Reef Foundation
+                      {sidebarData?.attributes?.title}
                     </h2>
 
                     <div class="inner-container _400px---mbl center">
                       <p class="mg-bottom-24px">
-                        A non-profitable civil institution with a legal
-                        personality that aims to work side by side with the
-                        Ministry of Environment, Water and Agriculture.
+                        {sidebarData?.attributes?.desc}
                       </p>
                     </div>
 
@@ -190,7 +232,7 @@ console.log(singleArticle, "singleArticle")
 
                     <div class="max-w-250px">
                       <h3 class="display-4 color-neutral-100 mg-bottom-24px">
-                        Subscribe to our weekly newsletter
+                        {sidebarData?.attributes?.subscribeTitle}
                       </h3>
                     </div>
 
@@ -212,7 +254,8 @@ console.log(singleArticle, "singleArticle")
                               maxlength="256"
                               name="Email"
                               data-name="Email"
-                              placeholder="Enter your email"
+                              placeholder={sidebarData?.attributes
+                                ?.emailPlaceholder}
                               type="email"
                               id="Email"
                               required=""
@@ -222,7 +265,7 @@ console.log(singleArticle, "singleArticle")
                               type="submit"
                               data-wait="Please wait..."
                               class="btn-primary small w-button"
-                              value="Subscribe"
+                              value={sidebarData?.attributes?.subscribeTitle}
                             />
                           </div>
                         </form>
@@ -258,23 +301,6 @@ console.log(singleArticle, "singleArticle")
                 </div>
               </div>
             </div>
-
-            <div
-              id="w-node-_3a8d5ab1-b67d-d0dd-77a5-be916a7689f5-c86ea1b0"
-              data-w-id="3a8d5ab1-b67d-d0dd-77a5-be916a7689f5"
-              style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-              class="mg-bottom--16px"
-            >
-              <div class="rich-text w-richtext">
-                <h2>{singleArticle?.attributes?.title}</h2>
-
-                {
-                  singleArticle?.attributes?.body && (
-                    <Markdown value={md?.render(singleArticle?.attributes?.body)} />
-                  )
-                }
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -288,5 +314,9 @@ console.log(singleArticle, "singleArticle")
     </div>
   </section>
 
-  <RelatedArticlesSection articles={articlesData} />
+  <RelatedArticlesSection
+    articles={articlesData}
+    title={sidebarData?.attributes?.latestArticleTitle}
+    articleButton={sidebarData?.attributes?.articleButton}
+  />
 </Layout>
