@@ -25,13 +25,16 @@ const urlParamsObject = {
     },
     specialties: {
       populate: "*",
-    }
+    },
   },
 };
+
+const locale = Astro.cookies.get("locale")?.value;
 
 const categorysData: any = await fetchApi<any[]>({
   endpoint: "categories", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
 });
 
 const {

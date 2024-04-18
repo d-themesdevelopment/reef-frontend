@@ -15,9 +15,11 @@ const urlParamsObject = {
   },
 };
 
+const locale = Astro.cookies.get("locale")?.value;
 const regulationAndPoliciesData: any = await fetchApi<any[]>({
   endpoint: "regulation-and-policies", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
+  locale: locale
 });
 
 const {
@@ -25,7 +27,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="section-14 overflow-hidden">
+<section id="Regulations-and-policies" class="section-14 overflow-hidden">
   <div class="container-default-6 w-container">
     <div
       data-w-id="745950d7-6bcc-061c-f6b9-bf1ae785c70e"
@@ -104,7 +106,7 @@ const {
                                 href={item?.attributes?.docUrl}
                                 class="text-link text-300 bold text-decoration-none"
                               >
-                                Click to view
+                                {item?.attributes?.title}
                               </a>
                             </div>
                           </>
@@ -114,7 +116,7 @@ const {
                           target="_blank"
                           class="btn-circle-secondary-2 small office-arrow w-inline-block"
                         >
-                          <div class="line-rounded-icon"></div>
+                          <div class="line-rounded-icon line2"></div>
                         </a>
                       </>
                     </div>
@@ -127,7 +129,7 @@ const {
       </div>
 
       <div
-        class="btn-circle-secondary-2 slider-arrow left---top-right w-slider-arrow-left"
+        class={`btn-circle-secondary-2 slider-arrow left---top-right w-slider-arrow-left ${ locale === "en" ? "btn-navigation-rtl" : "" }`}
         role="button"
         tabindex="0"
         aria-controls="w-slider-mask-0"
@@ -137,7 +139,7 @@ const {
       </div>
 
       <div
-        class="btn-circle-primary-2 slider-arrow right---top-right w-slider-arrow-right"
+        class={`btn-circle-primary-2 slider-arrow right---top-right w-slider-arrow-right ${ locale === "en" ? "btn-navigation-ltr" : "" }`}
         role="button"
         tabindex="0"
         aria-controls="w-slider-mask-0"

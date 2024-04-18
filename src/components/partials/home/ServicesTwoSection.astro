@@ -25,9 +25,11 @@ const urlParamsObject = {
   },
 };
 
+const locale = Astro.cookies.get("locale")?.value;
 const servicesData: any = await fetchApi<any[]>({
   endpoint: "services", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
+  locale: locale
 });
 ---
 

@@ -16,9 +16,11 @@ const urlParamsObject = {
   },
 };
 
+const locale = Astro.cookies.get("locale")?.value;
 const reportsData: any = await fetchApi<any[]>({
   endpoint: "reports", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
+  locale: locale
 });
 
 const {
@@ -43,11 +45,9 @@ const {
               >
                 <div class="mg-bottom-10px">
                   <div class="text-401 bold color-accent-1 text-uppercase">
-                    {heading?.subtitle}
+                    {heading?.title}
                   </div>
                 </div>
-
-                <h2 class="display-5 mg-bottom-0">{heading?.title}</h2>
               </div>
 
               <div
@@ -74,7 +74,6 @@ const {
                   <img
                     loading="eager"
                     sizes="(max-width: 767px) 83vw, (max-width: 991px) 65vw, (max-width: 1439px) 30vw, 393.0625px"
-                    srcset="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65deb1ba4d5bb659c32ccde7_Untitled%20design%20(63)-p-500.png 500w, https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65deb1ba4d5bb659c32ccde7_Untitled%20design%20(63).png 610w"
                     src={`${item?.attributes?.media?.image?.data?.attributes?.url}`}
                     src={`${item?.attributes?.media?.alt}`}
                     class="image-8 cover"
@@ -82,7 +81,7 @@ const {
                     style="visibility: visible; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                   />
 
-                  <div class="badge-secondary-2 small card-blog-post-v1-category" />
+                  <div class="badge-secondary-2 small card-blog-post-v1-category">2022</div>
                 </div>
 
                 <div class="card-blog-post-v1-content">
@@ -104,9 +103,9 @@ const {
 
                         <div
                           class="btn-circle-primary-2 small card-blog-post-arrow"
-                          style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                          style="transform: translate3d(8px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                         >
-                          <div class="line-rounded-icon"></div>
+                          <div class="line-rounded-icon line2"></div>
                         </div>
                       </div>
                     </div>
