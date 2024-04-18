@@ -1,5 +1,11 @@
 ---
+import type Link from "../../../interfaces/Link";
 import fetchApi from "../../../lib/strapi";
+
+interface Props {
+  title: string;
+  btn: Link;
+}
 
 const urlParamsObject = {
   populate: {
@@ -16,8 +22,10 @@ const locale = Astro.cookies.get("locale")?.value;
 const servicesData: any = await fetchApi<any[]>({
   endpoint: "services", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
-  locale: locale
+  locale: locale,
 });
+
+const { title, btn } = Astro.props;
 ---
 
 <section class="section pd-80px pd-top-0px">
@@ -28,14 +36,12 @@ const servicesData: any = await fetchApi<any[]>({
           id="w-node-_8bc4e8fb-5485-9d8d-1818-2e35d9822c58-c86ea1db"
           class="display-2 mg-bottom-0 moreservicesb"
         >
-          More Services
+          {title}
         </h2><div
           id="w-node-_6c264b86-38a0-5827-28c6-096c2eaf473b-c86ea1db"
           class="calltoactionphone2 desktopc"
         >
-          <a href="/ourservices" class="btn-secondary w-button"
-            >Browse all Services</a
-          >
+          <a href="/ourservices" class="btn-secondary w-button">{btn?.title}</a>
         </div>
       </div>
 
@@ -82,7 +88,9 @@ const servicesData: any = await fetchApi<any[]>({
                                   <h2 class="mg-bottom-6px display-4">
                                     {item.attributes.title}
                                   </h2>
-                                  <p>{item.attributes.desc}</p>
+                                  <p class="paragraph-5 paragraph-445">
+                                    {item.attributes.desc}
+                                  </p>
                                 </>
                               </div>
                               <div class="mg-left-6px">
@@ -90,30 +98,20 @@ const servicesData: any = await fetchApi<any[]>({
                                   class="btn-circle-wrapper"
                                   style="color: rgb(0, 64, 79); border-color: rgb(0, 64, 79); background-color: rgb(255, 255, 255);"
                                 >
-                                  <div class="line-rounded-icon"></div>
+                                  <div class="line-rounded-icon">
+                                    <strong></strong>
+                                  </div>
                                 </div>
                               </div>
                             </>
                           </div>
+
                           <div class="flex-horizontal start flex-wrap---gap-12px">
                             <>
                               <div class="badge-v1">
-                                <>
-                                  <img
-                                    alt="Small farmers"
-                                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65dd3d4bee3822b9d04e4902_22.svg"
-                                    width="30"
-                                    class="image"
-                                  />
-                                  <div>
-                                    {
-                                      item.attributes.category.data.attributes
-                                        .title
-                                    }
-                                  </div>
-                                </>
+                                <div>{item.attributes.workingDay}</div>
                               </div>
-                              <div class="badge-v1">0 SAR</div>
+                              <div class="badge-v1">{item.attributes.type}</div>
                             </>
                           </div>
                         </>

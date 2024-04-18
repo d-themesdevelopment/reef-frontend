@@ -1609,7 +1609,7 @@ figcaption {
 }
 
 .grid-2-columns.grid-team-single {
-  grid-template-columns: minmax(630px, 2fr) 1fr;
+  grid-template-columns:  1fr minmax(630px, 2fr);
   align-items: start;
   position: relative;
 }
@@ -7145,7 +7145,7 @@ figcaption {
 }
 
 .card-team-single {
-  justify-content: center;
+  /* justify-content: center; */
   align-items: flex-start;
   display: flex;
 }

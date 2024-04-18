@@ -26,6 +26,24 @@ const servicesData: any = await fetchApi<any[]>({
   locale: locale,
 });
 
+const singlePageData: any = await fetchApi<any[]>({
+  endpoint: "service-single-page", // the content type to fetch
+  query: {
+    populate: {
+      list: {
+        populate: "*",
+      },
+      serviceRequestBtn: {
+        populate: "*",
+      },
+      allServiceBtn: {
+        populate: "*",
+      },
+    },
+  }, // the key to unwrap the response
+  locale: locale,
+});
+
 const { slug } = Astro.params;
 
 const singleService = servicesData.find(
@@ -42,27 +60,125 @@ console.log(singleService?.attributes, "singleService");
     <div class="container-default w-container">
       <div class="w-layout-grid grid-2-columns grid-team-single">
         <div
+          id="w-node-a419257f-c480-9677-8844-30dc8c206af8-c86ea1db"
+          data-w-id="a419257f-c480-9677-8844-30dc8c206af8"
+          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+          class="card card-contact-info"
+        >
+          <div class="inner-container _400px---tablet">
+            <h3 class="display-4">
+              {singlePageData?.attributes?.sidebarTitle}
+            </h3>
+
+            <p class="mg-bottom-24px">
+              {singlePageData?.attributes?.sidebarDesc}
+            </p>
+          </div>
+
+          <div
+            class="w-layout-grid grid-1-column gap-row-16px team-contact-grid"
+          >
+            {
+              singlePageData?.attributes?.list?.map(
+                (item: any, index: number) => (
+                  <div
+                    id="w-node-_04f4dc10-279d-fb66-c092-06f10597e870-c86ea1db"
+                    data-w-id="04f4dc10-279d-fb66-c092-06f10597e870"
+                    class="card-link-icon contact-info w-inline-block"
+                  >
+                    <div
+                      class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-4" : "mg-right-16px"}`}
+                    >
+                      {index === 0 && (
+                        <img
+                          src={`https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0eca9_24.svg`}
+                          width="38"
+                          height="38"
+                          alt=""
+                          class="card-image size-40px"
+                        />
+                      )}
+
+                      {index === 1 && (
+                        <img
+                          src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ecac_25.svg"
+                          alt=""
+                          class="card-image size-40px"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1.1, 1.1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                      )}
+
+                      {index === 2 && (
+                        <img
+                          src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ecae_26.svg"
+                          alt=""
+                          class="card-image size-40px"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1.1, 1.1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                      )}
+
+                      {index === 3 && (
+                        <img
+                          src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ecad_27.svg"
+                          alt=""
+                          class="card-image size-40px"
+                          style="transform: translate3d(0px, 0px, 0px) scale3d(1.1, 1.1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                        />
+                      )}
+
+                      {index === 4 && (
+                        <img
+                          src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ecaf_28.svg"
+                          alt=""
+                          class="card-image size-40px"
+                        />
+                      )}
+
+                      {index === 5 && (
+                        <img
+                          src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ecb0_29.svg"
+                          alt=""
+                          class="card-image size-40px"
+                        />
+                      )}
+                    </div>
+
+                    <div>
+                      <div class="card-title text-100 text-break-all medium">
+                        {item?.title}
+                      </div>
+                    </div>
+                  </div>
+                )
+              )
+            }
+          </div>
+
+          <div class="mg-top-32px">
+            <button
+              data-w-id="5054fd6b-35a2-c60b-2b6d-752bf8dfeebd"
+              class="service-registration badge-primary w-button"
+              >{singlePageData?.attributes?.serviceRequestBtn?.title}<span
+                class="line-rounded-icon link-icon-right rotate-180 mr-2"
+                ></span
+              >
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="w-node-_3e25c3f2-d084-82d1-25f4-710e0b821ce7-c86ea1db"
+          class="divider _64px show-in-tablet"
+        >
+        </div>
+
+        <div
           id="w-node-_8cdca2b5-ab3c-4767-be55-e4c9df4efc6f-c86ea1db"
           data-w-id="8cdca2b5-ab3c-4767-be55-e4c9df4efc6f"
           style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
           class="inner-container _794px _100---tablet"
         >
           <div class="card-team-single">
-            <div class="mg-bottom-24-mbl">
-              <div class="mg-right-32px mg-right-0-mbl">
-                <div class="image-team-wrapper">
-                  <img
-                    alt="licenses and financing ."
-                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65cd57ee40b595e81966f829_Untitled%20design%20(40).png"
-                    width="271"
-                    class="c3 c3-desktop"
-                    data-xblocker="passed"
-                    style="visibility: visible;"
-                  />
-                </div>
-              </div>
-            </div>
-
             <div class="card-team-single---content">
               <h1 class="display-2 mg-bottom-12px">
                 {singleService?.attributes?.title}
@@ -81,26 +197,40 @@ console.log(singleService?.attributes, "singleService");
                     alt="licenses and financing ."
                     class="image-2"
                   /><div class="text-block-2">
-                    {singleService?.attributes?.category?.data?.attributes.title}
+                    {
+                      singleService?.attributes?.category?.data?.attributes
+                        .title
+                    }
                   </div></a
-                ><div class="badge-v1 mg-bottom-20px---mbp">0 SAR</div><div
-                  class="badge-v1 mg-bottom-20px---mbp"
-                >
-                  7 working days
+                ><div class="badge-v1 mg-bottom-20px---mbp">
+                  {singleService?.attributes?.type}
+                </div><div class="badge-v1 mg-bottom-20px---mbp">
+                  {singleService?.attributes?.workingDay}
                 </div>
               </div>
             </div>
-          </div><div class="divider _64px"></div><div
-            class="flex-icon---rich-text"
-          >
-            <img
-              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65cb9051807f5fe36b8d3823_1%20(24).svg"
-              alt=""
-              class="card-image size-40px"
-            /><div class="mg-bottom--16px">
-              <div class="rich-text-v2 w-richtext">
-                <h3>Requirements</h3>
 
+            <div class="mg-bottom-24-mbl">
+              <div class="mg-right-32px mg-right-0-mbl">
+                <div class="image-team-wrapper">
+                  <img
+                    alt="licenses and financing ."
+                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea149/65cd57ee40b595e81966f829_Untitled%20design%20(40).png"
+                    width="271"
+                    class="c3 c3-desktop"
+                    data-xblocker="passed"
+                    style="visibility: visible;"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divider _64px"></div>
+
+          <div class="flex-icon---rich-text">
+            <div class="mg-bottom--16px">
+              <div class="rich-text-v2 w-richtext">
                 <ul role="list" style="list-style-type: disc">
                   {
                     singleService?.attributes?.body
@@ -144,182 +274,16 @@ console.log(singleService?.attributes, "singleService");
             </div>
           </div>
         </div>
-
-        <div
-          id="w-node-_3e25c3f2-d084-82d1-25f4-710e0b821ce7-c86ea1db"
-          class="divider _64px show-in-tablet"
-        >
-        </div>
-
-        <div
-          id="w-node-a419257f-c480-9677-8844-30dc8c206af8-c86ea1db"
-          data-w-id="a419257f-c480-9677-8844-30dc8c206af8"
-          style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-          class="card card-contact-info"
-        >
-          <div class="inner-container _400px---tablet">
-            <h3 class="display-4">Steps for Requesting the Service</h3><p
-              class="mg-bottom-24px"
-            >
-              Lorem ipsum dolor sit amet consectetur id adipiscing elit faucibus <span
-                class="text-no-wrap">nunc pharetra.</span
-              >
-            </p>
-          </div>
-
-          <div
-            class="w-layout-grid grid-1-column gap-row-16px team-contact-grid"
-          >
-            <a
-              id="w-node-_04f4dc10-279d-fb66-c092-06f10597e870-c86ea1db"
-              data-w-id="04f4dc10-279d-fb66-c092-06f10597e870"
-              href="mailto:Alanazi@gmail.com"
-              class="card-link-icon contact-info w-inline-block"
-            >
-              <div
-                class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-4" : "mg-right-16px"}`}
-              >
-                <img
-                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65dd3ca8fadd3df7f5d16e6e_24.svg"
-                  alt=""
-                  class="card-image size-40px"
-                />
-              </div>
-
-              <div>
-                <div class="card-title text-100 text-break-all medium">
-                  Login
-                </div>
-              </div>
-            </a>
-
-            <a
-              id="w-node-cbf69310-9de2-b70c-22c8-ba735de146f6-c86ea1db"
-              data-w-id="cbf69310-9de2-b70c-22c8-ba735de146f6"
-              href="mailto:Alanazi@gmail.com"
-              class="card-link-icon contact-info w-inline-block"
-            >
-              <div
-                class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-4" : "mg-right-16px"}`}
-              >
-                <img
-                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65dd3ca8638e854c9d8f3a6b_25.svg"
-                  alt=""
-                  class="card-image size-40px"
-                  style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1.001) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
-                />
-              </div>
-
-              <div>
-                <div
-                  class="card-title text-100 text-break-all medium"
-                  style="color: rgb(0, 45, 51);"
-                >
-                  Fill in user data
-                </div>
-              </div>
-            </a>
-
-            <a
-              id="w-node-_6868887b-4397-2e5e-e2d9-a25ddc1feddc-c86ea1db"
-              data-w-id="6868887b-4397-2e5e-e2d9-a25ddc1feddc"
-              href="mailto:Alanazi@gmail.com"
-              class="card-link-icon contact-info w-inline-block"
-            >
-              <div
-                class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-4" : "mg-right-16px"}`}
-              >
-                <img
-                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65dd3ca95e7b9944943eec1e_26.svg"
-                  alt=""
-                  class="card-image size-40px"
-                />
-              </div>
-              <div>
-                <div class="card-title text-100 text-break-all medium">
-                  Choose the type of qualification required
-                </div>
-              </div>
-            </a>
-
-            <a
-              id="w-node-_4c124060-a521-1776-5e2e-7acd04582e47-c86ea1db"
-              data-w-id="4c124060-a521-1776-5e2e-7acd04582e47"
-              href="#"
-              class="card-link-icon contact-info w-inline-block"
-            >
-              <div
-                class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-4" : "mg-right-16px"}`}
-              >
-                <img
-                  src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65dd3ca987c2f835e730b51f_27.svg"
-                  alt=""
-                  class="card-image size-40px"
-                />
-              </div>
-              <div>
-                <div class="card-title text-100 medium">Submit the request</div>
-              </div>
-            </a>
-
-            <div>
-              <div class="flex-horizontal start">
-                <div
-                  class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-4" : "mg-right-16px"}`}
-                >
-                  <img
-                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65dd3ca9916442c31dbef54e_28.svg"
-                    alt=""
-                    class="card-image size-40px"
-                  />
-                </div>
-
-                <div>
-                  <div class="text-100 medium color-neutral-800">
-                    The application is studied by the institution
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex-horizontal start">
-                <div
-                  class={`card-picture circle-icon-contact ${locale === "ar" ? "ml-4" : "mg-right-16px"}`}
-                >
-                  <img
-                    src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65dd3ca998c0320a55e8bda8_29.svg"
-                    alt=""
-                    class="card-image size-40px"
-                  />
-                </div>
-
-                <div>
-                  <div class="text-100 medium color-neutral-800">
-                    Notifying the applicant of the application status
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mg-top-32px">
-            <button
-              data-w-id="5054fd6b-35a2-c60b-2b6d-752bf8dfeebd"
-              class="service-registration badge-primary w-button"
-              >Service Request<span class="line-rounded-icon link-icon-right"
-                ></span
-              >
-            </button>
-          </div>
-        </div>
       </div>
 
       <div class="divider"></div>
     </div>
   </section>
 
-  <RelatedService />
+  <RelatedService
+    title={singlePageData?.attributes?.serviceSectionTitle}
+    btn={singlePageData?.attributes?.allServiceBtn}
+  />
 </Layout>
 
 <script>
