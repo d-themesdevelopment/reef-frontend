@@ -196,9 +196,11 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
                           href={`${item.value}`}
                           class="dropdown-wrapper w-dropdown header-nav-link"
                         >
-                        <div class="dropdown-toggle w-dropdown-toggle">
-                          <div class="line-rounded-icon dropdown-arrow"><strong></strong></div>
-                          <div class="title-dropdown">{item.title}</div>
+                          <div class="dropdown-toggle w-dropdown-toggle">
+                            <div class="title-dropdown">{item.title}</div>
+                            
+                            <div class={`line-rounded-icon dropdown-arrow ${locale == "ar" ? "mr-2" : ""}`}><strong></strong></div>
+                         
                           </div>
                         </a>
 
