@@ -23,7 +23,7 @@ const urlParamsObject = {
     },
     applyButton: {
       populate: "*",
-    }
+    },
   },
 };
 
@@ -51,14 +51,20 @@ console.log(jobData, "jobData");
             id="w-node-_12c2dd47-3cd5-b6e2-fae2-035b4ba5cc28-4ba5cc14"
             class="heading-h5-size-2"
           >
-            {categoryText}
+            <strong class="bold-text-102">
+              {categoryText}
+            </strong>
           </div>
 
           <div
             id="w-node-_12c2dd47-3cd5-b6e2-fae2-035b4ba5cc2a-4ba5cc14"
             class="inner-container _484px center width-100 _100---mbl"
           >
-            <div class="heading-h5-size-2">{positionText}</div>
+            <div class="heading-h5-size-2">
+              <strong class="bold-text-103">
+                {positionText}
+              </strong>
+            </div>
           </div>
 
           <div
@@ -66,7 +72,9 @@ console.log(jobData, "jobData");
             class="heading-h5-size-2"
             style="justify-self: start;"
           >
-            {applyText}
+            <strong class="bold-text-104">
+              {applyText}
+            </strong>
           </div>
         </div>
       </div>
@@ -87,16 +95,6 @@ console.log(jobData, "jobData");
                       class="flex-horizontal-3 align-center children-wrap"
                     >
                       <>
-                        <div class={`career-item-category-icon ${locale === "ar" ? "ml-3" : ""}`}>
-                          <div class="image-wrapper">
-                            <img
-                              src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65e2d3958a7687c9a7fc9d5f_1%20(77).svg"
-                              loading="eager"
-                              alt=""
-                              class="image-18 cover"
-                            />
-                          </div>
-                        </div>
                         <div class="heading-h3-size-2">
                           <strong>
                             {
@@ -107,7 +105,7 @@ console.log(jobData, "jobData");
                         </div>
                       </>
                     </div>
-                    
+
                     <div
                       id="w-node-_12c2dd47-3cd5-b6e2-fae2-035b4ba5cc3a-4ba5cc14"
                       class="inner-container _484px center width-100 _100---mbl"
@@ -124,14 +122,16 @@ console.log(jobData, "jobData");
                         <div class="career-item-details">
                           <>
                             <div class="text-414 medium color-neutral-800">
-                              {item?.attributes?.extra}
+                              <strong class="bold-text-4">
+                                {item?.attributes?.type}
+                              </strong>
                             </div>
-                            
+
                             <div class="divider-details" />
 
                             <div class="text-414 medium color-neutral-800">
                               <strong class="bold-text-4">
-                                {item?.attributes?.type}
+                                {item?.attributes?.extra}
                               </strong>
                             </div>
                           </>

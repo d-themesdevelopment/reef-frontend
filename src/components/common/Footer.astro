@@ -38,9 +38,7 @@ const footerData: any = await fetchApi<any[]>({
   endpoint: "footer", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
   locale: locale,
-});
-
-console.log(footerData, "footerDatafooterData");
+});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 ---
 
 <footer class="footer">
@@ -83,7 +81,7 @@ console.log(footerData, "footerDatafooterData");
                 data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c20"
                 href={footerData?.attributes?.contactUsForm?.contactButton
                   ?.value}
-                class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : ""}`}
+                class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : "ml-en-space"}`}
                 >{
                   footerData?.attributes?.contactUsForm?.contactButton?.title
                 }<span

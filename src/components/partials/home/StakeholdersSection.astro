@@ -159,7 +159,7 @@ const locale = Astro.cookies.get("locale")?.value;
           <a
             data-w-id="12d49549-d020-de1a-37a2-21e499fb050e"
             href={buttons[0]?.value}
-            class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : ""}`}
+            class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : "ml-en-space"}`}
             >{buttons[0]?.title}<span
               class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2 rotate-90" : ""}`}
               ></span

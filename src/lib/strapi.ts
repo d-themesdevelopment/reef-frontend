@@ -36,10 +36,13 @@ export default async function fetchApi<T>({
     import.meta.env.STRAPI_URL
   }/api/${endpoint}?${queryString}&locale=${locale}`;
 
-  console.log(requestUrl, "requestUrlrequestUrl");
+  try {
+    const res = await fetch(requestUrl, mergedOptions);
+    const data = await res.json();
 
-  const res = await fetch(requestUrl, mergedOptions);
-  const data = await res.json();
-
-  return data.data as T;
+    return data.data as T;
+  } catch (error) {
+    console.log(error);
+    return null as T;
+  }
 }

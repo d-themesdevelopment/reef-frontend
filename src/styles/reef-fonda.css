@@ -1900,7 +1900,7 @@ figcaption {
 }
 
 .card.card-services.horizontal-item {
-  text-align: right;
+  
   flex-direction: row;
 }
 
@@ -1967,7 +1967,7 @@ figcaption {
 }
 
 .card.card-contact-info {
-  text-align: right;
+  
   border-style: none;
   border-radius: 16px;
   width: 100%;
@@ -2108,13 +2108,13 @@ figcaption {
 
 .card.faqs {
   background-color: var(--secondary--color-2);
-  text-align: right;
+  
   border-radius: 24px;
   padding: 62px 55px;
 }
 
 .card.contact-main {
-  text-align: right;
+  
   padding: 67px 32px;
 }
 
@@ -2524,12 +2524,12 @@ figcaption {
 }
 
 .mg-bottom-40px {
-  text-align: right;
+  
   margin-bottom: 60px;
 }
 
 .mg-bottom-40px.responsive {
-  text-align: right;
+  
 }
 
 .mg-bottom-40px.responsive.newtext34 {
@@ -2762,7 +2762,7 @@ figcaption {
 }
 
 .display-2.mg-bottom-0.mg223 {
-  text-align: right;
+  
   padding-left: 0;
 }
 
@@ -2932,7 +2932,7 @@ figcaption {
 
 .grid-3-columns.gap-row-32px {
   grid-row-gap: 32px;
-  text-align: right;
+  
 }
 
 .grid-3-columns.gap-row-32px._1-col-tablet.newblog2 {
@@ -3122,7 +3122,7 @@ figcaption {
 }
 
 .inner-container._600px---tablet.center {
-  text-align: right;
+  
 }
 
 .inner-container._600px---tablet.center.newcrd22 {
@@ -3550,7 +3550,7 @@ figcaption {
 }
 
 .mg-bottom-0.mgnew4 {
-  text-align: right;
+  
 }
 
 .style---content-wrapper {
@@ -3969,7 +3969,7 @@ figcaption {
   border: 1px solid var(--neutral--200);
   background-color: var(--neutral--100);
   color: var(--neutral--800);
-  text-align: right;
+  
   border-radius: 10px;
   min-height: 56px;
   margin-top: 8px;
@@ -4594,7 +4594,7 @@ figcaption {
 }
 
 .rich-text {
-  text-align: right;
+  
   font-family: reef Alfont Com Alfont Com Sst Arabic, sans-serif;
 }
 
@@ -5738,7 +5738,7 @@ figcaption {
 .flex-horizontal.start.flex-wrap---gap-16px {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  text-align: right;
+  
   flex-wrap: wrap;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -5859,7 +5859,7 @@ figcaption {
 }
 
 .text-right {
-  text-align: right;
+  
 }
 
 .text-center {
@@ -6344,7 +6344,7 @@ figcaption {
 }
 
 .pd---content-inside-card.pd-blog-wrapper {
-  text-align: right;
+  
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
@@ -7165,7 +7165,7 @@ figcaption {
 .flex-icon---rich-text {
   grid-column-gap: 16px;
   grid-row-gap: 16px;
-  text-align: right;
+  
   justify-content: center;
   align-items: flex-start;
   display: flex;
@@ -8044,7 +8044,7 @@ figcaption {
 }
 
 .card-team-single---content {
-  text-align: right;
+  
   align-self: center;
 }
 
@@ -8530,7 +8530,7 @@ figcaption {
 
 .f-progress-list {
   grid-column-gap: 3.125rem;
-  text-align: right;
+  
   justify-content: flex-end;
   align-self: auto;
   align-items: center;
@@ -8633,7 +8633,7 @@ figcaption {
 
 .f-form-button-wrapper.is---2 {
   grid-column-gap: .625rem;
-  text-align: right;
+  
   flex-direction: row;
   justify-content: flex-start;
   align-self: auto;
@@ -10103,7 +10103,7 @@ figcaption {
 }
 
 .feature-card.feature-card2 {
-  text-align: right;
+  
   background-image: url('../images/موقع-ريف-41.png'), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0));
   min-height: 385px;
   max-height: 385px;
@@ -10332,7 +10332,7 @@ figcaption {
 
 .section-4.pd-200px {
   background-color: var(--reef3);
-  text-align: right;
+  
   padding-top: 52px;
   padding-bottom: 91px;
 }
@@ -10689,7 +10689,7 @@ figcaption {
 }
 
 .mg-bottom-3.newmgbottom {
-  text-align: right;
+  
   display: block;
 }
 
@@ -10740,7 +10740,7 @@ figcaption {
 }
 
 .card5.sign-in {
-  text-align: right;
+  
   padding: 70px 68px 84px;
 }
 
@@ -10763,7 +10763,7 @@ figcaption {
 }
 
 .card5.job-perk {
-  text-align: right;
+  
   min-height: 400px;
   max-height: 400px;
   padding: 53px 29px;
@@ -11404,7 +11404,7 @@ figcaption {
 }
 
 .heading-h4-size-3.mg-bottom-0 {
-  text-align: right;
+  
   font-size: 30px;
 }
 
@@ -12383,7 +12383,7 @@ figcaption {
 .profile_form-header {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  text-align: right;
+  
   justify-content: space-between;
   align-items: center;
   padding-top: 40px;
@@ -12423,7 +12423,7 @@ figcaption {
 
 .profile_section-head {
   color: var(--reefgreen);
-  text-align: right;
+  
   margin-bottom: 46px;
   padding-left: 10px;
   font-family: Dgagnadeen, sans-serif;
@@ -12464,7 +12464,7 @@ figcaption {
 }
 
 .disconnect-link {
-  text-align: right;
+  
   padding: 13px;
   line-height: 1.3;
   text-decoration: underline;
@@ -12741,7 +12741,7 @@ figcaption {
 }
 
 .office-content {
-  text-align: right;
+  
 }
 
 .display-12 {
@@ -12929,7 +12929,7 @@ figcaption {
 
 .text-413.bold.color-accent-1.text-uppercase {
   color: var(--reef2);
-  text-align: right;
+  
   letter-spacing: 0;
   margin-bottom: 0;
   padding-top: 0;
@@ -13051,7 +13051,7 @@ figcaption {
 
 .career-item-grid-header {
   background-color: var(--neutral--100);
-  text-align: right;
+  
   border-top: 1.5px solid #e5ebec;
   border-bottom: 1.5px solid #e5ebec;
   border-radius: 20px 20px 0 0;
@@ -13091,7 +13091,7 @@ figcaption {
 }
 
 .color-neutral-806.mg-bottom-0.mg-bottom-40px---mbl {
-  text-align: right;
+  
   margin-top: 22px;
 }
 
@@ -13197,7 +13197,7 @@ figcaption {
 
 .heading-h3-size-2 {
   color: #013941;
-  width: 17vw;
+  width: 12vw;
   font-family: reef Alfont Com Alfont Com Sst Arabic, sans-serif;
   font-size: 24px;
   font-weight: 700;
@@ -13786,7 +13786,7 @@ figcaption {
 }
 
 .job-card {
-  text-align: right;
+  
   border: 1px solid #f2f3ff;
   border-radius: 20px;
   overflow: hidden;
@@ -13865,7 +13865,7 @@ figcaption {
 
 .h6 {
   color: #000;
-  text-align: right;
+  
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 3px;
@@ -14549,7 +14549,7 @@ figcaption {
 }
 
 .progress-bar-wrap {
-  text-align: right;
+  
   background-color: #f1f6fd;
   border-radius: 20px;
   width: 100%;
@@ -14563,7 +14563,7 @@ figcaption {
 .progress-bar {
   background-color: #1875f0;
   background-image: linear-gradient(274deg, var(--reefgreen), var(--reef2));
-  text-align: right;
+  
   border-radius: 20px;
   width: 100%;
   position: absolute;
@@ -15545,7 +15545,7 @@ figcaption {
 
 .collection-list-wrapper-3 {
   background-color: var(--neutral--100);
-  text-align: right;
+  
   border-radius: 0 0 20px 20px;
   margin-bottom: 49px;
   padding-bottom: 1px;
@@ -15587,7 +15587,7 @@ figcaption {
 }
 
 .div-block-12 {
-  text-align: right;
+  
 }
 
 .bold-text-10 {
@@ -15607,7 +15607,7 @@ figcaption {
 }
 
 .checkbox-label {
-  text-align: right;
+  
   padding-right: 10px;
   font-family: reef Alfont Com Alfont Com Sst Arabic Roman, sans-serif;
 }
@@ -15973,7 +15973,7 @@ figcaption {
 .testimonials-main-wrapper {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  text-align: right;
+  
   flex-direction: row;
   flex: 0 auto;
   justify-content: flex-start;
@@ -19365,7 +19365,7 @@ figcaption {
 
   .bold-text-9.bold-text-99 {
     color: var(--accent--primary-1);
-    text-align: right;
+    
   }
 
   .div-block-15 {
@@ -22946,7 +22946,7 @@ figcaption {
   }
 
   .mg-bottom-40px {
-    text-align: right;
+    
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
@@ -23163,7 +23163,7 @@ figcaption {
   }
 
   .inner-container._585px.flex-vertical {
-    text-align: right;
+    
   }
 
   .inner-container.testimonials-slider {
@@ -24799,7 +24799,7 @@ figcaption {
   }
 
   .heading-h4-size-3.mg-bottom-0 {
-    text-align: right;
+    
     padding-left: 16px;
     font-size: 19px;
   }
@@ -25114,7 +25114,7 @@ figcaption {
   }
 
   .text-413.bold.color-accent-1.text-uppercase {
-    text-align: right;
+    
   }
 
   .container-default-7 {
@@ -25161,7 +25161,7 @@ figcaption {
   }
 
   .color-neutral-806.mg-bottom-0.mg-bottom-40px---mbl {
-    text-align: right;
+    
   }
 
   .btn-primary-6 {
@@ -27012,7 +27012,7 @@ Preloader Area CSS
 
 .career-item-grid-header {
   background-color: var(--neutral--100);
-  text-align: right;
+  
   border-top: 1.5px solid #e5ebec;
   border-bottom: 1.5px solid #e5ebec;
   border-radius: 20px 20px 0 0;
@@ -27230,4 +27230,9 @@ Preloader Area CSS
   100% {
     opacity: 0.1;
   }
+}
+
+.ml-en-space {
+  margin-left: 20px !important;
+  margin-right: 0 !important;
 }

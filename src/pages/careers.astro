@@ -20,8 +20,6 @@ const pageUrlParamsObject = {
 
 const locale = Astro.cookies.get("locale")?.value;
 
-console.log(locale, "localelocale")
-
 const careerPageData: any = await fetchApi<any[]>({
   endpoint: "career", // the content type to fetch
   query: pageUrlParamsObject, // the key to unwrap the response

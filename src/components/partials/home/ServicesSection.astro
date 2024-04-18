@@ -12,6 +12,8 @@ interface Props {
   };
 }
 
+const locale = Astro.cookies.get("locale")?.value;
+
 const urlParamsObject = {
   populate: {
     media: {
@@ -26,19 +28,16 @@ const urlParamsObject = {
 const servicesData: any = await fetchApi<any[]>({
   endpoint: "services", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
 });
 
 const {
   fields: { heading, button },
 } = Astro.props;
-
-const locale = Astro.cookies.get("locale")?.value;
 ---
 
 <section class="section hero v7">
-  <div
-    class="container-default w-container"
-  >
+  <div class="container-default w-container">
     <div class="z-index-1">
       <div class="mg-bottom-32px">
         <div class="w-layout-grid grid-2-columns title-and-btn">
@@ -116,9 +115,9 @@ const locale = Astro.cookies.get("locale")?.value;
                         <div class="flex-horizontal start flex-wrap---gap-12px">
                           <>
                             <div class="badge-v1">
-                              <div>5 أيام عمل</div>
+                              <div>{item.attributes.workingDay}</div>
                             </div>
-                            <div class="badge-v1">مجاناً</div>
+                            <div class="badge-v1">{item.attributes.type}</div>
                           </>
                         </div>
                       </>
