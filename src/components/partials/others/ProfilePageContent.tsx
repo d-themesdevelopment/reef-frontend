@@ -1,19 +1,20 @@
 const ProfilePageContent = (props: any) => {
-  const { user } = props;
+  const { user, profilePageData } = props;
 
   console.log(user, "useruser");
 
   return (
     <div>
       <div className="profile_form-header">
-        <div className="text-block-5">My Profile</div>
+        <div className="text-block-5">{profilePageData?.pageTitle}</div>
       </div>
 
       {user?.serviceOrderRequestIDs &&
         user?.serviceOrderRequestIDs.length > 0 && (
           <div className="container-default-55 w-container">
-            <div className="profile_section-head">Service Requests</div>
-
+            <div className="profile_section-head">
+              {profilePageData?.ordertitle}
+            </div>
             <div className="inner-container _600px---tablet center">
               <div className="inner-container _500px---mbl center">
                 <div
@@ -33,9 +34,7 @@ const ProfilePageContent = (props: any) => {
                       .map((service: any, index: number) => (
                         <a
                           data-w-tab={`Tab ${index + 1}`}
-                          className={`tab-menu-left-link w-inline-block w-tab-link ${
-                            index === 0 ? "first" : ""
-                          }`}
+                          className="tab-menu-left-link first w-inline-block w-tab-link"
                           key={index}
                         >
                           <div className="tab-menu-left-link-icon">
@@ -43,42 +42,32 @@ const ProfilePageContent = (props: any) => {
                           </div>
                           <div className="tab-menu-left-link-content">
                             <div className="tab-menu-left-link-content-top">
-                              <h3 className="heading-h4-size-3 mg-bottom-0">
+                              <h3
+                                className="heading-h4-size-3 mg-bottom-0"
+                                title={`Service ID: ${service?.serviceID}`}
+                              >
                                 <strong className="bold-text-5">
                                   {service?.serviceName}
                                 </strong>{" "}
-                                <span style={{ color: "#999" }}>
-                                  (#{service?.serviceID})
+                                <span>
+                                  #{service?.serviceID.slice(0, 8)}...
                                 </span>
-                                <a
-                                  href="#"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
-                                  <img
-                                    className="ml-3"
-                                    src="/images/icon-copy.png"
-                                    width={20}
-                                    height={25}
-                                    alt="copy"
-                                  />
-                                </a>
                               </h3>
                               <div className="line-rounded-icon tab-menu-left-link-arrow">
                                 
                               </div>
                             </div>
-
                             <div className="tab-menu-link-content">
                               <div className="profile_section">
                                 <div className="profile_section-head">
-                                  Service Details
+                                  تفاصيل الطلب
                                 </div>
                                 <div className="job_labels-wrap">
                                   <div className="job_label-card">
                                     <div className="job_label-flex">
                                       <p className="paragraph-4">
                                         <strong className="bold-text-7">
-                                          Service Name
+                                          اسم الخدمة :
                                         </strong>
                                       </p>
                                     </div>
@@ -89,7 +78,7 @@ const ProfilePageContent = (props: any) => {
                                     <div className="job_label-flex">
                                       <p className="paragraph-4">
                                         <strong className="bold-text-6">
-                                          Date Submitted
+                                          تاريخ التقديم :
                                         </strong>
                                       </p>
                                     </div>
@@ -102,11 +91,11 @@ const ProfilePageContent = (props: any) => {
                                     <div className="job_label-flex">
                                       <p className="paragraph-4">
                                         <strong className="bold-text-8">
-                                          Status
+                                          حالة الطلب :
                                         </strong>
                                       </p>
                                     </div>
-                                    <div className="spacer-10"></div>
+                                    <div className="spacer-10 newspacer-10"></div>
                                   </div>
                                   <div className="progress-wrapper">
                                     <div className="progress-text-row">
@@ -115,7 +104,7 @@ const ProfilePageContent = (props: any) => {
                                           <div>1</div>
                                         </div>
                                         <div className="text-block-8">
-                                          Pending
+                                          قيد الانتظار
                                         </div>
                                       </div>
                                       <div className="progress-text-column">
@@ -123,7 +112,7 @@ const ProfilePageContent = (props: any) => {
                                           <div>2</div>
                                         </div>
                                         <div className="text-block-6">
-                                          In Progress
+                                          قيد التنفيذ
                                         </div>
                                       </div>
                                       <div className="progress-text-column">
@@ -131,19 +120,12 @@ const ProfilePageContent = (props: any) => {
                                           <div>3</div>
                                         </div>
                                         <div className="text-block-7">
-                                          Completed
+                                          تم الانتهاء
                                         </div>
                                       </div>
                                     </div>
                                     <div className="progress-bar-wrap">
-                                      <div
-                                        className="progress-bar"
-                                        style={{
-                                          width: service?.confirm
-                                            ? "100%"
-                                            : "50%",
-                                        }}
-                                      ></div>
+                                      <div className="progress-bar"></div>
                                     </div>
                                   </div>
                                 </div>
@@ -160,7 +142,9 @@ const ProfilePageContent = (props: any) => {
         )}
 
       <div className="profile_section">
-        <div className="profile_section-head">Profile Picture</div>
+        <div className="profile_section-head">
+          {profilePageData?.profilePictureTitle}
+        </div>
         <div className="profile_flex">
           <div className="profile_column">
             <div className="ms-profile-image-row">
@@ -181,7 +165,7 @@ const ProfilePageContent = (props: any) => {
                   width="16"
                   alt=""
                 />
-                <div>Upload New</div>
+                <div>{profilePageData?.editProfilePicture}</div>
               </a>
             </div>
           </div>
@@ -189,7 +173,9 @@ const ProfilePageContent = (props: any) => {
       </div>
 
       <div className="profile_section">
-        <div className="profile_section-head">Personal Information</div>
+        <div className="profile_section-head">
+          {profilePageData?.profileInformation}
+        </div>
         <div className="profile_flex">
           <div className="w-form">
             <form
@@ -205,12 +191,14 @@ const ProfilePageContent = (props: any) => {
               aria-label="Email Form"
             >
               <div className="profile_column">
-                <div className="input-label">First Name</div>
+                <div className="input-label">
+                  {profilePageData?.firstName?.title}
+                </div>
                 <input
                   className="input-preview w-input"
                   name="First-name-2"
                   data-name="First Name 2"
-                  placeholder="Add a first name"
+                  placeholder={profilePageData?.firstName?.value}
                   type="text"
                   defaultValue={user?.username.split(" ")[0]}
                   id="First-name-2"
@@ -218,12 +206,14 @@ const ProfilePageContent = (props: any) => {
                 />
               </div>
               <div className="profile_column">
-                <div className="input-label">Last Name</div>
+                <div className="input-label">
+                  {profilePageData?.lastName?.title}
+                </div>
                 <input
                   className="input-preview w-input"
                   name="Last-name-2"
                   data-name="Last Name 2"
-                  placeholder="Add a last name"
+                  placeholder={profilePageData?.lastName?.value}
                   type="text"
                   defaultValue={user?.username.split(" ")[1]}
                   id="Last-name-2"
@@ -231,12 +221,14 @@ const ProfilePageContent = (props: any) => {
                 />
               </div>
               <div className="profile_column">
-                <div className="input-label">Phone Number</div>
+                <div className="input-label">
+                  {profilePageData?.phoneNumber?.title}
+                </div>
                 <input
                   className="input-preview w-input"
                   name="Phone-2"
                   data-name="Phone 2"
-                  placeholder="Add a phone number"
+                  placeholder={profilePageData?.phoneNumber?.value}
                   type="tel"
                   defaultValue={user?.mobileNumber}
                   id="Phone-2"
@@ -244,12 +236,14 @@ const ProfilePageContent = (props: any) => {
                 />
               </div>
               <div className="profile_column">
-                <div className="input-label">Title</div>
+                <div className="input-label">
+                  {profilePageData?.title?.title}
+                </div>
                 <input
                   className="input-preview w-input"
                   name="Title-2"
                   data-name="Title 2"
-                  placeholder="Add a title"
+                  placeholder={profilePageData?.title?.value}
                   type="text"
                   id="Title-2"
                   data-ms-member="title"
@@ -260,7 +254,7 @@ const ProfilePageContent = (props: any) => {
                 href="#"
                 className="edit-profile w-inline-block"
               >
-                <div>Edit info</div>
+                <div>{profilePageData?.editInfoTitle}</div>
               </a>
               <input
                 type="submit"
@@ -290,7 +284,9 @@ const ProfilePageContent = (props: any) => {
       </div>
 
       <div className="profile_section">
-        <div className="profile_section-head">Email address</div>
+        <div className="profile_section-head">
+          {profilePageData?.emailAddress}
+        </div>
         <div className="profile_flex">
           <div className="w-form">
             <form
@@ -306,12 +302,14 @@ const ProfilePageContent = (props: any) => {
               aria-label="Email Form"
             >
               <div className="profile_column">
-                <div className="input-label">Email</div>
+                <div className="input-label">
+                  {profilePageData?.email?.title}
+                </div>
                 <input
                   className="input-preview w-input"
                   name="Email-2"
                   data-name="Email 2"
-                  placeholder="Add an email"
+                  placeholder={profilePageData?.email?.value}
                   type="email"
                   id="Email-2"
                   defaultValue={user?.email}
@@ -324,7 +322,7 @@ const ProfilePageContent = (props: any) => {
                 href="#"
                 className="edit-profile w-inline-block"
               >
-                <div>Edit email</div>
+                <div>{profilePageData?.editEmailTitle}</div>
               </a>
               <input
                 type="submit"
@@ -353,7 +351,7 @@ const ProfilePageContent = (props: any) => {
       </div>
 
       <div className="profile_section">
-        <div className="profile_section-head">Password</div>
+        <div className="profile_section-head">{profilePageData?.password}</div>
         <div className="profile_flex">
           <div className="w-form">
             <form
@@ -369,24 +367,28 @@ const ProfilePageContent = (props: any) => {
               aria-label="Email Form"
             >
               <div className="profile_column">
-                <div className="input-label">Current Password</div>
+                <div className="input-label">
+                  {profilePageData?.currentPassword?.title}
+                </div>
                 <input
                   className="input-preview w-input"
                   name="Current-Password-2"
                   data-name="Current Password 2"
-                  placeholder="Current password"
+                  placeholder={profilePageData?.currentPassword?.value}
                   type="password"
                   id="Current-Password-2"
                   data-ms-member="current-password"
                 />
               </div>
               <div className="profile_column">
-                <div className="input-label">New Password</div>
+                <div className="input-label">
+                  {profilePageData?.newPassword?.title}
+                </div>
                 <input
                   className="input-preview w-input"
                   name="New-Password-2"
                   data-name="New Password 2"
-                  placeholder="New Password"
+                  placeholder={profilePageData?.newPassword?.value}
                   type="password"
                   id="New-Password-2"
                   data-ms-member="new-password"
@@ -397,7 +399,7 @@ const ProfilePageContent = (props: any) => {
                 href="#"
                 className="edit-profile w-inline-block"
               >
-                <div>Change password</div>
+                <div>{profilePageData?.changePasswordTitle}</div>
               </a>
               <input
                 type="submit"

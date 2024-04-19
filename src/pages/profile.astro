@@ -6,16 +6,54 @@ import { user } from "../store/users";
 import Layout from "../layouts/Layout.astro";
 import ProfilePageContent from "..//components/partials/others/ProfilePageContent";
 import { getCurrentUser } from "../utils/user";
+import fetchApi from "../lib/strapi";
 
-const $user: any = await getCurrentUser(Astro.cookies.get("reef_token")?.value as string);
+const $user: any = await getCurrentUser(
+  Astro.cookies.get("reef_token")?.value as string
+);
 user.set($user);
+
+const locale = Astro.cookies.get("locale")?.value;
+const profilePageData: any = await fetchApi<any[]>({
+  endpoint: "profile-page", // the content type to fetch
+  query: {
+    populate: {
+      firstName: {
+        populate: "*",
+      },
+      lastName: {
+        populate: "*",
+      },
+      title: {
+        populate: "*",
+      },
+      phoneNumber: {
+        populate: "*",
+      },
+      email: {
+        populate: "*",
+      },
+      newPassword: {
+        populate: "*",
+      },
+      currentPassword: {
+        populate: "*",
+      },
+    },
+  }, // the key to unwrap the response
+  locale: locale,
+});
 ---
 
 <Layout title="Profile Page">
   <div class="dash_content">
     <div class="dash_contain">
       <div class="relative">
-        <ProfilePageContent user={$user ?? {}} client:load/>
+        <ProfilePageContent
+          user={$user ?? {}}
+          profilePageData={profilePageData?.attributes}
+          client:load
+        />
       </div>
     </div>
   </div>
@@ -26,6 +64,6 @@ user.set($user);
   const isloggedIn = Cookies.get("reef_token");
 
   if (!isloggedIn) {
-          window.location.href = "/sign-in";
+    window.location.href = "/sign-in";
   }
 </script>

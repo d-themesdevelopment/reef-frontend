@@ -102,6 +102,7 @@ const ServiceRegistration = ({
   );
 
   const createNewServiceToStrapi = async () => {
+    console.log(user, "useruseruser!!")
     try {
       const response = await fetch(`${apiUrl}/api/service-orders`, {
         method: "POST",
@@ -1202,7 +1203,7 @@ const ServiceRegistration = ({
                               <span className="f-checkbox-label w-form-label ml-2">
                                 <Markdown
                                   value={md?.render(
-                                    registerPageData?.termsPolicyText
+                                    registerPageData?.termsPolicyText.toString()
                                   )}
                                 />
                               </span>
