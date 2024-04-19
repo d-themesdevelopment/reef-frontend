@@ -27274,3 +27274,13 @@ Preloader Area CSS
 .ml-0 {
   margin-left: 0 !important;
 }
+
+@media(max-width: 991px) {
+  .btn-profile {
+    display: none;
+  }
+
+  .w-nav-menu .btn-secondary.small.header-btn-hidden-on-tablet.white2{
+    display: block;
+  }
+}

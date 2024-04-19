@@ -41,7 +41,7 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
   data-easing="ease"
   data-easing2="ease"
   role="banner"
-  class="header-wrapper header-v1"
+  class="header-wrapper header-v1 w-nav"
 >
   <div>
     <!-- Upper Nav -->
@@ -155,6 +155,10 @@ const $isLoggedIn = Astro.cookies.get("reef_token")?.value;
                   </Fragment>
                 ))
               }
+
+              <li class="header-nav-list-item show-in-tablet header-buttons">
+                <LanguageButton client:load />
+              </li>
             </ul>
           </nav>
         </div>
