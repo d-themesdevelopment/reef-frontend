@@ -10,6 +10,7 @@ import LoadingTwo from "../../../components/features/LoadingTwo";
 interface Props {
   apiUrl: string;
   apiToken: string;
+  data: any;
 }
 
 Modal.setAppElement("body");
@@ -27,7 +28,7 @@ const customStyles = {
   },
 };
 
-const SignInForm = ({ apiUrl, apiToken }: Props) => {
+const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
   const {
     register,
     handleSubmit,
@@ -182,37 +183,37 @@ const SignInForm = ({ apiUrl, apiToken }: Props) => {
         className="grid-1-column gap-row-24px"
       >
         <div id="w-node-c4efb870-0447-4e1d-dd16-c798f678d1d6-72fbc747">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{data?.emailTitle}</label>
 
           <input
             {...register("email", { required: true })}
             className="input-2 icon-left email w-input"
-            placeholder="Enter your email address"
+            placeholder={data?.emailPlaceholder}
             type="email"
           />
 
-          {errors.email && <p className="error">Email is required.</p>}
+          {errors.email && <p className="error">{data?.emailTitle} {data?.required}</p>}
         </div>
 
         <div id="w-node-c4efb870-0447-4e1d-dd16-c798f678d1da-72fbc747">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{data?.passwordTitle}</label>
           <input
             {...register("password", { required: true })}
             className="input-2 icon-left password w-input"
-            placeholder="Enter your password"
+            placeholder={data?.passwordPlaceholder}
             type="password"
           />
 
-          {errors.password && <p className="error">Password is required.</p>}
+          {errors.password && <p className="error">{data?.passwordTitle} {data?.required}.</p>}
         </div>
 
         <div
           id="w-node-c4efb870-0447-4e1d-dd16-c798f678d1de-72fbc747"
           className="flex-horizontal-2 space-between align-center children-wrap"
         >
-          <div className="mg-right-24px">
+          <div className="">
             <label className="w-checkbox checkbox-field-wrapper mg-bottom-0">
-              <div className="w-checkbox-input w-checkbox-input--inputType-custom checkbox-2"></div>
+              <div className="w-checkbox-input w-checkbox-input--inputType-custom checkbox-2 ml-en-space"></div>
 
               <input
                 type="checkbox"
@@ -222,13 +223,13 @@ const SignInForm = ({ apiUrl, apiToken }: Props) => {
                 style={{ display: "none" }}
               />
               <span className="text-408 color-neutral-600 w-form-label">
-                Remember me
+                {data?.rememberMeTitle}
               </span>
             </label>
           </div>
 
           <a href="#" className="text-decoration-none">
-            Forgot password?
+            {data?.forgetPasswordTitle}
           </a>
         </div>
 
@@ -236,13 +237,14 @@ const SignInForm = ({ apiUrl, apiToken }: Props) => {
           id="w-node-c4efb870-0447-4e1d-dd16-c798f678d1e6-72fbc747"
           className="btn-primary-3 btn-form-arrow"
         >
+          <div className="line-rounded-icon link-icon-right"></div>
+
           <input
             type="submit"
             data-wait="Please wait..."
             className="btn-primary-3 btn-form-arrow-inside w-button"
-            value="Sign in"
+            value={data?.siginInTitle}
           />
-          <div className="line-rounded-icon link-icon-right"></div>
         </div>
       </form>
 
@@ -254,11 +256,11 @@ const SignInForm = ({ apiUrl, apiToken }: Props) => {
         overlayClassName={"overlay"}
       >
         <div className="mb-0" style={{ textAlign: "center" }}>
-          <label htmlFor="password">Verfication Code</label>
+          <label htmlFor="password">{data?.verificationCodeTitle}</label>
           <input
             value={verificationCode}
             className="input-2 w-input"
-            placeholder="Enter your verfication code"
+            placeholder={data?.verificationCodePlaceholder}
             onChange={(e: any) => {
               setVerificationCode(e.target.value);
             }}
@@ -274,7 +276,7 @@ const SignInForm = ({ apiUrl, apiToken }: Props) => {
             className="f-form-button next w-button inline-block mt-7"
             style={{ display: "inline-flex" }}
           >
-            Verify
+            {data?.verifyTitle}
           </a>
         </div>
       </Modal>

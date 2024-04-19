@@ -7,9 +7,10 @@ import { useState } from "react";
 interface Props {
   apiUrl: string;
   apiToken: string;
+  data: any;
 }
 
-const SignUpForm = ({ apiUrl, apiToken }: Props) => {
+const SignUpForm = ({ apiUrl, apiToken, data }: Props) => {
   const {
     register,
     handleSubmit,
@@ -19,6 +20,21 @@ const SignUpForm = ({ apiUrl, apiToken }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSignUp = async (data: any) => {
+    if (data?.password !== data?.confirm) {
+      toast.warn("The Passowrd not matched!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+      return;
+    }
+
     setLoading(true);
 
     const registerationEndpoint = `${apiUrl}/api/auth/local/register`;
@@ -68,7 +84,7 @@ const SignUpForm = ({ apiUrl, apiToken }: Props) => {
 
     if (res.jwt && res.user) {
       console.log("Successfull registration");
-      
+
       setTimeout(() => {
         setLoading(false);
       }, 1500);
@@ -103,25 +119,16 @@ const SignUpForm = ({ apiUrl, apiToken }: Props) => {
             data-w-id="73fdc906-b228-81b6-e02b-e3d306b9ce6f"
             className="mg-bottom-48px-2"
           >
-            <a
-              href="index.html"
-              className="header-logo-link-sign-up w-inline-block"
-            >
-              <img
-                src="/images/reef_1reef.webp"
-                alt=""
-                sizes="(max-width: 479px) 63vw, (max-width: 767px) 33vw, (max-width: 1439px) 176px, 240px"
-                srcSet="/images/reef_1-p-500.png 500w, images/reef_1-p-800.png 800w, images/reef_1-p-1080.png 1080w, images/reef_1reef.webp 1584w"
-                className="header-logo-2"
-              />
-            </a>
+            <a href="/" className="header-logo-link-sign-up w-inline-block"></a>
           </div>
 
           <div
             data-w-id="73fdc906-b228-81b6-e02b-e3d306b9ce72"
             className="mg-bottom-42px"
           >
-            <h1 className="display-6 mg-bottom-6px">Create your account</h1>
+            <h1 className="display-6 mg-bottom-6px">
+              {data?.signUpAccountTitle}
+            </h1>
             <p className="mg-bottom-3">
               Please fill out the form below to create your account.
             </p>
@@ -142,44 +149,65 @@ const SignUpForm = ({ apiUrl, apiToken }: Props) => {
               onSubmit={handleSubmit(handleSignUp)}
             >
               <div id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce7c-4ea0ea99">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">{data?.nameTitle}</label>
 
                 <input
                   {...register("name", { required: true })}
                   className="input-3 icon-left user w-input"
-                  placeholder="Your name"
+                  placeholder={data?.usernamePlaceholder}
                   type="text"
                 />
 
-                {errors.name && <p className="error">Name is required.</p>}
+                {errors.name && (
+                  <p className="error">
+                    {data?.nameTitle} {data?.required}
+                  </p>
+                )}
               </div>
 
               <div id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce80-4ea0ea99">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{data?.emailTitle}</label>
 
                 <input
                   {...register("email", { required: true })}
                   className="input-3 icon-left email w-input"
-                  placeholder="Your email"
+                  placeholder={data?.emailPlaceholder}
                   type="email"
                 />
 
-                {errors.email && <p className="error">Email is required.</p>}
+                {errors.email && (
+                  <p className="error">
+                    {data?.emailTitle} {data?.required}
+                  </p>
+                )}
               </div>
 
               <div id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce84-4ea0ea99">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">{data?.passwordTitle}</label>
 
                 <input
                   {...register("password", { required: true })}
                   className="input-3 icon-left password w-input"
-                  placeholder="Enter your password"
+                  placeholder={data?.passwordPlaceholder}
                   type="password"
                 />
 
                 {errors.password && (
-                  <p className="error">Password is required.</p>
+                  <p className="error">
+                    {data?.passwordTitle} {data?.required}
+                  </p>
                 )}
+              </div>
+
+              <div id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce84-4ea0ea99">
+                <label htmlFor="password">{data?.confirmPasswordTitle}</label>
+
+                <input
+                  {...register("confirm", { required: true })}
+                  className="input-3 icon-left password w-input"
+                  placeholder={data?.confirmPasswordPlaceholder}
+                  type="password"
+                />
               </div>
 
               <label
@@ -195,10 +223,7 @@ const SignUpForm = ({ apiUrl, apiToken }: Props) => {
                 />
 
                 <span className="text-409 color-neutral-600 w-form-label">
-                  I have read and agree to the{" "}
-                  <a href="#" className="text-decoration-none text-no-wrap">
-                    Terms &amp; Conditions.
-                  </a>
+                  {data?.agreementText}
                 </span>
               </label>
 
@@ -213,32 +238,19 @@ const SignUpForm = ({ apiUrl, apiToken }: Props) => {
                 id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce8e-4ea0ea99"
                 className="btn-primary-4 btn-form-arrow"
               >
+                <div className="line-rounded-icon link-icon-right"></div>
+
                 <input
                   type="text"
                   data-wait="Please wait..."
                   className="btn-primary-4 btn-form-arrow-inside w-button"
-                  value="Create account"
+                  value={data?.createAccountTitle}
                   style={{
                     border: "none !important",
                     outline: "none !important",
                   }}
                 />
-
-                <div className="line-rounded-icon link-icon-right"></div>
               </button>
-
-              <div
-                id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce92-4ea0ea99"
-                className="mg-top-10px"
-              >
-                Already have an account?{" "}
-                <a
-                  href="/sign-in"
-                  className="text-decoration-none text-no-wrap"
-                >
-                  Sign in
-                </a>
-              </div>
             </form>
 
             <div
@@ -266,6 +278,29 @@ const SignUpForm = ({ apiUrl, apiToken }: Props) => {
               <div>Oops! Something went wrong.</div>
             </div>
           </div>
+        </div>
+
+        <div
+          data-w-id="73fdc906-b228-81b6-e02b-e3d306b9cea1"
+          className="card-options-divider-wrapper"
+        >
+          <div className="divider-2 _0px card-options-divider"></div>
+          <div className="card-options-divider-text">{data?.hasAccountTitle}</div>
+          <div className="divider-2 _0px card-options-divider"></div>
+        </div>
+
+        <div
+          data-w-id="73fdc906-b228-81b6-e02b-e3d306b9cea6"
+          className="buttons-row-2 sign-in-buttons"
+        >
+          <a
+            href="/sign-in"
+            className="btn-secondary-2 width-100 sign-in-button w-inline-block"
+          >
+            <div className="text-block-17">
+              <strong className="bold-text-12">{data?.logInNowText}</strong>
+            </div>
+          </a>
         </div>
       </div>
     </>

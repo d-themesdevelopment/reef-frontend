@@ -1,25 +1,36 @@
 ---
+import type Link from "../../../interfaces/Link";
+
 interface Props {
   fields: {
     title: string;
     desc: string;
-    email: {
-      title: string;
-      value: string;
-    };
-    phone: {
-      title: string;
-      value: string;
-    };
-    nationalAddress: {
-      title: string;
-      value: string;
-    };
+    email: Link;
+    phone: Link;
+    nationalAddress: Link;
+    emailForm: Link;
+    usernameForm: Link;
+    subjectForm: Link;
+    phoneForm: Link;
+    messageForm: Link;
+    submitBtnTitle: string
   };
 }
 
 const {
-  fields: { title, desc, email, phone, nationalAddress },
+  fields: {
+    title,
+    desc,
+    email,
+    phone,
+    nationalAddress,
+    emailForm,
+    usernameForm,
+    subjectForm,
+    phoneForm,
+    messageForm,
+    submitBtnTitle
+  },
 } = Astro.props;
 
 const locale = Astro.cookies.get("locale")?.value;
@@ -212,7 +223,7 @@ const locale = Astro.cookies.get("locale")?.value;
                       <div
                         id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69281-65b6923e"
                       >
-                        <label for="Name-3">Full name</label><div
+                        <label for="Name-3">{usernameForm?.title}</label><div
                           class="position-relative"
                         >
                           <input
@@ -220,7 +231,7 @@ const locale = Astro.cookies.get("locale")?.value;
                             maxlength="256"
                             name="name-2"
                             data-name="Name 2"
-                            placeholder="Full name"
+                            placeholder={usernameForm?.value}
                             type="text"
                             id="name-2"
                             required=""
@@ -232,7 +243,7 @@ const locale = Astro.cookies.get("locale")?.value;
                       <div
                         id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69286-65b6923e"
                       >
-                        <label for="Email-3">Email address</label><div
+                        <label for="Email-3">{emailForm?.title}</label><div
                           class="position-relative"
                         >
                           <input
@@ -240,7 +251,7 @@ const locale = Astro.cookies.get("locale")?.value;
                             maxlength="256"
                             name="email-2"
                             data-name="Email 2"
-                            placeholder="example@youremail.com"
+                            placeholder={emailForm?.value}
                             type="email"
                             id="email-2"
                             required=""
@@ -249,7 +260,7 @@ const locale = Astro.cookies.get("locale")?.value;
                       </div><div
                         id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b6928b-65b6923e"
                       >
-                        <label for="Phone-3">Phone number</label><div
+                        <label for="Phone-3">{phoneForm?.title}</label><div
                           class="position-relative"
                         >
                           <input
@@ -257,7 +268,7 @@ const locale = Astro.cookies.get("locale")?.value;
                             maxlength="256"
                             name="phone-2"
                             data-name="Phone 2"
-                            placeholder="(123) 456 - 7890"
+                            placeholder={phoneForm?.value}
                             type="tel"
                             id="phone-2"
                             required=""
@@ -266,7 +277,7 @@ const locale = Astro.cookies.get("locale")?.value;
                       </div><div
                         id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69290-65b6923e"
                       >
-                        <label for="Subject-3">Subject</label><div
+                        <label for="Subject-3">{subjectForm?.title}</label><div
                           class="position-relative"
                         >
                           <input
@@ -274,7 +285,7 @@ const locale = Astro.cookies.get("locale")?.value;
                             maxlength="256"
                             name="subject-2"
                             data-name="Subject 2"
-                            placeholder="ex. Gardening service"
+                            placeholder={subjectForm?.value}
                             type="text"
                             id="subject-2"
                             required=""
@@ -284,12 +295,12 @@ const locale = Astro.cookies.get("locale")?.value;
                         id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69295-65b6923e"
                         class="text-area-wrapper"
                       >
-                        <label for="message-3">Message</label><textarea
+                        <label for="message-3">{messageForm?.title}</label><textarea
                           id="message-2"
                           name="message-2"
                           maxlength="5000"
                           data-name="Message 2"
-                          placeholder="Type your message here"
+                          placeholder={messageForm?.value}
                           required=""
                           class="text-area small mg-bottom-8px w-input"
                         ></textarea>
@@ -298,7 +309,7 @@ const locale = Astro.cookies.get("locale")?.value;
                         data-wait="Please wait..."
                         id="w-node-_0194c01e-dfbe-ade8-bdb1-320265b69299-65b6923e"
                         class="btn-primary w-button"
-                        value="Send Message"
+                        value={submitBtnTitle}
                       />
                     </div>
                   </form><div

@@ -49,8 +49,9 @@ const { slug } = Astro.params;
 const singleService = servicesData.find(
   (page: any) => page?.attributes?.slug === slug
 );
+
 if (!singleService) return Astro.redirect("/404");
-service.set(singleService);
+service.set(singleService?.attributes);
 
 console.log(singleService?.attributes, "singleService");
 ---

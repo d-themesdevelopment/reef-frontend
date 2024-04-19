@@ -58,7 +58,7 @@ const locale = Astro.cookies.get("locale")?.value;
     data-wf-site="65a12e04c59a1723c86ea0f8"
   >
     <div class={`page-wrapper ${locale === "en" ? "direction-ltr" : "direction-rtl"}`}>
-      {!currentPath.includes("/sign-up") && <Header />}
+      <Header />
 
       <slot />
 

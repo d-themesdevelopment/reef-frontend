@@ -7,6 +7,7 @@ import { z } from "zod";
 
 const { string } = z;
 
+import Markdown from "../../../components/features/Markdown";
 import MarkdownIt from "markdown-it";
 const md = new MarkdownIt();
 
@@ -32,6 +33,8 @@ const ServiceRegistration = ({
   reafToken,
   services,
   currentService,
+  registerPageData,
+  locale,
 }: any) => {
   const [step, setStep] = useState<number>(0);
   const [serviceData, setServiceData] = useState<UserType>();
@@ -92,6 +95,12 @@ const ServiceRegistration = ({
     createNewServiceToStrapi();
   };
 
+  console.log(
+    data,
+    currentService?.category?.data?.attributes?.value,
+    "Datatat"
+  );
+
   const createNewServiceToStrapi = async () => {
     try {
       const response = await fetch(`${apiUrl}/api/service-orders`, {
@@ -113,7 +122,7 @@ const ServiceRegistration = ({
               email: serviceData?.email,
               address: serviceData?.address,
               idNumber: serviceData?.idNumber,
-              mobileNumber: serviceData?.mobileNumber
+              mobileNumber: serviceData?.mobileNumber,
             },
             requestInformation: {
               serviceName: serviceData?.serviceName,
@@ -156,7 +165,7 @@ const ServiceRegistration = ({
   const handleEnKeyPress = (event: any) => {
     const pattern = /^[a-zA-Z\s]+$/; // Regular expression pattern for English letters and spaces
     const inputChar = String.fromCharCode(event.charCode);
-  
+
     if (!pattern.test(inputChar)) {
       event.preventDefault();
     }
@@ -175,13 +184,9 @@ const ServiceRegistration = ({
                   className="subtitle-icon"
                 />
                 <h1 className="display-1 mg-bottom-12px">
-                  Service Registration
+                  {registerPageData?.title}
                 </h1>
-                <p className="mg-bottom-0">
-                  We are delighted that you are interested in our services.
-                  Please complete the registration form below to initiate the
-                  service registration process.
-                </p>
+                <p className="mg-bottom-0">{registerPageData?.desc}</p>
               </div>
             </div>
 
@@ -213,7 +218,7 @@ const ServiceRegistration = ({
                             step === 0 ? "form-step" : ""
                           }`}
                         >
-                          Personal and request information
+                          {registerPageData?.personalRequestTitle}
                           <em>
                             <br />
                           </em>
@@ -232,10 +237,10 @@ const ServiceRegistration = ({
                             step === 1 ? "form-step" : ""
                           }`}
                         >
-                          Summary
+                          {registerPageData?.summaryTitle}
                         </div>
                       </div>
-                      '
+
                       <div className="f-progress-item">
                         <div
                           className={`progress-number_block  ${
@@ -249,7 +254,7 @@ const ServiceRegistration = ({
                             step === 2 ? "form-step" : ""
                           }`}
                         >
-                          Terms &amp;&nbsp;Conditions
+                          {registerPageData?.termsConditionTitle}
                         </div>
                       </div>
                     </div>
@@ -269,33 +274,16 @@ const ServiceRegistration = ({
                             className="f-steps-info-clone"
                           >
                             <div className="f-steps-info-text-header is---2">
-                              <div className="f-copy-element is--form-2">
-                                <div className="f-steps-txt">
-                                  Steps{" "}
-                                  <span
-                                    data-text="current-step"
-                                    className="f-current-step"
-                                  >
-                                    1
-                                  </span>{" "}
-                                  /{" "}
-                                  <span
-                                    data-text="total-steps"
-                                    className="f-total-steps"
-                                  >
-                                    3
-                                  </span>
-                                </div>
-                              </div>
-
                               <div className="flex-horizontal start flex-wrap---gap-16px">
                                 <img
                                   alt="Icon Personal Information - Localfinder X Webflow Template"
                                   src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a12e04c59a1723c86ea1f7_icon-personal-information-localfinder-x-webflow-template.svg"
-                                  className="card-image size-40px"
+                                  className={`card-image size-40px ${
+                                    locale === "en" ? "mr-3  ml-0" : ""
+                                  }`}
                                 />
-                                <h2 className="display-4 mg-bottom-0">
-                                  1. Personal information
+                                <h2 className="display-4 mg-bottom-0 ">
+                                  {registerPageData?.personalInformationTitle}
                                 </h2>
                               </div>
                             </div>
@@ -306,7 +294,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-2"
                                   className="f-input-label w-clearfix"
                                 >
-                                  First Name (Arabic)
+                                  {registerPageData?.firstName} (
+                                  {registerPageData?.arabicText})
                                 </label>
                                 <input
                                   {...register("firstNameAr", {
@@ -319,7 +308,9 @@ const ServiceRegistration = ({
                                 />
                                 {errors.firstNameAr && (
                                   <p className="error">
-                                    FirstName(Arabic) is required.
+                                    {registerPageData?.firstName} (
+                                    {registerPageData?.arabicText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -329,7 +320,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-3"
                                   className="f-input-label w-clearfix"
                                 >
-                                  First Name (English)
+                                  {registerPageData?.firstName} (
+                                  {registerPageData?.englishText})
                                 </label>
                                 <input
                                   {...register("firstNameEn", {
@@ -343,7 +335,9 @@ const ServiceRegistration = ({
                                 />
                                 {errors.firstNameEn && (
                                   <p className="error">
-                                    FirstName(English) is required.
+                                    {registerPageData?.firstName} (
+                                    {registerPageData?.englishText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -353,7 +347,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-4"
                                   className="f-input-label w-clearfix"
                                 >
-                                  Father Name (Arabic)
+                                  {registerPageData?.fatherName} (
+                                  {registerPageData?.arabicText})
                                 </label>
 
                                 <input
@@ -367,7 +362,9 @@ const ServiceRegistration = ({
                                 />
                                 {errors.fatherNameAr && (
                                   <p className="error">
-                                    FatherName(Arabic) is required.
+                                    {registerPageData?.fatherName} (
+                                    {registerPageData?.arabicText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -377,7 +374,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-5"
                                   className="f-input-label w-clearfix"
                                 >
-                                  Father Name (English)
+                                  {registerPageData?.fatherName} (
+                                  {registerPageData?.englishText})
                                 </label>
                                 <input
                                   {...register("fatherNameEn", {
@@ -390,7 +388,9 @@ const ServiceRegistration = ({
                                 />
                                 {errors.fatherNameEn && (
                                   <p className="error">
-                                    FatherName(English) is required.
+                                    {registerPageData?.fatherName} (
+                                    {registerPageData?.englishText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -400,7 +400,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-7"
                                   className="f-input-label w-clearfix"
                                 >
-                                  Grand Father Name (Arabic)
+                                  {registerPageData?.grandFatherName} (
+                                  {registerPageData?.arabicText})
                                 </label>
                                 <input
                                   {...register("grandFatherNameAr", {
@@ -413,7 +414,9 @@ const ServiceRegistration = ({
                                 />
                                 {errors.grandFatherNameAr && (
                                   <p className="error">
-                                    GrandFatherName(Arabic) is required.
+                                    {registerPageData?.grandFatherName} (
+                                    {registerPageData?.arabicText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -423,7 +426,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-6"
                                   className="f-input-label w-clearfix"
                                 >
-                                  Grand Father Name (English)
+                                  {registerPageData?.grandFatherName} (
+                                  {registerPageData?.englishText})
                                 </label>
 
                                 <input
@@ -437,7 +441,9 @@ const ServiceRegistration = ({
                                 />
                                 {errors.grandFatherNameEn && (
                                   <p className="error">
-                                    GrandFatherName(English) is required.
+                                    {registerPageData?.grandFatherName} (
+                                    {registerPageData?.englishText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -447,7 +453,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-8"
                                   className="f-input-label w-clearfix"
                                 >
-                                  Last Name (Arabic)
+                                  {registerPageData?.lastName} (
+                                  {registerPageData?.arabicText})
                                 </label>
                                 <input
                                   {...register("lastNameAr", {
@@ -460,7 +467,9 @@ const ServiceRegistration = ({
                                 />
                                 {errors.lastNameAr && (
                                   <p className="error">
-                                    LastName(Arabic) is required.
+                                    {registerPageData?.lastName} (
+                                    {registerPageData?.arabicText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -470,7 +479,8 @@ const ServiceRegistration = ({
                                   htmlFor="name-9"
                                   className="f-input-label w-clearfix"
                                 >
-                                  Last Name (English)
+                                  {registerPageData?.lastName} (
+                                  {registerPageData?.englishText})
                                 </label>
                                 <input
                                   {...register("lastNameEn", {
@@ -485,7 +495,9 @@ const ServiceRegistration = ({
 
                                 {errors.lastNameEn && (
                                   <p className="error">
-                                    LastName(English) is required.
+                                    {registerPageData?.lastName} (
+                                    {registerPageData?.englishText}){" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -495,7 +507,7 @@ const ServiceRegistration = ({
                                   htmlFor="email-2"
                                   className="f-input-label"
                                 >
-                                  Email Address
+                                  {registerPageData?.email}
                                 </label>
                                 <div className="ms-input-wrap">
                                   <input
@@ -509,7 +521,11 @@ const ServiceRegistration = ({
                                   />
                                 </div>
                                 {errors.email && (
-                                  <p className="error">Email is required.</p>
+                                  <p className="error">
+                                    {" "}
+                                    {registerPageData?.email}{" "}
+                                    {registerPageData?.requiredText}.
+                                  </p>
                                 )}
                               </div>
 
@@ -518,7 +534,7 @@ const ServiceRegistration = ({
                                   htmlFor="email-2"
                                   className="f-input-label"
                                 >
-                                  Address
+                                  {registerPageData?.address}
                                 </label>
                                 <div className="ms-input-wrap">
                                   <input
@@ -527,12 +543,17 @@ const ServiceRegistration = ({
                                     })}
                                     defaultValue={user?.address}
                                     className="input w-input"
-                                    placeholder="Ex: street Vitruka, building 32"
+                                    placeholder={
+                                      registerPageData?.addressPlaceholder
+                                    }
                                     type="text"
                                   />
                                 </div>
                                 {errors.email && (
-                                  <p className="error">Address is required.</p>
+                                  <p className="error">
+                                    {registerPageData?.address}{" "}
+                                    {registerPageData?.requiredText}.
+                                  </p>
                                 )}
                               </div>
 
@@ -541,8 +562,9 @@ const ServiceRegistration = ({
                                   htmlFor="phone-2"
                                   className="f-input-label"
                                 >
-                                  ID Number
+                                  {registerPageData?.idNumber}
                                 </label>
+
                                 <input
                                   {...register("idNumber", {
                                     required: true,
@@ -552,9 +574,11 @@ const ServiceRegistration = ({
                                   placeholder="Ex: 1100000000"
                                   type="number"
                                 />
+
                                 {errors.idNumber && (
                                   <p className="error">
-                                    ID Number is required.
+                                    {registerPageData?.idNumber}{" "}
+                                    {registerPageData?.requiredText}.
                                   </p>
                                 )}
                               </div>
@@ -564,7 +588,7 @@ const ServiceRegistration = ({
                                   htmlFor="phone-3"
                                   className="f-input-label"
                                 >
-                                  Mobile Number
+                                  {registerPageData?.mobileNumber}
                                 </label>
 
                                 <input
@@ -578,14 +602,16 @@ const ServiceRegistration = ({
                                       }).success,
                                   })}
                                   defaultValue={user?.mobileNumber}
-                                  className="input w-input"
+                                  className={`input w-input ${
+                                    locale === "ar" ? "direction-rtl" : ""
+                                  }`}
                                   placeholder="e.g.+966XXXXXXXXX or 05XXXXXXXX"
                                 />
 
                                 {errors.mobileNumber && (
                                   <p className="error">
-                                    Please enter a valid Saudi mobile
-                                    number(+966XXXXXXXXX or 05XXXXXXXX)
+                                    {registerPageData?.mobileNumberError}{" "}
+                                    (+966XXXXXXXXX or 05XXXXXXXX)
                                   </p>
                                 )}
                               </div>
@@ -598,10 +624,14 @@ const ServiceRegistration = ({
                                   <img
                                     alt="Icon Blog - Localfinder X Webflow Template"
                                     src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a12e04c59a1723c86ea1fa_icon-blog-localfinder-x-webflow-template.svg"
-                                    className="card-image size-40px"
+                                    className={`card-image size-40px ${
+                                      locale === "en" ? "mr-3 ml-0" : ""
+                                    }`}
                                   />
                                   <h2 className="display-4 mg-bottom-0">
-                                    2. <strong>Request information</strong>
+                                    <strong>
+                                      {registerPageData?.requestInformation}
+                                    </strong>
                                   </h2>
                                 </div>
 
@@ -609,7 +639,7 @@ const ServiceRegistration = ({
                                   htmlFor="email-3"
                                   className="f-input-label w-clearfix"
                                 >
-                                  Service Name
+                                  {registerPageData?.serviceName}
                                 </label>
 
                                 <div className="ms-input-wrap"></div>
@@ -636,14 +666,17 @@ const ServiceRegistration = ({
                                     </select>
 
                                     {errors.serviceName && (
-                                      <p>Service Name is required.</p>
+                                      <p>
+                                        {registerPageData?.serviceName}{" "}
+                                        {registerPageData?.requiredText}.
+                                      </p>
                                     )}
 
                                     <label
                                       htmlFor="email-2"
                                       className="f-input-label w-clearfix"
                                     >
-                                      Applicant Category
+                                      {registerPageData?.applicantCategory}
                                     </label>
 
                                     <select
@@ -665,14 +698,17 @@ const ServiceRegistration = ({
                                     </select>
 
                                     {errors.applicantCategory && (
-                                      <p>Applicant Category is required.</p>
+                                      <p>
+                                        {registerPageData?.applicantCategory}{" "}
+                                        {registerPageData?.requiredText}.
+                                      </p>
                                     )}
 
                                     <label
                                       htmlFor="Specialty-of-the-applicant"
                                       className="f-input-label w-clearfix"
                                     >
-                                      Specialty of the applicant
+                                      {registerPageData?.specialty}
                                     </label>
 
                                     <select
@@ -706,14 +742,17 @@ const ServiceRegistration = ({
                                     </select>
 
                                     {errors.specialty && (
-                                      <p>Specialty is required.</p>
+                                      <p>
+                                        {registerPageData?.specialty}{" "}
+                                        {registerPageData?.requiredText}.
+                                      </p>
                                     )}
 
                                     <label
                                       htmlFor="Type-of-qualification"
                                       className="f-input-label w-clearfix"
                                     >
-                                      Type of qualification
+                                      {registerPageData?.qualificationTypeTitle}
                                     </label>
 
                                     <select
@@ -725,32 +764,41 @@ const ServiceRegistration = ({
                                       data-name="Type Of Qualification"
                                       className="f-input-2 is-middle is-right w-select"
                                     >
-                                      <option value="Extension technician qualification">
-                                        Extension technician qualification
-                                      </option>
-                                      <option value="Qualification of project management technician">
-                                        Qualification of project management
-                                        technician
-                                      </option>
+                                      {registerPageData?.qualificationTypeList?.map(
+                                        (item: any) => (
+                                          <option value={item?.value}>
+                                            {item?.title}
+                                          </option>
+                                        )
+                                      )}
                                     </select>
 
                                     {errors.qualificationType && (
-                                      <p>Qualification Type is required.</p>
+                                      <p>
+                                        {registerPageData?.qualificationType}{" "}
+                                        {registerPageData?.requiredText}.
+                                      </p>
                                     )}
 
                                     <label
                                       htmlFor="message-2"
                                       className="f-input-label w-clearfix"
                                     >
-                                      Required qualification
+                                      {registerPageData?.qualification}
                                     </label>
 
                                     <textarea
                                       {...register("qualification", {
                                         required: true,
                                       })}
-                                      placeholder="Describe your qualifications"
-                                      className="text-area small mg-bottom-0 w-input"
+                                      placeholder={
+                                        registerPageData?.qualificationPlaceholder
+                                      }
+                                      className={`text-area small mg-bottom-0 w-input ${
+                                        locale === "ar"
+                                          ? "text-right"
+                                          : "text-left"
+                                      }`}
                                     ></textarea>
 
                                     {errors.qualification && (
@@ -758,7 +806,8 @@ const ServiceRegistration = ({
                                         className="error"
                                         style={{ width: "100%" }}
                                       >
-                                        Qualification is required.
+                                        {registerPageData?.qualification}{" "}
+                                        {registerPageData?.requiredText}.
                                       </p>
                                     )}
 
@@ -766,7 +815,9 @@ const ServiceRegistration = ({
                                       htmlFor="email-2"
                                       className="f-input-label w-clearfix"
                                     >
-                                      Professional status of the applicant
+                                      {
+                                        registerPageData?.professionalStatusTitle
+                                      }
                                     </label>
 
                                     <div className="ms-input-middle-row">
@@ -779,16 +830,20 @@ const ServiceRegistration = ({
                                         data-name="Professional Status Of The Applicant"
                                         className="f-input-2 is-middle is-right w-select"
                                       >
-                                        <option value="New practitioner">
-                                          Current practitioner
-                                        </option>
-                                        <option value="New practitioner">
-                                          New practitioner
-                                        </option>
+                                        {registerPageData?.professionalStatusList?.map(
+                                          (item: any) => (
+                                            <option value={item?.value}>
+                                              {item?.title}
+                                            </option>
+                                          )
+                                        )}
                                       </select>
 
                                       {errors.professtionalStatus && (
-                                        <p>Professional status is required.</p>
+                                        <p>
+                                          {registerPageData?.professionalStatus}{" "}
+                                          {registerPageData?.requiredText}.
+                                        </p>
                                       )}
                                     </div>
                                   </div>
@@ -804,7 +859,7 @@ const ServiceRegistration = ({
                             data-form="next-btn"
                             className="f-form-button next w-button"
                           >
-                            Next Step
+                            {registerPageData?.nextBtnTitle}
                           </button>
                         </div>
                       </form>
@@ -824,7 +879,7 @@ const ServiceRegistration = ({
                               <div className="f-steps-info-details-grid">
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Service name
+                                    {registerPageData?.serviceName}
                                     <br />
                                   </div>
                                   <div
@@ -838,7 +893,7 @@ const ServiceRegistration = ({
                                 <div>
                                   <div className="f-steps-info-details-heading">
                                     <strong className="f-steps-info-details-heading">
-                                      ID Number
+                                      {registerPageData?.idNumber}
                                     </strong>
                                     <br />
                                   </div>
@@ -854,7 +909,8 @@ const ServiceRegistration = ({
                               <div className="f-steps-info-details-grid">
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    First Name (Arabic)
+                                    {registerPageData?.firstName} (
+                                    {registerPageData?.arabicText})
                                     <br />
                                   </div>
                                   <div
@@ -868,7 +924,8 @@ const ServiceRegistration = ({
 
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    First Name (English)
+                                    {registerPageData?.firstName} (
+                                    {registerPageData?.englishText})
                                     <br />
                                   </div>
                                   <div
@@ -882,7 +939,8 @@ const ServiceRegistration = ({
 
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Father Name (Arabic)
+                                    {registerPageData?.fatherName} (
+                                    {registerPageData?.arabicText})
                                     <br />
                                   </div>
                                   <div
@@ -896,7 +954,8 @@ const ServiceRegistration = ({
 
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Father Name (English)
+                                    {registerPageData?.fatherName} (
+                                    {registerPageData?.englishText})
                                     <br />
                                   </div>
                                   <div
@@ -910,7 +969,8 @@ const ServiceRegistration = ({
 
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Grand Father Name (Arabic)
+                                    {registerPageData?.grandFatherName} (
+                                    {registerPageData?.arabicText})
                                     <br />
                                   </div>
                                   <div
@@ -924,7 +984,8 @@ const ServiceRegistration = ({
 
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Grand Father Name (English)
+                                    {registerPageData?.grandFatherName} (
+                                    {registerPageData?.englishText})
                                     <br />
                                   </div>
                                   <div
@@ -938,7 +999,8 @@ const ServiceRegistration = ({
 
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Last name (Arabic)
+                                    {registerPageData?.lastName} (
+                                    {registerPageData?.arabicText})
                                     <br />
                                   </div>
                                   <div
@@ -952,7 +1014,8 @@ const ServiceRegistration = ({
 
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Last name (English)
+                                    {registerPageData?.lastName} (
+                                    {registerPageData?.englishText})
                                     <br />
                                   </div>
                                   <div
@@ -967,7 +1030,7 @@ const ServiceRegistration = ({
                               <div className="f-steps-info-details-grid">
                                 <div>
                                   <div className="f-steps-info-details-heading">
-                                    Email
+                                    {registerPageData?.email}
                                     <br />
                                   </div>
                                   <div
@@ -981,7 +1044,7 @@ const ServiceRegistration = ({
                                 <div className="f-input-display-item">
                                   <div className="f-steps-info-details-heading">
                                     <strong className="f-steps-info-details-heading">
-                                      Mobile Number
+                                      {registerPageData?.mobileNumber}
                                     </strong>
                                     <br />
                                   </div>
@@ -995,7 +1058,7 @@ const ServiceRegistration = ({
                                 </div>
                                 <div id="w-node-fa84bdca-1099-417e-a5df-211bc4d5dab4-c98c163b">
                                   <div className="f-steps-info-details-heading">
-                                    Address
+                                    {registerPageData?.address}
                                     <br />
                                   </div>
 
@@ -1019,7 +1082,7 @@ const ServiceRegistration = ({
                                 <div>
                                   <div className="f-steps-info-details-heading">
                                     <strong className="f-steps-info-details-heading">
-                                      Applicant Category
+                                      {registerPageData?.applicantCategory}
                                     </strong>
                                     <br />
                                   </div>
@@ -1035,7 +1098,7 @@ const ServiceRegistration = ({
                                 <div>
                                   <div className="f-steps-info-details-heading">
                                     <strong className="f-steps-info-details-heading">
-                                      Specialty of the applicant
+                                      {registerPageData?.specialty}
                                     </strong>
                                     <br />
                                   </div>
@@ -1053,7 +1116,7 @@ const ServiceRegistration = ({
                                 <div>
                                   <div className="f-steps-info-details-heading">
                                     <strong className="f-steps-info-details-heading">
-                                      Type of qualification
+                                      {registerPageData?.qualificationTypeTitle}
                                     </strong>
                                     <br />
                                   </div>
@@ -1069,7 +1132,9 @@ const ServiceRegistration = ({
                                 <div>
                                   <div className="f-steps-info-details-heading">
                                     <strong className="f-steps-info-details-heading">
-                                      Professional status of the applicant
+                                      {
+                                        registerPageData?.professionalStatusTitle
+                                      }
                                     </strong>
                                     <br />
                                   </div>
@@ -1098,8 +1163,9 @@ const ServiceRegistration = ({
                             }}
                             className="f-form-button back w-button"
                           >
-                            Back
+                            {registerPageData?.backBtnTitle}
                           </a>
+
                           <a
                             data-form="next-btn"
                             href="#"
@@ -1110,7 +1176,7 @@ const ServiceRegistration = ({
                             }}
                             className="f-form-button next w-button"
                           >
-                            Continue
+                            {registerPageData?.continueBtnTitle}
                           </a>
                         </div>
                       </>
@@ -1134,10 +1200,11 @@ const ServiceRegistration = ({
                                 onChange={handleCheckboxChange}
                               />
                               <span className="f-checkbox-label w-form-label ml-2">
-                                By checking this little box, you agree to abide
-                                by Reef Foundation's terms and conditions.
-                                Please review our terms [
-                                <a href="/terms-policy">here</a>].
+                                <Markdown
+                                  value={md?.render(
+                                    registerPageData?.termsPolicyText
+                                  )}
+                                />
                               </span>
                             </label>
                           </div>
@@ -1154,7 +1221,7 @@ const ServiceRegistration = ({
                             }}
                             className="f-form-button back w-button"
                           >
-                            Back
+                            {registerPageData?.backBtnTitle}
                           </a>
                           <a
                             data-form="next-btn"
@@ -1164,7 +1231,7 @@ const ServiceRegistration = ({
                               isChecked ? "" : "btn-disabled"
                             }`}
                           >
-                            Submit
+                            {registerPageData?.submitBtnTitle}
                           </a>
                         </div>
                       </>
@@ -1186,19 +1253,17 @@ const ServiceRegistration = ({
       >
         <div className="mb-0" style={{ textAlign: "center" }}>
           <div className="line-rounded-icon success-message-check large"></div>
-          <div className="heading-h3-size mg-bottom-8px">Thank you</div>
-          <div>
-            Your message has been submitted.
-            <br />
-            We will get back to you within 24-48 hours.
+          <div className="heading-h3-size mg-bottom-8px">
+            {registerPageData?.thankyouTitle}
           </div>
+          <div>{registerPageData?.thankyouContent}</div>
 
           <a
-            href="/profile"
+            href={registerPageData?.profileBtn?.value}
             className="f-form-button next w-button inline-block mt-7"
             style={{ display: "inline-flex" }}
           >
-            Go to profile
+            {registerPageData?.profileBtn?.title}
           </a>
         </div>
       </Modal>

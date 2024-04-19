@@ -3535,7 +3535,7 @@ figcaption {
 
 .mg-bottom-0 {
   color: var(--neutral--600);
-  text-align: center;
+  /* text-align: center; */
   margin-bottom: 0;
   font-family: reef Alfont Com Alfont Com Sst Arabic, sans-serif;
   font-weight: 500;
@@ -8534,7 +8534,7 @@ figcaption {
   justify-content: flex-end;
   align-self: auto;
   align-items: center;
-  margin-right: auto;
+  /* margin-right: auto; */
   padding-left: 0;
   font-family: reef Alfont Com Alfont Com Sst Arabic Roman, sans-serif;
   font-weight: 500;
@@ -8750,7 +8750,7 @@ figcaption {
 .f-steps-info-clone {
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-end;
+  /* align-items: flex-end; */
   display: flex;
 }
 
@@ -8917,7 +8917,7 @@ figcaption {
   justify-content: center;
   align-items: flex-start;
   max-width: 700px;
-  margin-right: auto;
+  /* margin-right: auto; */
   padding-top: 0;
   padding-right: 0;
   font-size: 2rem;
@@ -27261,4 +27261,16 @@ Preloader Area CSS
   left: auto !important;
   right: 8% !important;
   transform: rotate(180deg) !important;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.ml-0 {
+  margin-left: 0 !important;
 }

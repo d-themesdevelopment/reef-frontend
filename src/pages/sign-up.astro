@@ -4,14 +4,30 @@
 // Import Custom Components
 import Layout from "../layouts/Layout.astro";
 import SignUpForm from "../components/partials/auth/SignUpForm";
+import fetchApi from "..//lib/strapi";
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const authPageData: any = await fetchApi<any[]>({
+  endpoint: "auth-page", // the content type to fetch
+  query: {}, // the key to unwrap the response
+  locale: locale,
+});
 ---
 
 <Layout title="Sign Up">
   <div class="section-11 hero sign-up">
     <div class="container-default-55 w-container">
       <div class="inner-container _600px---tablet center">
-        <div class="inner-container _500px---mbl center">
+        <div class="inner-container _500px---mbl center new877">
           <div class="w-layout-grid grid-2-columns sign-up-main-grid">
+            <SignUpForm
+              apiUrl={import.meta.env.STRAPI_URL}
+              apiToken={import.meta.env.STRAPI_Token}
+              client:load
+              data={authPageData?.attributes}
+            />
+
             <div
               id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce5f-4ea0ea99"
               class="inner-container sign-up-images"
@@ -27,54 +43,53 @@ import SignUpForm from "../components/partials/auth/SignUpForm";
                 >
                   <div
                     class="w-layout-grid grid-1-column gap-row-24px _01"
-                    style="will-change: transform; transform: translate3d(0px, 7.0956%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                    style="will-change: transform; transform: translate3d(0px, -5.4206%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                   >
                     <div
                       id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce63-4ea0ea99"
                       class="image-wrapper border-radius-24px shadow-02"
                     >
                       <img
-                        src="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a28e58411a110327b5f0ae_david-kohler-gBdG886bLDY-unsplash-p-800.webp"
+                        src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash.webp"
                         loading="eager"
                         sizes="(max-width: 767px) 99vw, (max-width: 991px) 72vw, (max-width: 1439px) 59vw, (max-width: 1919px) 761.0458374023438px, 38vw"
-                        srcset="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65a28e58411a110327b5f0ae_david-kohler-gBdG886bLDY-unsplash-p-800.webp"
+                        srcset="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash-p-500.jpg 500w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash-p-800.jpg 800w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash-p-1080.jpg 1080w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash-p-1600.jpg 1600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash-p-2000.jpg 2000w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash-p-2600.jpg 2600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash-p-3200.jpg 3200w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebba_david-kohler-gBdG886bLDY-unsplash.webp 4912w"
                         alt=""
                         class="image-14 cover"
                       />
-                    </div>
-                    <div
+                    </div><div
                       id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce65-4ea0ea99"
                       class="image-wrapper border-radius-24px shadow-02"
                     >
                       <img
-                        src="/images/موقع-ريف-6.png"
+                        src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ebd2_%D9%85%D9%88%D9%82%D8%B9%20%D8%B1%D9%8A%D9%81%20(6).png"
                         loading="eager"
                         alt=""
                         class="image-14 cover"
                       />
                     </div>
-                  </div>
-                  <div
+                  </div><div
                     class="w-layout-grid grid-1-column gap-row-24px _02"
-                    style="will-change: transform; transform: translate3d(0px, -7.0956%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+                    style="will-change: transform; transform: translate3d(0px, 5.4206%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
                   >
                     <div
                       id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce68-4ea0ea99"
                       class="image-wrapper border-radius-24px shadow-02"
                     >
                       <img
-                        src="/images/موقع-ريف-3.png"
+                        src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash.jpg"
                         loading="eager"
+                        sizes="(max-width: 767px) 100vw, (max-width: 991px) 73vw, (max-width: 1439px) 60vw, (max-width: 1919px) 54vw, 38vw"
+                        srcset="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash-p-500.jpg 500w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash-p-800.jpg 800w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash-p-1080.jpg 1080w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash-p-1600.jpg 1600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash-p-2000.jpg 2000w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash-p-2600.jpg 2600w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash-p-3200.jpg 3200w, https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec21_dan-meyers-IQVFVH0ajag-unsplash.jpg 3992w"
                         alt=""
                         class="image-14 cover"
                       />
-                    </div>
-                    <div
+                    </div><div
                       id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce6a-4ea0ea99"
                       class="image-wrapper border-radius-24px shadow-02"
                     >
                       <img
-                        src="/images/موقع-ريف-4.png"
+                        src="https://assets-global.website-files.com/65e9eb27ad372f914ea0e9a7/65e9eb27ad372f914ea0ec96_%D9%85%D9%88%D9%82%D8%B9%20%D8%B1%D9%8A%D9%81%20(20).png"
                         loading="eager"
                         alt=""
                         class="image-14 cover"
@@ -82,15 +97,8 @@ import SignUpForm from "../components/partials/auth/SignUpForm";
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="position-absolute sign-up-images-bg"></div>
+              </div><div class="position-absolute sign-up-images-bg"></div>
             </div>
-
-            <SignUpForm
-              apiUrl={import.meta.env.STRAPI_URL}
-              apiToken={import.meta.env.STRAPI_Token}
-              client:load
-            />
           </div>
         </div>
       </div>
@@ -117,7 +125,9 @@ import SignUpForm from "../components/partials/auth/SignUpForm";
                 class="footer-logo-2"
               /></a
             >
-            <p class="color-neutral-804 mg-bottom-0">Copyright © reef</p>
+            <p class="color-neutral-804 mg-bottom-0">
+              {authPageData?.attributes?.authPageFooterTitle}
+            </p>
           </div>
         </div>
       </div>

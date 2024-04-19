@@ -70,7 +70,8 @@ const locale = Astro.cookies.get("locale")?.value;
                   target="_blank"
                   class="btn-primary w-button"
                 >
-                  {button?.title}<span class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2" : ""}`}
+                  {button?.title}<span
+                    class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2 rotate-180" : ""}`}
                     ></span
                   >
                 </a>
@@ -107,7 +108,21 @@ const locale = Astro.cookies.get("locale")?.value;
               style="transform: translateX(0px); opacity: 1;"
             >
               <div class="card card-services horizontal-item">
-                <div class="pd---content-inside-card horizontal-item">
+                <div
+                  class="card-picture image-wrapper---br-bottom horizontal-item"
+                >
+                  <img
+                    src={`${contactAddress?.media?.image?.data?.attributes?.url}`}
+                    alt=""
+                    sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, (max-width: 991px) 44vw, 440px"
+                    src={`${contactAddress?.media?.image?.data?.attributes?.url}`}
+                    class="card-image"
+                    data-xblocker="passed"
+                    style="visibility: visible;"
+                  />
+                </div>
+
+                <div class={`pd---content-inside-card horizontal-item ${locale === "ar" ? "direction-rtl" : ""}`}>
                   <div class={`${locale === "ar" ? "text-right" : ""}`}>
                     <div class="inner-container _400px---mbl">
                       <h3 class="card-title display-4 mg-bottom-12px">
@@ -210,20 +225,6 @@ const locale = Astro.cookies.get("locale")?.value;
                       </a>
                     </div>
                   </div>
-                </div>
-
-                <div
-                  class="card-picture image-wrapper---br-bottom horizontal-item"
-                >
-                  <img
-                    src={`${contactAddress?.media?.image?.data?.attributes?.url}`}
-                    alt=""
-                    sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, (max-width: 991px) 44vw, 440px"
-                    src={`${contactAddress?.media?.image?.data?.attributes?.url}`}
-                    class="card-image"
-                    data-xblocker="passed"
-                    style="visibility: visible;"
-                  />
                 </div>
               </div>
             </div>
