@@ -1,0 +1,61 @@
+---
+// export const prerender = true;
+import fetchApi from "../lib/strapi";
+
+// Import Custom Components
+import Layout from "../layouts/Layout.astro";
+import CategoryPageContent from "../components/partials/others/CategoryPageContent";
+
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+    logo: {
+      populate: "*",
+    },
+    background: {
+      populate: "*",
+    },
+    services: {
+      populate: "*",
+    },
+    specialties: {
+      populate: "*",
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const categories: any = await fetchApi<any[]>({
+  endpoint: "categories", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+
+const servicesData: any = await fetchApi<any[]>({
+  endpoint: "services", // the content type to fetch
+  query: {
+    populate: {
+      media: {
+        populate: "*",
+      },
+      category: {
+        populate: "*",
+      },
+    },
+  }, // the key to unwrap the response
+  locale: locale,
+});
+
+console.log(servicesData[1]?.attributes?.category, "servicesDataservicesData")
+---
+
+<Layout title="Category Page">
+  <CategoryPageContent
+    categories={categories}
+    servicesData={servicesData}
+    client:load
+  />
+</Layout>

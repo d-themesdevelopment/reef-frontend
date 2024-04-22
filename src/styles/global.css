@@ -1771,7 +1771,7 @@ textarea.w-select {
   vertical-align: top;
   text-decoration: none;
   padding: 9px 30px;
-  text-align: left;
+  /* text-align: left; */
   cursor: pointer;
   color: #222222;
   background-color: #dddddd;
