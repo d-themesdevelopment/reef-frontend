@@ -101,7 +101,7 @@ const ProfilePageContent = (props: any) => {
                                       </p>
                                     </div>
                                     <div className="spacer-10"></div>
-                                    <p className={`h6 ${locale === "ar" ? "text-right" : ""}`}>{service?.createdAt}</p>
+                                    <p className={`h6 ${locale === "ar" ? "text-right" : ""}`}>{service?.createdAt.slice(0, 10)}</p>
                                   </div>
                                 </div>
                                 <div className="box-padding">
