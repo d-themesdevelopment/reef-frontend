@@ -53,6 +53,7 @@ const profilePageData: any = await fetchApi<any[]>({
           user={$user ?? {}}
           profilePageData={profilePageData?.attributes}
           client:load
+          locale={locale}
         />
       </div>
     </div>

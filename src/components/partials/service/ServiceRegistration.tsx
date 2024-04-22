@@ -36,18 +36,45 @@ const ServiceRegistration = ({
   registerPageData,
   locale,
 }: any) => {
+  console.log(data, "datadata");
+
   const [step, setStep] = useState<number>(0);
   const [serviceData, setServiceData] = useState<UserType>();
   const [category, setCategory] = useState<string>(
     currentService?.category?.data?.attributes?.value
   );
 
+  const saudiArabianPhoneNumberPattern = /^(?:(?:\+?966)|0)?\s?5\d{8}$/;
+
   const saudiMobileSchema = z.object({
-    mobileNumber: string().refine((value) => /^(\+966|05)\d{9}$/.test(value), {
+    mobileNumber: string().refine((value) => saudiArabianPhoneNumberPattern.test(value), {
       message:
         "Please enter a valid Saudi mobile number (+966XXXXXXXXX or 05XXXXXXXX).",
     }),
   });
+
+  
+
+  // Function to check the correctness and validity of a Saudi Arabian phone number
+  function isValidSaudiArabianPhoneNumber(phoneNumber: any) {
+    // Step 1: Regular expression validation
+    if (!saudiArabianPhoneNumberPattern.test(phoneNumber)) {
+      return false; // Phone number format is incorrect
+    }
+
+    // Step 2: Length check
+    if (phoneNumber.replace(/\D/g, "").length !== 10) {
+      return false; // Phone number length is incorrect
+    }
+
+    // Step 3: Country code verification
+    if (!phoneNumber.startsWith("966") && !phoneNumber.startsWith("05")) {
+      return false; // Invalid country code
+    }
+
+    // All checks passed, phone number is considered valid
+    return true;
+  }
 
   const {
     register,
@@ -95,14 +122,8 @@ const ServiceRegistration = ({
     createNewServiceToStrapi();
   };
 
-  console.log(
-    data,
-    currentService?.category?.data?.attributes?.value,
-    "Datatat"
-  );
-
   const createNewServiceToStrapi = async () => {
-    console.log(user, "useruseruser!!")
+    console.log(user, "useruseruser!!");
     try {
       const response = await fetch(`${apiUrl}/api/service-orders`, {
         method: "POST",
@@ -569,6 +590,13 @@ const ServiceRegistration = ({
                                 <input
                                   {...register("idNumber", {
                                     required: true,
+                                    maxLength: {
+                                      value: 10,
+                                      message:
+                                        locale === "ar"
+                                          ? "الرجاء إدخال رقم الهوية المكون من عشر خانات"
+                                          : "Please enter your ten-digit ID number",
+                                    },
                                   })}
                                   defaultValue={user?.idNumber}
                                   className="input w-input"
@@ -578,8 +606,9 @@ const ServiceRegistration = ({
 
                                 {errors.idNumber && (
                                   <p className="error">
-                                    {registerPageData?.idNumber}{" "}
-                                    {registerPageData?.requiredText}.
+                                    {locale === "ar"
+                                      ? "الرجاء إدخال رقم الهوية المكون من عشر خانات"
+                                      : "Please enter your ten-digit ID number"}
                                   </p>
                                 )}
                               </div>

@@ -87,7 +87,7 @@ console.log($user, "$service$useruser");
     user={$user}
     currentService={$service}
     services={servicesData}
-    data={res}
+    data={res ?? []}
     apiUrl={import.meta.env.STRAPI_URL}
     reafToken={reafToken}
     client:load

@@ -1,5 +1,5 @@
 const ProfilePageContent = (props: any) => {
-  const { user, profilePageData } = props;
+  const { user, profilePageData, locale } = props;
 
   console.log(user, "useruser");
 
@@ -42,17 +42,35 @@ const ProfilePageContent = (props: any) => {
                           </div>
                           <div className="tab-menu-left-link-content">
                             <div className="tab-menu-left-link-content-top">
-                              <h3
-                                className="heading-h4-size-3 mg-bottom-0"
-                                title={`Service ID: ${service?.serviceID}`}
+                              <div
+                                className={locale === "ar" ? "text-right" : ""}
                               >
-                                <strong className="bold-text-5">
-                                  {service?.serviceName}
-                                </strong>{" "}
-                                <span>
-                                  #{service?.serviceID.slice(0, 8)}...
-                                </span>
-                              </h3>
+                                <h3
+                                  className="heading-h4-size-3 mg-bottom-0"
+                                  title={`Service ID: ${service?.serviceID}`}
+                                >
+                                  <strong className="bold-text-5">
+                                    {service?.serviceName}
+                                  </strong>{" "}
+                                </h3>
+
+                                <h3 style={{ fontSize: "16px", color: "#999" }}>
+                                  #{service?.serviceID}
+                                  <a href="#">
+                                    <img
+                                      src="./images/icons/copy-icon.svg"
+                                      width={24}
+                                      height={24}
+                                      alt="ICON"
+                                      style={{
+                                        marginLeft: 4,
+                                        marginRight: 4,
+                                        marginBottom: 2,
+                                      }}
+                                    />
+                                  </a>
+                                </h3>
+                              </div>
                               <div className="line-rounded-icon tab-menu-left-link-arrow">
                                 
                               </div>

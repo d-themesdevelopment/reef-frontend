@@ -8,9 +8,10 @@ interface Props {
   apiUrl: string;
   apiToken: string;
   data: any;
+  locale: any;
 }
 
-const SignUpForm = ({ apiUrl, apiToken, data }: Props) => {
+const SignUpForm = ({ apiUrl, apiToken, data, locale }: Props) => {
   const {
     register,
     handleSubmit,
@@ -112,7 +113,9 @@ const SignUpForm = ({ apiUrl, apiToken, data }: Props) => {
 
       <div
         id="w-node-_73fdc906-b228-81b6-e02b-e3d306b9ce6d-4ea0ea99"
-        className="inner-container _577px width-100 _100---tablet"
+        className={`inner-container _577px width-100 _100---tablet ${
+          locale === "en" ? "direction-ltr" : ""
+        }`}
       >
         <div className="text-center-tablet">
           <div
@@ -186,16 +189,31 @@ const SignUpForm = ({ apiUrl, apiToken, data }: Props) => {
                 <label htmlFor="password">{data?.passwordTitle}</label>
 
                 <input
-                  {...register("password", { required: true })}
+                  {...register("password", {
+                    required: true,
+                    minLength: {
+                      value: 12,
+                      message:
+                        locale === "ar"
+                          ? "يرجى إضافة كلمة المرور أكثر من 12"
+                          : "Please add the password more than 12",
+                    },
+                    pattern: {
+                      value:
+                        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[-ـ!@#$%^&*()])[A-Za-z\d-ـ!@#$%^&*()]{8,}$/,
+                      message:
+                        locale === "ar"
+                          ? "يجب أن تشتمل كلمة المرور على 12 حرفًا ورقمًا ورمزًا على الأقل: -ـ!@#$٪^&*)("
+                          : "Password must include at least 12 char, a digit, and a symbol: -ـ!@#$٪^&*)(",
+                    },
+                  })}
                   className="input-3 icon-left password w-input"
                   placeholder={data?.passwordPlaceholder}
                   type="password"
                 />
 
                 {errors.password && (
-                  <p className="error">
-                    {data?.passwordTitle} {data?.required}
-                  </p>
+                  <p className="error">{errors.password.message?.toString()}</p>
                 )}
               </div>
 
@@ -285,7 +303,9 @@ const SignUpForm = ({ apiUrl, apiToken, data }: Props) => {
           className="card-options-divider-wrapper"
         >
           <div className="divider-2 _0px card-options-divider"></div>
-          <div className="card-options-divider-text">{data?.hasAccountTitle}</div>
+          <div className="card-options-divider-text">
+            {data?.hasAccountTitle}
+          </div>
           <div className="divider-2 _0px card-options-divider"></div>
         </div>
 

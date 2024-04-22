@@ -20,12 +20,13 @@ const authPageData: any = await fetchApi<any[]>({
     <div class="container-default-55 w-container">
       <div class="inner-container _600px---tablet center">
         <div class="inner-container _500px---mbl center new877">
-          <div class="w-layout-grid grid-2-columns sign-up-main-grid">
+          <div class="w-layout-grid grid-2-columns sign-up-main-grid direction-rtl">
             <SignUpForm
               apiUrl={import.meta.env.STRAPI_URL}
               apiToken={import.meta.env.STRAPI_Token}
               client:load
               data={authPageData?.attributes}
+              locale={locale}
             />
 
             <div

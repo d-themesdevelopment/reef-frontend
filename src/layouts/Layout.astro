@@ -21,8 +21,8 @@ interface Props {
 const { title } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-if(!Astro.cookies.has("locale")) {
-  Astro.cookies.set("locale","ar");
+if (!Astro.cookies.has("locale")) {
+  Astro.cookies.set("locale", "ar");
 }
 
 if (Astro.cookies.has("reef_token")) {
@@ -47,7 +47,12 @@ const locale = Astro.cookies.get("locale")?.value;
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="icon" type="image/png" href="/favicon.png" /> -->
+    <link
+      href="https://assets-global.website-files.com/65a12e04c59a1723c86ea0f8/65b8d6fc94afd5351790834c_Untitled%20design%20(40)%20(1).png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -57,7 +62,9 @@ const locale = Astro.cookies.get("locale")?.value;
     data-wf-page="65e15640c1b7f0142de959a1"
     data-wf-site="65a12e04c59a1723c86ea0f8"
   >
-    <div class={`page-wrapper ${locale === "en" ? "direction-ltr" : "direction-rtl"}`}>
+    <div
+      class={`page-wrapper ${locale === "en" ? "direction-ltr" : "direction-rtl"}`}
+    >
       <Header />
 
       <slot />
