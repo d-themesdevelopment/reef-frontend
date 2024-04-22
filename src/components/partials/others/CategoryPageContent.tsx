@@ -121,10 +121,6 @@ const CategoryPageContent = ({ categories, servicesData }: any) => {
                                     <>
                                       <h2 className="mg-bottom-6px display-4">
                                         {item.attributes.title}
-                                        {
-                                          item?.attributes?.category?.data
-                                            ?.attributes?.value
-                                        }
                                       </h2>
                                       <p className="paragraph-5 paragraph-445">
                                         {item.attributes.desc}
