@@ -192,7 +192,7 @@ const footerData: any = await fetchApi<any[]>({
                   <ul role="list" class="footer-list-wrapper">
                     {
                       footerData?.attributes?.mainMenu
-                        ?.slice(0, 4)
+                        ?.slice(0, 3)
                         .map((item: Link, index: number) => (
                           <li class="footer-list-item">
                             <a href={item?.value} class="footer-link">
@@ -209,7 +209,7 @@ const footerData: any = await fetchApi<any[]>({
                   >
                     {
                       footerData?.attributes?.mainMenu
-                        ?.slice(4, 8)
+                        ?.slice(3, 6)
                         .map((item: Link, index: number) => (
                           <li class="footer-list-item">
                             <a href={item?.value} class="footer-link">

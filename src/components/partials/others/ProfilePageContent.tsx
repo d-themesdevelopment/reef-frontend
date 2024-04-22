@@ -90,7 +90,7 @@ const ProfilePageContent = (props: any) => {
                                       </p>
                                     </div>
                                     <div className="spacer-10"></div>
-                                    <p className="h6">{service?.serviceName}</p>
+                                    <p className={`h6 ${locale === "ar" ? "text-right" : ""}`}>{service?.serviceName}</p>
                                   </div>
                                   <div className="job_label-card">
                                     <div className="job_label-flex">
@@ -101,7 +101,7 @@ const ProfilePageContent = (props: any) => {
                                       </p>
                                     </div>
                                     <div className="spacer-10"></div>
-                                    <p className="h6">{service?.createdAt}</p>
+                                    <p className={`h6 ${locale === "ar" ? "text-right" : ""}`}>{service?.createdAt}</p>
                                   </div>
                                 </div>
                                 <div className="box-padding">
