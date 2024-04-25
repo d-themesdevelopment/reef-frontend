@@ -1,19 +1,44 @@
 ---
 import type Heading from "../../../interfaces/Heading";
-import type CategoryBox from "../../../interfaces/CategoryBox";
+import fetchApi from "../../../lib/strapi";
 
 interface Props {
   fields: {
     heading: Heading;
-    categoryBox: Array<CategoryBox>;
   };
 }
 
 const {
-  fields: { heading, categoryBox },
+  fields: { heading },
 } = Astro.props;
 
+const urlParamsObject = {
+  populate: {
+    media: {
+      populate: "*",
+    },
+    logo: {
+      populate: "*",
+    },
+    background: {
+      populate: "*",
+    },
+    services: {
+      populate: "*",
+    },
+    specialties: {
+      populate: "*",
+    },
+  },
+};
+
 const locale = Astro.cookies.get("locale")?.value;
+
+const categories: any = await fetchApi<any[]>({
+  endpoint: "categories", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
 ---
 
 <div
@@ -52,125 +77,52 @@ const locale = Astro.cookies.get("locale")?.value;
         <div class="div-block-4">
           <div class="hero-v2-images-wrapper">
             <div class="w-layout-grid grid-3-columns hero-v2-grid-3-col">
-              <div
-                id="w-node-_12d49549-d020-de1a-37a2-21e499fb048b-99fb0473"
-                class="hero-v2-image-box"
-              >
-                <div
-                  data-w-id="12d49549-d020-de1a-37a2-21e499fb048d"
-                  class="feature-card"
-                  style={`background-image: url(${categoryBox[0]?.background?.image?.data?.attributes?.url}), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0))`}
-                >
-                  <div class="feature-line"></div>
+              {
+                categories?.map((cateogry: any, index: number) => (
+                  <div
+                    id="w-node-_12d49549-d020-de1a-37a2-21e499fb048b-99fb0473"
+                    class={`hero-v2-image-box ${index === 1 ? "center" : ""}`}
+                  >
+                    <div
+                      data-w-id="12d49549-d020-de1a-37a2-21e499fb048d"
+                      class="feature-card"
+                      style={`background-image: url(${cateogry?.attributes?.background?.image?.data?.attributes?.url}), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0))`}
+                    >
+                      <div class="feature-line" />
 
-                  <div class="feature-heading">
-                    <div class="icon-wrap">
-                      <img
-                        src={`${categoryBox[0]?.logo?.image?.data?.attributes?.url}`}
-                        loading="lazy"
-                        width="22"
-                        alt=""
-                        class="feature-icon"
-                      />
+                      <div class="feature-heading">
+                        <div class="icon-wrap">
+                          <img
+                            src={`${cateogry?.attributes?.logo?.image?.data?.attributes?.url}`}
+                            loading="lazy"
+                            width="22"
+                            alt=""
+                            class="feature-icon"
+                          />
 
-                      <img
-                        src="/images/Icon-Blur.svg"
-                        loading="lazy"
-                        alt=""
-                        class="icon-blur"
-                      />
-                    </div><div class="wrap-v-x-small">
-                      <div class="h6-heading">{categoryBox[0]?.title}</div><p
-                        class="paragraph-regular"
-                      >
-                        {categoryBox[0]?.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                          <img
+                            src="/images/Icon-Blur.svg"
+                            loading="lazy"
+                            alt=""
+                            class="icon-blur"
+                          />
+                        </div>
 
-              <div
-                id="w-node-_12d49549-d020-de1a-37a2-21e499fb0498-99fb0473"
-                class="hero-v2-image-box center"
-              >
-                <div
-                  data-w-id="12d49549-d020-de1a-37a2-21e499fb049a"
-                  class="feature-card "
-                  style={`background-image: url(${categoryBox[1]?.background?.image?.data?.attributes?.url}), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0));`}
-                >
-                  <div class="feature-line"></div>
-
-                  <div class="feature-heading">
-                    <div class="icon-wrap">
-                      <img
-                        src={`${categoryBox[1]?.logo?.image?.data?.attributes?.url}`}
-                        loading="lazy"
-                        width="22"
-                        alt=""
-                        class="feature-icon"
-                      />
-
-                      <img
-                        src="/images/Icon-Blur.svg"
-                        loading="lazy"
-                        alt=""
-                        class="icon-blur"
-                      />
-                    </div>
-
-                    <div class="wrap-v-x-small">
-                      <div class="h6-heading">{categoryBox[1]?.title}</div><p
-                        class="paragraph-regular"
-                      >
-                        {categoryBox[1]?.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                id="w-node-_12d49549-d020-de1a-37a2-21e499fb04a5-99fb0473"
-                class="hero-v2-image-box right"
-              >
-                <div
-                  data-w-id="12d49549-d020-de1a-37a2-21e499fb04a6"
-                  class="feature-card feature-card3"
-                  style={`background-image: url(${categoryBox[2]?.background?.image?.data?.attributes?.url}), linear-gradient(rgba(255, 255, 255, .02), rgba(255, 255, 255, 0));`}
-                >
-                  <div class="feature-line"></div>
-
-                  <div class="feature-heading">
-                    <div class="icon-wrap">
-                      <img
-                        src={`${categoryBox[2]?.logo?.image?.data?.attributes?.url}`}
-                        loading="lazy"
-                        width="22"
-                        alt=""
-                        class="feature-icon"
-                      />
-
-                      <img
-                        src="/images/Icon-Blur.svg"
-                        loading="lazy"
-                        alt=""
-                        class="icon-blur"
-                      />
-                    </div>
-
-                    <div class="wrap-v-x-small">
-                      <div class="h6-heading">
-                        {categoryBox[2]?.title}
+                        <div class="wrap-v-x-small">
+                          <>
+                            <div class="h6-heading">
+                              {cateogry?.attributes?.title}
+                            </div>
+                            <p class="paragraph-regular">
+                              {cateogry?.attributes?.desc}
+                            </p>
+                          </>
+                        </div>
                       </div>
-
-                      <p class="paragraph-regular">
-                        {categoryBox[2]?.desc}
-                      </p>
                     </div>
                   </div>
-                </div>
-              </div>
+                ))
+              }
             </div>
 
             <img

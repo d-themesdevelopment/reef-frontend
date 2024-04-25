@@ -38,7 +38,8 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
   const [token, setToken] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [identifier, setIdentifier] = useState<string>("");
-  const [verificationCode, setVerificationCode] = useState<number>();
+  const [verificationCode, setVerificationCode] = useState<number>(0);
+  const [verifiedCode, setVerifiedCode] = useState<any>(0);
 
   const handleLogin = async (data: any) => {
     setLoading(true);
@@ -88,7 +89,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
           setIdentifier(identifier);
 
           // Request Verification
-          await fetch(`${apiUrl}/api/auth/request-verification`, {
+          const res = await fetch(`${apiUrl}/api/auth/request-verification`, {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -100,6 +101,9 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
             }),
           });
 
+          const resData = await res.json();
+
+          setVerifiedCode(resData?.verifiedCode);
           setLoading(false);
           setIsOpen(true);
         }
@@ -132,22 +136,9 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
   const handleVerification = async () => {
     setLoading(true);
 
-    try {
-      await fetch(`${apiUrl}/api/auth/send-verification`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `bearer ${apiToken}`,
-        },
-        body: JSON.stringify({
-          identifier,
-          verificationCode,
-        }),
-      });
-
-      // Handle successful login, e.g., store token in local storage
+    if (verificationCode === verifiedCode) {
       Cookies.set("reef_token", token);
+      closeModal();
 
       console.log("Login successful");
 
@@ -162,14 +153,23 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
         theme: "colored",
       });
 
-      closeModal();
-
       setTimeout(() => {
         setLoading(false);
         location.href = "/profile";
       }, 1500);
-    } catch (error) {
-      console.error("Error occurred during verify:", error);
+    } else {
+      toast.error("Verification Failed", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+      setLoading(false);
     }
   };
 
@@ -192,7 +192,11 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
             type="email"
           />
 
-          {errors.email && <p className="error">{data?.emailTitle} {data?.required}</p>}
+          {errors.email && (
+            <p className="error">
+              {data?.emailTitle} {data?.required}
+            </p>
+          )}
         </div>
 
         <div id="w-node-c4efb870-0447-4e1d-dd16-c798f678d1da-72fbc747">
@@ -204,7 +208,11 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
             type="password"
           />
 
-          {errors.password && <p className="error">{data?.passwordTitle} {data?.required}.</p>}
+          {errors.password && (
+            <p className="error">
+              {data?.passwordTitle} {data?.required}.
+            </p>
+          )}
         </div>
 
         <div
