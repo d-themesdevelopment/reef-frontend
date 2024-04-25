@@ -1,3 +1,6 @@
+import pkg from 'react-copy-to-clipboard';
+const {CopyToClipboard} = pkg;
+
 const ProfilePageContent = (props: any) => {
   const { user, profilePageData, locale } = props;
 
@@ -56,19 +59,21 @@ const ProfilePageContent = (props: any) => {
 
                                 <h3 style={{ fontSize: "16px", color: "#999" }}>
                                   #{service?.serviceID}
-                                  <a href="#">
-                                    <img
-                                      src="./images/icons/copy-icon.svg"
-                                      width={24}
-                                      height={24}
-                                      alt="ICON"
-                                      style={{
-                                        marginLeft: 4,
-                                        marginRight: 4,
-                                        marginBottom: 2,
-                                      }}
-                                    />
-                                  </a>
+                                  <CopyToClipboard text={service?.serviceID}>
+                                    <button>
+                                      <img
+                                        src="./images/icons/copy-icon.svg"
+                                        width={24}
+                                        height={24}
+                                        alt="ICON"
+                                        style={{
+                                          marginLeft: 4,
+                                          marginRight: 4,
+                                          marginBottom: 2,
+                                        }}
+                                      />
+                                    </button>
+                                  </CopyToClipboard>
                                 </h3>
                               </div>
                               <div className="line-rounded-icon tab-menu-left-link-arrow">
@@ -90,7 +95,13 @@ const ProfilePageContent = (props: any) => {
                                       </p>
                                     </div>
                                     <div className="spacer-10"></div>
-                                    <p className={`h6 ${locale === "ar" ? "text-right" : ""}`}>{service?.serviceName}</p>
+                                    <p
+                                      className={`h6 ${
+                                        locale === "ar" ? "text-right" : ""
+                                      }`}
+                                    >
+                                      {service?.serviceName}
+                                    </p>
                                   </div>
                                   <div className="job_label-card">
                                     <div className="job_label-flex">
@@ -101,7 +112,13 @@ const ProfilePageContent = (props: any) => {
                                       </p>
                                     </div>
                                     <div className="spacer-10"></div>
-                                    <p className={`h6 ${locale === "ar" ? "text-right" : ""}`}>{service?.createdAt.slice(0, 10)}</p>
+                                    <p
+                                      className={`h6 ${
+                                        locale === "ar" ? "text-right" : ""
+                                      }`}
+                                    >
+                                      {service?.createdAt.slice(0, 10)}
+                                    </p>
                                   </div>
                                 </div>
                                 <div className="box-padding">
@@ -218,7 +235,7 @@ const ProfilePageContent = (props: any) => {
                   data-name="First Name 2"
                   placeholder={profilePageData?.firstName?.value}
                   type="text"
-                  defaultValue={user?.username.split(" ")[0]}
+                  defaultValue={user?.username?.split(" ")[0]}
                   id="First-name-2"
                   data-ms-member="first-name"
                 />
@@ -233,7 +250,7 @@ const ProfilePageContent = (props: any) => {
                   data-name="Last Name 2"
                   placeholder={profilePageData?.lastName?.value}
                   type="text"
-                  defaultValue={user?.username.split(" ")[1]}
+                  defaultValue={user?.username?.split(" ")[1]}
                   id="Last-name-2"
                   data-ms-member="last-name"
                 />

@@ -7,6 +7,7 @@ import Layout from "../layouts/Layout.astro";
 import ProfilePageContent from "..//components/partials/others/ProfilePageContent";
 import { getCurrentUser } from "../utils/user";
 import fetchApi from "../lib/strapi";
+import { service } from "../store/service";
 
 const $user: any = await getCurrentUser(
   Astro.cookies.get("reef_token")?.value as string
@@ -43,6 +44,8 @@ const profilePageData: any = await fetchApi<any[]>({
   }, // the key to unwrap the response
   locale: locale,
 });
+
+const $service = service.get();
 ---
 
 <Layout title="Profile Page">
@@ -54,6 +57,7 @@ const profilePageData: any = await fetchApi<any[]>({
           profilePageData={profilePageData?.attributes}
           client:load
           locale={locale}
+          currentService={$service}
         />
       </div>
     </div>

@@ -36,7 +36,7 @@ const ServiceRegistration = ({
   registerPageData,
   locale,
 }: any) => {
-  console.log(data, "datadata");
+  console.log(currentService, "datadata");
 
   const [step, setStep] = useState<number>(0);
   const [serviceData, setServiceData] = useState<UserType>();
@@ -687,7 +687,7 @@ const ServiceRegistration = ({
                                         (service: any, index: number) => (
                                           <option
                                             key={index}
-                                            value={service?.attributes?.slug}
+                                            value={service?.attributes?.title}
                                           >
                                             {service?.attributes?.title}
                                           </option>
@@ -719,7 +719,7 @@ const ServiceRegistration = ({
                                     >
                                       {data?.map((item: any, index: number) => (
                                         <option
-                                          value={item?.attributes?.value}
+                                          value={item?.attributes?.title}
                                           key={index}
                                         >
                                           {item?.attributes?.title}
@@ -762,7 +762,7 @@ const ServiceRegistration = ({
                                         ?.attributes?.specialties?.data?.map(
                                           (sub: any, subIndex: number) => (
                                             <option
-                                              value={sub?.attributes?.value}
+                                              value={sub?.attributes?.title}
                                               key={subIndex}
                                             >
                                               {sub?.attributes?.title}
@@ -796,7 +796,7 @@ const ServiceRegistration = ({
                                     >
                                       {registerPageData?.qualificationTypeList?.map(
                                         (item: any) => (
-                                          <option value={item?.value}>
+                                          <option value={item?.title}>
                                             {item?.title}
                                           </option>
                                         )
@@ -862,7 +862,7 @@ const ServiceRegistration = ({
                                       >
                                         {registerPageData?.professionalStatusList?.map(
                                           (item: any) => (
-                                            <option value={item?.value}>
+                                            <option value={item?.title}>
                                               {item?.title}
                                             </option>
                                           )
