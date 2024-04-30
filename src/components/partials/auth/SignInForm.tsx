@@ -121,6 +121,8 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
           progress: undefined,
           theme: "colored",
         });
+
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error occurred during login:", error);
