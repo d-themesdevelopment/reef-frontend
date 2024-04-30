@@ -1,5 +1,5 @@
-import pkg from 'react-copy-to-clipboard';
-const {CopyToClipboard} = pkg;
+import pkg from "react-copy-to-clipboard";
+const { CopyToClipboard } = pkg;
 
 const ProfilePageContent = (props: any) => {
   const { user, profilePageData, locale } = props;
@@ -160,7 +160,16 @@ const ProfilePageContent = (props: any) => {
                                       </div>
                                     </div>
                                     <div className="progress-bar-wrap">
-                                      <div className="progress-bar"></div>
+                                      <div
+                                        className="progress-bar"
+                                        style={{
+                                          width: `${
+                                            service?.agreement?.complete
+                                              ? "100%"
+                                              : "50%"
+                                          }`,
+                                        }}
+                                      ></div>
                                     </div>
                                   </div>
                                 </div>

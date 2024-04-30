@@ -155,7 +155,6 @@ const ServiceRegistration = ({
               qualificationDesc: serviceData?.qualification,
             },
             user: user,
-            confirm: false,
           },
         }),
       });

@@ -13,7 +13,17 @@ export const getCurrentUser = async (reef_token: string) => {
         populate: "*",
       },
       serviceOrderRequestIDs: {
-        populate: "*",
+        populate: {
+          agreement: {
+            populate: "*",
+          },
+          personalInformation: {
+            populate: "*",
+          },
+          requestInformation: {
+            populate: "*",
+          },
+        },
       },
     },
   };
@@ -32,5 +42,5 @@ export const getCurrentUser = async (reef_token: string) => {
 
   const data = await userData.json();
 
- return data;
+  return data;
 };
