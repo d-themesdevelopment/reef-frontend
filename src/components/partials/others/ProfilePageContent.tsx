@@ -164,9 +164,7 @@ const ProfilePageContent = (props: any) => {
                                         className="progress-bar"
                                         style={{
                                           width: `${
-                                            service?.agreement?.complete
-                                              ? "100%"
-                                              : "50%"
+                                            service?.complete ? "100%" : "50%"
                                           }`,
                                         }}
                                       ></div>
