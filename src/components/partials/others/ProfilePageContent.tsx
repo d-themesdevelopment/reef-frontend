@@ -164,12 +164,24 @@ const ProfilePageContent = (props: any) => {
                                         className="progress-bar"
                                         style={{
                                           width: `${
-                                            service?.complete ? "100%" : "50%"
+                                            service?.confirmation
+                                              ? "100%"
+                                              : "50%"
                                           }`,
                                         }}
                                       ></div>
                                     </div>
                                   </div>
+
+                                  {service?.confirmation && (
+                                    <div className="agreement">
+                                      <h3 className="title">قبلت خدمتك</h3>
+                                      <p>{service?.message}</p>
+                                      <a href={`${service?.attachedFile.url}`} target="_blank">
+                                        Download PDF
+                                      </a>
+                                    </div>
+                                  )}
                                 </div>
                               </div>
                             </div>

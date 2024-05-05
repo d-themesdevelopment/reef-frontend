@@ -27284,3 +27284,14 @@ Preloader Area CSS
     display: block;
   }
 }
+
+/* Profile */
+.agreement {
+  margin-top: 1rem;
+}
+
+.agreement .title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #00a087;
+}

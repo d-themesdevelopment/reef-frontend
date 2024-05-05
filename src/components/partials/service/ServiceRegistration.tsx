@@ -915,7 +915,7 @@ const ServiceRegistration = ({
                                     data-input-field="firstname"
                                     className="f-steps-info-details-subtext"
                                   >
-                                    {serviceData?.serviceName}
+                                    {serviceData?.firstNameEn}
                                     <br />
                                   </div>
                                 </div>
@@ -930,7 +930,7 @@ const ServiceRegistration = ({
                                     data-input-field="lastname"
                                     className="f-steps-info-details-subtext"
                                   >
-                                    {serviceData?.idNumber}
+                                    {serviceData?.lastNameEn}
                                     <br />
                                   </div>
                                 </div>

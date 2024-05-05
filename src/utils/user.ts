@@ -15,6 +15,9 @@ export const getCurrentUser = async (reef_token: string) => {
       serviceOrderRequestIDs: {
         populate: "*",
       },
+      attachedFile: {
+        populate: "*",
+      }
     },
   };
 
