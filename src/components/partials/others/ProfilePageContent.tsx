@@ -405,7 +405,7 @@ const ProfilePageContent = (props: any) => {
       </div>
 
       <div className="profile_section">
-        <div className="profile_section-head">{profilePageData?.password}</div>
+        <div className="profile_section-head">{profilePageData?.Password}</div>
         <div className="profile_flex">
           <div className="w-form">
             <form
