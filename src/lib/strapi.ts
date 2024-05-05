@@ -1,4 +1,3 @@
-import { locale } from "../store/locale";
 import qs from "qs";
 
 interface Props {
