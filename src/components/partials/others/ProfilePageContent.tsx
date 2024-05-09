@@ -175,9 +175,9 @@ const ProfilePageContent = (props: any) => {
 
                                   {service?.confirmation && (
                                     <div className="agreement">
-                                      <h3 className="title">قبلت خدمتك</h3>
+                                      <h3 className="title">لقد قبلنا طلب الخدمة الخاص بك</h3>
                                       <p>{service?.message}</p>
-                                      <a href={`${service?.attachedFile.url}`} target="_blank">
+                                      <a href={`${service?.attachedFile?.url}`} target="_blank">
                                         Download PDF
                                       </a>
                                     </div>
