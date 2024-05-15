@@ -38,7 +38,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
   const [token, setToken] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [identifier, setIdentifier] = useState<string>("");
-  const [verificationCode, setVerificationCode] = useState<number>(0);
+  const [verificationCode, setVerificationCode] = useState<string>("");
   const [verifiedCode, setVerifiedCode] = useState<any>(0);
 
   const handleLogin = async (data: any) => {
@@ -258,6 +258,8 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
         </div>
       </form>
 
+
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -266,16 +268,45 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
         overlayClassName={"overlay"}
       >
         <div className="mb-0" style={{ textAlign: "center" }}>
-          <label htmlFor="password">{data?.verificationCodeTitle}</label>
-          <input
-            value={verificationCode}
-            className="input-2 w-input"
-            placeholder={data?.verificationCodePlaceholder}
-            onChange={(e: any) => {
-              setVerificationCode(e.target.value);
-            }}
-            type="number"
-          />
+          <label>{data?.verificationCodeTitle}</label>
+
+          <div className="verification-form">
+            <input
+              className="input-2 w-input"
+              onChange={(e: any) => {
+                setVerificationCode(verificationCode.concat(e.target.value));
+              }}
+              maxLength={1}
+              type="text"
+            />
+
+            <input
+              className="input-2 w-input"
+              onChange={(e: any) => {
+                setVerificationCode(verificationCode.concat(e.target.value));
+              }}
+              maxLength={1}
+              type="text"
+            />
+
+            <input
+              className="input-2 w-input"
+              onChange={(e: any) => {
+                setVerificationCode(verificationCode.concat(e.target.value));
+              }}
+              maxLength={1}
+              type="text"
+            />
+
+            <input
+              className="input-2 w-input"
+              onChange={(e: any) => {
+                setVerificationCode(verificationCode.concat(e.target.value));
+              }}
+              maxLength={1}
+              type="text"
+            />
+          </div>
 
           <a
             href="#"

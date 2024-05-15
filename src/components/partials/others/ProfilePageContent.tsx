@@ -1,7 +1,9 @@
+import { useRef } from "react";
 import pkg from "react-copy-to-clipboard";
 const { CopyToClipboard } = pkg;
 
 const ProfilePageContent = (props: any) => {
+  const downloadRef = useRef<any>();
   const { user, profilePageData, locale } = props;
 
   console.log(user, "useruser");
@@ -35,7 +37,7 @@ const ProfilePageContent = (props: any) => {
                     {user?.serviceOrderRequestIDs
                       ?.sort((a: any, b: any) => b.id - a.id)
                       .map((service: any, index: number) => (
-                        <a
+                        <div
                           data-w-tab={`Tab ${index + 1}`}
                           className="tab-menu-left-link first w-inline-block w-tab-link"
                           key={index}
@@ -160,25 +162,91 @@ const ProfilePageContent = (props: any) => {
                                       </div>
                                     </div>
                                     <div className="progress-bar-wrap">
-                                      <div
-                                        className="progress-bar"
-                                        style={{
-                                          width: `${
-                                            service?.confirmation
-                                              ? "100%"
-                                              : "50%"
-                                          }`,
-                                        }}
-                                      ></div>
+                                      {locale === "ar" ? (
+                                        <>
+                                          <div
+                                            className="progress-bar"
+                                            style={{
+                                              width: `${
+                                                service?.confirmation ||
+                                                service?.rejected
+                                                  ? "100%"
+                                                  : "50%"
+                                              }`,
+                                              backgroundImage: `linear-gradient(274deg, var(--reef2), ${
+                                                service?.rejected
+                                                  ? "red"
+                                                  : "var(--reefgreen)"
+                                              })`,
+                                            }}
+                                          ></div>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <div
+                                            className="progress-bar"
+                                            style={{
+                                              width: `${
+                                                service?.confirmation ||
+                                                service?.rejected
+                                                  ? "100%"
+                                                  : "50%"
+                                              }`,
+                                              backgroundImage: `linear-gradient(274deg, ${
+                                                service?.rejected
+                                                  ? "red"
+                                                  : "var(--reefgreen)"
+                                              }, var(--reef2))`,
+                                            }}
+                                          ></div>
+                                        </>
+                                      )}
                                     </div>
                                   </div>
 
                                   {service?.confirmation && (
                                     <div className="agreement">
-                                      <h3 className="title">لقد قبلنا طلب الخدمة الخاص بك</h3>
+                                      <h3
+                                        className="title"
+                                        style={{ fontSize: 28 }}
+                                      >
+                                        {service?.rejected
+                                          ? locale === "ar"
+                                            ? "لقد رفضنا طلب الخدمة الخاص بك"
+                                            : "We have rejected your service request"
+                                          : locale === "ar"
+                                          ? "لقد قبلنا طلب الخدمة الخاص بك"
+                                          : "We have accepted your service request"}
+                                      </h3>
                                       <p>{service?.message}</p>
-                                      <a href={`${service?.attachedFile?.url}`} target="_blank">
-                                        Download PDF
+                                      <a
+                                        href={`${service?.attachedFile?.url}`}
+                                        onClick={() => {
+                                          downloadRef.current.click();
+                                        }}
+                                        target="_blank"
+                                        style={{
+                                          color: "black",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          textDecoration: "none",
+                                        }}
+                                      >
+                                        <span>
+                                          {service?.attachedFile?.name}
+                                        </span>
+
+                                        <img
+                                          src="/images/icons/download-icon.png"
+                                          width={24}
+                                          height={24}
+                                          alt="Upload Icon"
+                                          style={{
+                                            marginTop: 3,
+                                            marginLeft: 7,
+                                            marginRight: 7,
+                                          }}
+                                        />
                                       </a>
                                     </div>
                                   )}
@@ -186,7 +254,7 @@ const ProfilePageContent = (props: any) => {
                               </div>
                             </div>
                           </div>
-                        </a>
+                        </div>
                       ))}
                   </div>
                 </div>
@@ -194,6 +262,21 @@ const ProfilePageContent = (props: any) => {
             </div>
           </div>
         )}
+
+      <a
+        ref={downloadRef}
+        href="https://res.cloudinary.com/dzmc6x1bk/image/upload/v1714915402/Desktop_1_9e77272304.pdf"
+        target="_blank"
+        style={{ display: "none" }}
+      >
+        <span>Desktop - 1.pdf</span>
+        <img
+          src="/images/icons/download-icon.png"
+          width="24"
+          height="24"
+          alt="Upload Icon"
+        />
+      </a>
 
       <div className="profile_section">
         <div className="profile_section-head">

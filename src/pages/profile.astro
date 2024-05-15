@@ -55,7 +55,7 @@ const $service = service.get();
         <ProfilePageContent
           user={$user ?? {}}
           profilePageData={profilePageData?.attributes}
-          client:load
+          client:only="react"
           locale={locale}
           currentService={$service}
         />
