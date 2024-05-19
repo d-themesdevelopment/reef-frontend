@@ -78,7 +78,7 @@ const categories: any = await fetchApi<any[]>({
           <div class="hero-v2-images-wrapper">
             <div class="w-layout-grid grid-3-columns hero-v2-grid-3-col">
               {
-                categories?.map((cateogry: any, index: number) => (
+                categories?.slice(0, 3)?.map((cateogry: any, index: number) => (
                   <div
                     id="w-node-_12d49549-d020-de1a-37a2-21e499fb048b-99fb0473"
                     class={`hero-v2-image-box ${index === 1 ? "center" : ""}`}
