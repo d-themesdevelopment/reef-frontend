@@ -13,6 +13,12 @@ const pageUrlParamsObject = {
         heading: {
           populate: "*",
         },
+        buttons: {
+          populate: "*",
+        },
+        media: {
+          populate: "*",
+        }
       },
     },
   },
@@ -26,7 +32,7 @@ const careerPageData: any = await fetchApi<any[]>({
   locale: locale,
 });
 
-console.log(careerPageData, "careerPageData")
+console.log(careerPageData?.attributes?.blocks, "careerPageData");
 ---
 
 <Layout title="Our Career">

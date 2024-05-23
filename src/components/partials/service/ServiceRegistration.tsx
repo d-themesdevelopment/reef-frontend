@@ -47,13 +47,16 @@ const ServiceRegistration = ({
   const saudiArabianPhoneNumberPattern = /^(?:(?:\+?966)|0)?\s?5\d{8}$/;
 
   const saudiMobileSchema = z.object({
-    mobileNumber: string().refine((value) => saudiArabianPhoneNumberPattern.test(value), {
-      message:
-        "Please enter a valid Saudi mobile number (+966XXXXXXXXX or 05XXXXXXXX).",
-    }),
+    mobileNumber: string().refine(
+      (value) => saudiArabianPhoneNumberPattern.test(value),
+      {
+        message:
+          "Please enter a valid Saudi mobile number (+966XXXXXXXXX or 05XXXXXXXX).",
+      }
+    ),
   });
 
-  
+  console.log(serviceData, "serviceDataserviceDataserviceData");
 
   // Function to check the correctness and validity of a Saudi Arabian phone number
   function isValidSaudiArabianPhoneNumber(phoneNumber: any) {
@@ -794,8 +797,11 @@ const ServiceRegistration = ({
                                       className="f-input-2 is-middle is-right w-select"
                                     >
                                       {registerPageData?.qualificationTypeList?.map(
-                                        (item: any) => (
-                                          <option value={item?.title}>
+                                        (item: any, index: number) => (
+                                          <option
+                                            value={item?.title}
+                                            key={index}
+                                          >
                                             {item?.title}
                                           </option>
                                         )
@@ -860,8 +866,11 @@ const ServiceRegistration = ({
                                         className="f-input-2 is-middle is-right w-select"
                                       >
                                         {registerPageData?.professionalStatusList?.map(
-                                          (item: any) => (
-                                            <option value={item?.title}>
+                                          (item: any, index: number) => (
+                                            <option
+                                              value={item?.title}
+                                              key={index}
+                                            >
                                               {item?.title}
                                             </option>
                                           )

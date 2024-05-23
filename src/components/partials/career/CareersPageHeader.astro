@@ -1,0 +1,80 @@
+---
+import type Link from "@/interfaces/Link";
+import type Media from "@/interfaces/Media";
+
+interface Props {
+  fields: {
+    title: string;
+    desc: string;
+    media: any;
+    buttons: Array<Link>;
+  };
+}
+
+const {
+  fields: { title, desc, media, buttons },
+} = Astro.props;
+
+console.log(buttons, media, "mediamediamedia");
+---
+
+<section class="section-15 hero v13">
+  <div class="container-default-7 w-container">
+    <div class="position-relative z-index-1">
+      <div class="inner-container _686px center">
+        <div class="inner-container _600px---mbl center">
+          <div class="text-center-6">
+            <div class="inner-container _500px---mbl center">
+              <h1
+                data-w-id="c3d6c8fb-bcb4-981e-d07c-09c380e9eca8"
+                class="display-12"
+                style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+              >
+                {title}
+              </h1>
+            </div><p
+              data-w-id="c3d6c8fb-bcb4-981e-d07c-09c380e9ecaa"
+              class="mg-bottom-40px responsive newtext34 newtext333"
+              style="transform: translate3d(0px, 0%, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+            >
+              {desc}
+            </p>
+
+            <div
+              data-w-id="c3d6c8fb-bcb4-981e-d07c-09c380e9ecae"
+              class="buttons-row-2 center"
+            >
+              {
+                buttons?.map((button, index) => (
+                  <a
+                    data-w-id="77dedd9b-7265-2f12-95bd-8f07ed98ac2e"
+                    href={button?.value}
+                    class="btn-primary-66 btn-primary-6 btn-primary-665 w-button"
+                  >
+                    {button?.title}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mg-top--109px mg-top-0px---mbp">
+      <div
+        data-w-id="c3d6c8fb-bcb4-981e-d07c-09c380e9ecb3"
+        class="image-wrapper"
+        style="opacity: 1; transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+      >
+        <img
+          src={media?.data?.attributes?.url}
+          loading="eager"
+          sizes="(max-width: 479px) 90vw, (max-width: 767px) 94vw, (max-width: 991px) 95vw, (max-width: 1439px) 96vw, 1264px"
+          alt=""
+          class="image-17 cover"
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -13255,8 +13255,9 @@ figcaption {
 }
 
 .section-15.hero.v13 {
-  padding-top: 82px;
-  padding-bottom: 151px;
+  margin-bottom: 0;
+  padding-top: 40px;
+  padding-bottom: 0;
 }
 
 .section-15.pd-200px {
@@ -13628,7 +13629,7 @@ figcaption {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 15px;
+  white-space: nowrap;
   font-size: 16px;
   display: flex;
 }
@@ -13654,7 +13655,7 @@ figcaption {
   flex: 0 auto;
   order: 0;
   align-self: auto;
-  margin-top: 16px;
+  margin-top: 4px;
   margin-bottom: 0;
   margin-right: -8px;
   padding-left: 0;
@@ -13824,10 +13825,9 @@ figcaption {
 }
 
 .job_label-card {
-  text-align: left;
   flex: 1;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   padding-left: 0;
   padding-right: 0;
 }
@@ -27314,4 +27314,8 @@ Preloader Area CSS
 
 .verification-form input:not(:last-child) {
   margin-right: 10px;
+}
+
+.Toastify {
+  z-index: 1000000000;
 }

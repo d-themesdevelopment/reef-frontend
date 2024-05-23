@@ -61,7 +61,7 @@ const {
     >
       <div role="list" class="grid-3-columns gap-row-32px servhome w-dyn-items">
         {
-          servicesData.map((item: any, index: number) => (
+          servicesData?.slice(0, 3).map((item: any, index: number) => (
             <Fragment key={index}>
               <div role="listitem" class="w-dyn-item">
                 <a

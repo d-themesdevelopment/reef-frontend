@@ -1,0 +1,463 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import fetchApi from "../../lib/strapi";
+import JobApplyButton from "../../components/partials/career/JobApplyButton";
+import { jobStore } from "../../store/job";
+
+const urlParamsObject = {
+  populate: {
+    job_category: {
+      populate: "*",
+    },
+    applyButton: {
+      populate: "*",
+    },
+    postOwnerName: {
+      populate: "*",
+    },
+    timeline: {
+      populate: "*",
+    },
+    mainDutiesAndTasks: {
+      populate: "*",
+    },
+    jobDescription: {
+      populate: "*",
+    },
+    practicalExperience: {
+      populate: "*",
+    },
+    job_section: {
+      populate: "*",
+    },
+    job_type: {
+      populate: "*",
+    },
+  },
+};
+
+const queryJobSidebar = {
+  populate: {
+    apply: {
+      populate: "*",
+    },
+    institution: {
+      populate: "*",
+    },
+  },
+};
+
+const queryJobModal = {
+  populate: {
+    fullName: {
+      populate: "*",
+    },
+    email: {
+      populate: "*",
+    },
+    phoneNumber: {
+      populate: "*",
+    },
+    coverLetter: {
+      populate: "*",
+    },
+    portfolioLink: {
+      populate: "*",
+    },
+  },
+};
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const jobData: any = await fetchApi<any[]>({
+  endpoint: "jobs", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+
+const jobSidebar: any = await fetchApi<any[]>({
+  endpoint: "job-sidebar", // the content type to fetch
+  query: queryJobSidebar, // the key to unwrap the response
+  locale: locale,
+});
+
+const jobModal: any = await fetchApi<any[]>({
+  endpoint: "job-modal", // the content type to fetch
+  query: queryJobModal, // the key to unwrap the response
+  locale: locale,
+});
+
+const { slug } = Astro.params;
+
+const singleJobPost = jobData.find(
+  (page: any) => page?.attributes?.slug === slug
+);
+
+if (!singleJobPost) return Astro.redirect("/404");
+
+const apiUrl = import.meta.env.STRAPI_URL;
+const apiToken = import.meta.env.STRAPI_Token;
+---
+
+<Layout title="Job Post Single Page">
+  <div>
+    <section class="section-16 jobs">
+      <div class="container">
+        <div class="job-wrapper">
+          <div class="flex-wrap">
+            <a
+              href="/careers"
+              data-w-id="e6fc9369-5fd9-0b02-5258-62ccd796e853"
+              class="all-jobs w-inline-block"
+              ><div
+                class="embed-icon new334 w-embed"
+                style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;"
+              >
+                <svg
+                  width="19"
+                  height="16"
+                  viewBox="0 0 19 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_1591_20)">
+                    <path
+                      d="M17.0643 8.41504L1.02148 8.41504"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                    <path
+                      d="M7.58444 14.9785L1.02148 8.41556L7.58444 1.8526"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_1591_20">
+                      <rect
+                        width="16"
+                        height="19"
+                        fill="white"
+                        transform="matrix(0 -1 1 0 0 16)"></rect>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+
+              <p class="paragraph-4 job-link">
+                {locale === "ar" ? "جميع الوظائف" : "All Careers"}
+              </p>
+            </a>
+          </div>
+
+          <div class="spacer-20"></div>
+
+          <div class="job-flex">
+            <div class="job-left">
+              <div class="job-card">
+                <div class="spacer-30"></div><div class="job-body">
+                  <div class="job_labels-wrap">
+                    <div class="job_label-card">
+                      <div class="job_label-flex">
+                        <div class="embed-icon w-embed">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 18 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0_1590_16)">
+                              <path
+                                d="M9.00038 16.7888C13.3018 16.7888 16.7888 13.3018 16.7888 9.00038C16.7888 4.69893 13.3018 1.21191 9.00038 1.21191C4.69893 1.21191 1.21191 4.69893 1.21191 9.00038C1.21191 13.3018 4.69893 16.7888 9.00038 16.7888Z"
+                                stroke="currentColor"
+                                stroke-miterlimit="10"></path>
+                              <path
+                                d="M9 4.45703V9.0003H13.5433"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_1590_16">
+                                <rect width="18" height="18" fill="white"
+                                ></rect>
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </div>
+
+                        <p class="paragraph-4">
+                          {singleJobPost?.attributes?.employmentTypeTitle}
+                        </p>
+                      </div>
+
+                      <div class="spacer-10"></div>
+                      <p class="h6">
+                        <strong
+                          >{
+                            singleJobPost?.attributes?.job_type?.data
+                              ?.attributes?.title
+                          }</strong
+                        >
+                      </p>
+                    </div>
+
+                    <div class="job_label-card">
+                      <div class="job_label-flex">
+                        <div class="embed-icon w-embed">
+                          <svg
+                            width="15"
+                            height="18"
+                            viewBox="0 0 15 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.50036 9.86399C8.80576 9.86399 9.86399 8.80576 9.86399 7.50036C9.86399 6.19495 8.80576 5.13672 7.50036 5.13672C6.19495 5.13672 5.13672 6.19495 5.13672 7.50036C5.13672 8.80576 6.19495 9.86399 7.50036 9.86399Z"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                            <path
+                              d="M13.409 7.49991C13.409 12.8181 7.49991 16.9545 7.49991 16.9545C7.49991 16.9545 1.59082 12.8181 1.59082 7.49991C1.59082 5.93272 2.21338 4.42972 3.32155 3.32155C4.42972 2.21338 5.93272 1.59082 7.49991 1.59082C9.0671 1.59082 10.5701 2.21338 11.6783 3.32155C12.7864 4.42972 13.409 5.93272 13.409 7.49991Z"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"></path>
+                          </svg>
+                        </div><p class="paragraph-4">
+                          {singleJobPost?.attributes?.sectionTitle}
+                        </p>
+                      </div>
+
+                      <div class="spacer-10"></div><p class="h6">
+                        <strong
+                          >{
+                            singleJobPost?.attributes?.job_section?.data
+                              ?.attributes?.title
+                          }</strong
+                        >
+                      </p>
+                    </div>
+
+                    <div class="job_label-card">
+                      <div class="job_label-flex">
+                        <div class="embed-icon w-embed">
+                          <svg
+                            width="20"
+                            height="18"
+                            viewBox="0 0 20 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0_1589_4)">
+                              <path
+                                d="M18 3.75H1.5C1.08579 3.75 0.75 4.08579 0.75 4.5V16.5C0.75 16.9142 1.08579 17.25 1.5 17.25H18C18.4142 17.25 18.75 16.9142 18.75 16.5V4.5C18.75 4.08579 18.4142 3.75 18 3.75Z"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M13.5 3.75V2.25C13.5 1.85218 13.342 1.47064 13.0607 1.18934C12.7794 0.908035 12.3978 0.75 12 0.75H7.5C7.10218 0.75 6.72064 0.908035 6.43934 1.18934C6.15804 1.47064 6 1.85218 6 2.25V3.75"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M18.75 8.84082C16.0146 10.4228 12.9099 11.254 9.75 11.2502C6.58955 11.2584 3.48363 10.4269 0.75 8.84082"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                              <path
+                                d="M8.625 8.25H10.875"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_1589_4">
+                                <rect width="19.5" height="18" fill="white"
+                                ></rect>
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </div><p class="paragraph-4">
+                          {singleJobPost?.attributes?.postOwnerName?.title}
+                        </p>
+                      </div><div class="spacer-10"></div><p class="h6">
+                        {singleJobPost?.attributes?.postOwnerName?.value}
+                      </p>
+                    </div>
+
+                    <div class="job_label-card">
+                      <div class="job_label-flex">
+                        <div class="embed-icon w-embed">
+                          <svg
+                            width="18"
+                            height="18"
+                            viewBox="0 0 18 18"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g clip-path="url(#clip0_1590_16)">
+                              <path
+                                d="M9.00038 16.7888C13.3018 16.7888 16.7888 13.3018 16.7888 9.00038C16.7888 4.69893 13.3018 1.21191 9.00038 1.21191C4.69893 1.21191 1.21191 4.69893 1.21191 9.00038C1.21191 13.3018 4.69893 16.7888 9.00038 16.7888Z"
+                                stroke="currentColor"
+                                stroke-miterlimit="10"></path>
+                              <path
+                                d="M9 4.45703V9.0003H13.5433"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            </g>
+                            <defs>
+                              <clipPath id="clip0_1590_16">
+                                <rect width="18" height="18" fill="white"
+                                ></rect>
+                              </clipPath>
+                            </defs>
+                          </svg>
+                        </div><p class="paragraph-4">
+                          {
+                            locale === "ar"
+                              ? " تاريخ النشر"
+                              : "Date of publication"
+                          }
+                        </p>
+                      </div><div class="spacer-10"></div><p class="h6">
+                        January 5, 2023
+                      </p>
+                    </div>
+                  </div><div class="job_description">
+                    <div class="job-description_heading">
+                      <h2 class="h4">
+                        <strong class="bold-text-105"
+                          >{
+                            singleJobPost?.attributes?.jobDescription?.title
+                          }</strong
+                        >
+                      </h2><div class="">
+                        <p class="paragraph-4 semi-bold">
+                          <strong class="p" style="color: #00a087"
+                            >{
+                              singleJobPost?.attributes?.timeline?.title
+                            }</strong
+                          >
+                        </p><p class="paragraph-4">
+                          {singleJobPost?.attributes?.timeline?.value}
+                        </p>
+                      </div>
+                    </div><div class="job-rte w-richtext">
+                      <p>
+                        {singleJobPost?.attributes?.jobDescription?.value}
+                      </p>
+
+                      <h3>
+                        <strong class="bold-text-109"
+                          >{
+                            singleJobPost?.attributes?.mainDutiesAndTasks?.title
+                          }</strong
+                        >
+                      </h3>
+
+                      <p class="paragraph-7">
+                        {singleJobPost?.attributes?.mainDutiesAndTasks?.value}
+                      </p>
+
+                      <p>
+                        <strong class="bold-text-108"
+                          >{
+                            singleJobPost?.attributes?.practicalExperience
+                              ?.title
+                          }</strong
+                        >
+                      </p>
+
+                      <p class="paragraph-8 paragraph-444">
+                        {singleJobPost?.attributes?.practicalExperience?.value}
+                      </p>
+                    </div>
+
+                    <div class="spacer-40"></div>
+                  </div>
+
+                  <JobApplyButton
+                    singleJobPost={singleJobPost?.attributes}
+                    jobModal={jobModal}
+                    apiToken={apiToken}
+                    apiUrl={apiUrl}
+                    locale={locale}
+                    client:only="react"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="job-sticky">
+              <div class="job_sticky-card">
+                <div class="job-square-2">
+                  <div class="embed-icon new334 w-embed">
+                    <svg
+                      width="30"
+                      height="30"
+                      viewBox="0 0 30 30"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_1592_46)">
+                        <path
+                          d="M21.3466 11.5381L12.8803 19.615L8.6543 15.5765"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"></path>
+                        <path
+                          d="M15.0005 28.8466C22.6475 28.8466 28.8466 22.6475 28.8466 15.0005C28.8466 7.35343 22.6475 1.1543 15.0005 1.1543C7.35343 1.1543 1.1543 7.35343 1.1543 15.0005C1.1543 22.6475 7.35343 28.8466 15.0005 28.8466Z"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"></path>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1592_46">
+                          <rect width="30" height="30" fill="white"></rect>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="spacer-15"></div><p class="h4">
+                  {jobSidebar?.attributes?.apply?.title}
+                </p><div class="spacer-15"></div><p
+                  class="paragraph-4 paragraph-444"
+                >
+                  {jobSidebar?.attributes?.apply?.value}
+                </p><div class="spacer-20"></div><a
+                  data-w-id="e6fc9369-5fd9-0b02-5258-62ccd796e864"
+                  href="#"
+                  class="button-3 w-button"
+                  >{locale === "ar" ? "التقديم" : "Submission"}</a
+                >
+              </div><div class="spacer-30"></div><div class="job_sticky-card">
+                <p class="h4">
+                  <strong class="bold-text-110">
+                    {jobSidebar?.attributes?.institution.title}</strong
+                  >
+                </p><div class="spacer-15"></div><p
+                  class="paragraph-4 paragraph-444"
+                >
+                  {jobSidebar?.attributes?.institution?.value}
+                </p><div class="spacer-20"></div><a
+                  href="/about-us"
+                  target="_blank"
+                  class="button-3 w-button"
+                  >{locale === "ar" ? "من نحن" : "Who are we?"}</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>

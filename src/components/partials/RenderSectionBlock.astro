@@ -24,6 +24,8 @@ import MediaHeroSection from "./media-center/MediaHeroSection.astro";
 import NewsletterSection from "./media-center/NewsletterSection.astro";
 import LatestArticlesSection from "./media-center/LatestArticlesSection.astro";
 import JobSection from "./career/JobSection.astro";
+import CareersPageHeader from "./career/CareersPageHeader.astro";
+
 
 const { blocks } = Astro.props;
 ---
@@ -147,6 +149,12 @@ const { blocks } = Astro.props;
         return (
           <Fragment key={index}>
             <LatestArticlesSection fields={{ ...rest }} />
+          </Fragment>
+        );
+      case "partials.career-page-header":
+        return (
+          <Fragment key={index}>
+            <CareersPageHeader fields={{ ...rest }} />
           </Fragment>
         );
       case "partials.jobs":

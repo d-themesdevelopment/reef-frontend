@@ -9,6 +9,7 @@ interface Props {
     positionText: string;
     applyText: string;
     emptyItemText: string;
+    title: string;
   };
 }
 
@@ -34,10 +35,7 @@ const jobData: any = await fetchApi<any[]>({
   query: urlParamsObject, // the key to unwrap the response
   locale: locale,
 });
-
-console.log(jobData, "jobData");
 ---
-
 <section id="careers" class="section-15 pd-200px sect33">
   <div class="container-default-7 w-container">
     <div class="inner-container _500px---mbl center">
@@ -77,6 +75,9 @@ console.log(jobData, "jobData");
             </strong>
           </div>
         </div>
+        {
+          console.log(jobData, "jobDatajobDatajobData")
+        }
       </div>
 
       <div
@@ -148,7 +149,7 @@ console.log(jobData, "jobData");
                         class="buttons-row-2"
                       >
                         <a
-                          href={item?.attributes?.applyButton?.value}
+                          href={`/job-post/${item?.attributes.slug}`}
                           class="btn-primary-7 width-100---mbl w-button"
                         >
                           {item?.attributes?.applyButton?.title}
