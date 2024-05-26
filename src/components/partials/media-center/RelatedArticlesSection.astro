@@ -58,12 +58,6 @@ const { articles, title, articleButton } = Astro.props;
                           <div class="badge-primary small white">
                             <div class="flex-horizontal start gap-4px">
                               <>
-                                <img
-                                  alt="مكتبة الوسائط المتعددة"
-                                  loading="eager"
-                                  width="21"
-                                  src={`${article?.attributes?.icon?.image?.data?.attributes?.url}`}
-                                />
                                 <div class="color-neutral-800">
                                   {
                                     article?.attributes?.article_category?.data
