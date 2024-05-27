@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -21,10 +21,26 @@ const JobApplyModal = ({
     formState: { errors },
   } = useForm();
 
-  console.log(jobModal, "jobModal?.fullName?.title");
+  useEffect(() => {
+    return () => {
+      setCVError(false);
+      setCVUrl(null);
+    }
+  }, [])
+
+  const [cvError, setCVError] = useState(false);
 
   const handleJobApply = async (data) => {
+    if (!cvUrl) {
+      setCVError(true);
+      return;
+    } else {
+      setCVError(false);
+    }
+
     setLoading(true);
+
+    const attachedFile = await handleImageUpload(cvRef);
 
     const username = data.fullName;
     const email = data.email;
@@ -63,6 +79,7 @@ const JobApplyModal = ({
             title: jobModal?.attributes?.portfolioLink?.title,
             value: portfolioLink,
           },
+          attachedFile: attachedFile,
         },
       }),
     };
@@ -109,6 +126,43 @@ const JobApplyModal = ({
     }
 
     // console.log(res, "resres");
+  };
+
+  const cvRef = useRef(null);
+  const [cvUrl, setCVUrl] = useState(null);
+
+  const handleUploadCV = () => {
+    if (cvRef.current.files && cvRef.current.files[0]) {
+      let reader = new FileReader();
+
+      reader.addEventListener(
+        "load",
+        function () {
+          let src = reader.result;
+
+          setCVUrl(src);
+        },
+        false
+      );
+
+      reader.readAsDataURL(cvRef.current.files[0]);
+    }
+  };
+
+  const handleImageUpload = async (elementRef) => {
+    console.log(elementRef, "elementRefelementRefelementRefelementRef");
+
+    const formData = new FormData();
+    formData.append("files", elementRef?.current.files[0]);
+
+    const uploadResponse = await fetch(`${apiUrl}/api/upload/`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const uploadedImage = await uploadResponse.json();
+
+    return uploadedImage;
   };
 
   return (
@@ -204,6 +258,23 @@ const JobApplyModal = ({
                     type="email"
                   />
                 </div>
+              </div>
+
+              <div className="col-span-12">
+                <label className="inline-flex items-center cursor-pointer border border-primary px-12 pt-2 pb-3 rounded-[45px] hover:bg-primary hover:text-white transition-all font-bold text-base">
+                  <input
+                    hidden
+                    accept="image/*"
+                    type="file"
+                    onChange={handleUploadCV}
+                    ref={cvRef}
+                  />
+                  {
+                    cvUrl ? "Attached your CV 👍" : "Please attach your CV"
+                  }
+                </label>
+
+                {cvError && <p className="text-red">Please attach your CV</p>}
               </div>
 
               <div className="col-span-12">
