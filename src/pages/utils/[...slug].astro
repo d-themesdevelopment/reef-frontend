@@ -1,0 +1,39 @@
+---
+// export const prerender = true;
+import type { GetStaticPaths } from "astro";
+import fetchApi from "../../lib/strapi";
+import Markdown from "../../components/features/Markdown";
+
+import MarkdownIt from "markdown-it";
+const md = new MarkdownIt();
+
+// Import Custom Components
+import Layout from "../../layouts/Layout.astro";
+import UtilsPageContent from "../../components/partials/utils/UtilsPageContent";
+
+const locale = Astro.cookies.get("locale")?.value;
+
+const urlParamsObject = {
+  populate: "*",
+};
+
+const pagesData: any = await fetchApi<any[]>({
+  endpoint: "util-pages", // the content type to fetch
+  query: urlParamsObject, // the key to unwrap the response
+  locale: locale,
+});
+
+const { slug } = Astro.params;
+
+const singlePage = pagesData.find(
+  (page: any) => page?.attributes?.slug === slug
+);
+
+if (!singlePage) return Astro.redirect("/404");
+
+console.log(singlePage, "utilsPage");
+---
+
+<Layout title="Utils Page">
+  <UtilsPageContent singlePage={singlePage} client:only="react" />
+</Layout>
