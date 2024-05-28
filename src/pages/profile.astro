@@ -45,6 +45,9 @@ const profilePageData: any = await fetchApi<any[]>({
   locale: locale,
 });
 
+const strapiUrl = import.meta.env.STRAPI_URL;
+const strapiToken = import.meta.env.STRAPI_Token;
+
 const $service = service.get();
 ---
 
@@ -53,6 +56,8 @@ const $service = service.get();
     <div class="dash_contain">
       <div class="relative">
         <ProfilePageContent
+          apiUrl={strapiUrl}
+          apiToken={strapiToken}
           user={$user ?? {}}
           profilePageData={profilePageData?.attributes}
           client:only="react"

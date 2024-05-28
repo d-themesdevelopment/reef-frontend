@@ -75,7 +75,8 @@ const locale = Astro.cookies.get("locale")?.value;
       }
 
       <ToastContainer
-        client:load
+        className={"toast-container-wrap"}
+        client:only="react"
         position="top-right"
         autoClose={5000}
         hideProgressBar={false}

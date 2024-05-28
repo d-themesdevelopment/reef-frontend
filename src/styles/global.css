@@ -1849,3 +1849,7 @@ textarea.w-select {
 .direction-rtl {
   direction: rtl !important;
 }
+
+.Toastify {
+  position: relative;
+}

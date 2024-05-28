@@ -4,6 +4,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import LoadingTwo from "../LoadingTwo";
 
+import { z } from "zod";
+
+const { string } = z;
+
 const JobApplyModal = ({
   singleJobPost,
   locale,
@@ -23,21 +27,11 @@ const JobApplyModal = ({
 
   useEffect(() => {
     return () => {
-      setCVError(false);
       setCVUrl(null);
-    }
-  }, [])
-
-  const [cvError, setCVError] = useState(false);
+    };
+  }, []);
 
   const handleJobApply = async (data) => {
-    if (!cvUrl) {
-      setCVError(true);
-      return;
-    } else {
-      setCVError(false);
-    }
-
     setLoading(true);
 
     const attachedFile = await handleImageUpload(cvRef);
@@ -150,8 +144,6 @@ const JobApplyModal = ({
   };
 
   const handleImageUpload = async (elementRef) => {
-    console.log(elementRef, "elementRefelementRefelementRefelementRef");
-
     const formData = new FormData();
     formData.append("files", elementRef?.current.files[0]);
 
@@ -164,6 +156,18 @@ const JobApplyModal = ({
 
     return uploadedImage;
   };
+
+  const saudiArabianPhoneNumberPattern = /^(?:(?:\+?966)|0)?\s?5\d{8}$/;
+
+  const saudiMobileSchema = z.object({
+    phone: string().refine(
+      (value) => saudiArabianPhoneNumberPattern.test(value),
+      {
+        message:
+          "Please enter a valid Saudi mobile number (+966XXXXXXXXX or 05XXXXXXXX).",
+      }
+    ),
+  });
 
   return (
     <>
@@ -187,9 +191,7 @@ const JobApplyModal = ({
             <div className="grid grid-flex-row grid-cols-12 gap-4">
               <div className="col-span-12 lg:col-span-6">
                 <div className="form-wrap">
-                  <label htmlFor="fullName">
-                    {jobModal?.attributes?.fullName?.title}
-                  </label>
+                  <label>{jobModal?.attributes?.fullName?.title}</label>
 
                   <input
                     {...register("fullName", { required: true })}
@@ -197,6 +199,14 @@ const JobApplyModal = ({
                     placeholder={jobModal?.attributes?.fullName?.value}
                     type="text"
                   />
+
+                  {errors.fullName && (
+                    <p className="error">{`${
+                      locale === "ar"
+                        ? "الاسم الكامل مطلوب"
+                        : "Full name required"
+                    }`}</p>
+                  )}
                 </div>
               </div>
 
@@ -212,6 +222,14 @@ const JobApplyModal = ({
                     placeholder={jobModal?.attributes?.email?.value}
                     type="email"
                   />
+
+                  {errors.email && (
+                    <p className="error">{`${
+                      locale === "ar"
+                        ? "البريد الإلكتروني (مطلوب"
+                        : "Email required"
+                    }`}</p>
+                  )}
                 </div>
               </div>
 
@@ -222,11 +240,25 @@ const JobApplyModal = ({
                   </label>
 
                   <input
-                    {...register("phone", { required: true })}
+                    {...register("phone", {
+                      required: true,
+                      validate: (value) =>
+                        saudiMobileSchema.safeParse({
+                          phone: value,
+                        }).success,
+                    })}
                     className="border w-full rounded-lg h-[45px] px-3 pb-2"
                     placeholder={jobModal?.attributes?.phoneNumber?.value}
                     type="text"
                   />
+
+                  {errors.phone && (
+                    <p className="error">{`${
+                      locale === "ar"
+                        ? "رقم الهاتف المحمول السعودي غير صالح (+966XXXXXXXXX أو 05XXXXXXXXX)"
+                        : "InValid Saudi mobile number (+966XXXXXXXXX or 05XXXXXXXX)"
+                    }`}</p>
+                  )}
                 </div>
               </div>
 
@@ -237,7 +269,7 @@ const JobApplyModal = ({
                   </label>
 
                   <input
-                    {...register("portfolioLink", { required: true })}
+                    {...register("portfolioLink")}
                     className="border w-full rounded-lg h-[45px] px-3 pb-2"
                     placeholder={jobModal?.attributes?.portfolioLink?.value}
                     type="text"
@@ -252,7 +284,7 @@ const JobApplyModal = ({
                   </label>
 
                   <textarea
-                    {...register("coverLetter", { required: true })}
+                    {...register("coverLetter")}
                     className="border w-full rounded-lg px-3 pb-2"
                     placeholder={jobModal?.attributes?.coverLetter?.value}
                     type="email"
@@ -269,12 +301,8 @@ const JobApplyModal = ({
                     onChange={handleUploadCV}
                     ref={cvRef}
                   />
-                  {
-                    cvUrl ? "Attached your CV 👍" : "Please attach your CV"
-                  }
+                  {cvUrl ? "Attached your CV 👍" : "Please attach your CV"}
                 </label>
-
-                {cvError && <p className="text-red">Please attach your CV</p>}
               </div>
 
               <div className="col-span-12">

@@ -22,13 +22,9 @@ const UtilsPageContent = ({ singlePage }) => {
           </div>
         </div>
       </section>
-
-      {
-        console.log(singlePage?.attributes?.content, "singlePage?.attributes?.content")
-      }
-
+      
       <section class="section-27">
-        <div class="w-layout-blockcontainer container-3 w-container">
+        <div class="w-layout-block container container-3 w-container">
           <Markdown
             value={md?.render(singlePage?.attributes?.content)}
           />
