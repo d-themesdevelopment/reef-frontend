@@ -296,7 +296,7 @@ const JobApplyModal = ({
                 <label className="inline-flex items-center cursor-pointer border border-primary px-12 pt-2 pb-3 rounded-[45px] hover:bg-primary hover:text-white transition-all font-bold text-base">
                   <input
                     hidden
-                    accept="image/*"
+                    accept=".pdf"
                     type="file"
                     onChange={handleUploadCV}
                     ref={cvRef}
