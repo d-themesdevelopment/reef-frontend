@@ -432,13 +432,21 @@ const apiToken = import.meta.env.STRAPI_Token;
                   class="paragraph-4 paragraph-444"
                 >
                   {jobSidebar?.attributes?.apply?.value}
-                </p><div class="spacer-20"></div><a
-                  data-w-id="e6fc9369-5fd9-0b02-5258-62ccd796e864"
-                  href="#"
-                  class="button-3 w-button"
-                  >{locale === "ar" ? "التقديم" : "Submission"}</a
-                >
-              </div><div class="spacer-30"></div><div class="job_sticky-card">
+                </p>
+
+                <div class="spacer-20"></div>
+
+                <JobApplyButton
+                  singleJobPost={singleJobPost?.attributes}
+                  jobModal={jobModal}
+                  apiToken={apiToken}
+                  apiUrl={apiUrl}
+                  locale={locale}
+                  client:only="react"
+                />
+              </div>
+
+              <div class="spacer-30"></div><div class="job_sticky-card">
                 <p class="h4">
                   <strong class="bold-text-110">
                     {jobSidebar?.attributes?.institution.title}</strong

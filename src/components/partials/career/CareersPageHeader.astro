@@ -1,6 +1,6 @@
 ---
 import type Link from "@/interfaces/Link";
-import type Media from "@/interfaces/Media";
+import Buttons from "./Buttons";
 
 interface Props {
   fields: {
@@ -44,17 +44,7 @@ console.log(buttons, media, "mediamediamedia");
               data-w-id="c3d6c8fb-bcb4-981e-d07c-09c380e9ecae"
               class="buttons-row-2 center"
             >
-              {
-                buttons?.map((button, index) => (
-                  <a
-                    data-w-id="77dedd9b-7265-2f12-95bd-8f07ed98ac2e"
-                    href={button?.value}
-                    class="btn-primary-66 btn-primary-6 btn-primary-665 w-button"
-                  >
-                    {button?.title}
-                  </a>
-                ))
-              }
+              <Buttons buttons={buttons} client:only="react" />
             </div>
           </div>
         </div>
@@ -78,3 +68,5 @@ console.log(buttons, media, "mediamediamedia");
     </div>
   </div>
 </section>
+
+<script></script>
