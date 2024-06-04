@@ -147,7 +147,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
           progress: undefined,
           theme: "colored",
         });
-      }, 12000);
+      }, 120000);
     }
   }, [modalIsOpen]);
 
