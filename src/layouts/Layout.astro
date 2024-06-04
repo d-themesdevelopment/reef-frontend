@@ -38,6 +38,7 @@ if (Astro.cookies.has("reef_token")) {
   isLoggedIn.set(false);
 }
 
+const pathname = Astro.url.pathname;
 const locale = Astro.cookies.get("locale")?.value;
 ---
 
@@ -65,13 +66,14 @@ const locale = Astro.cookies.get("locale")?.value;
     <div
       class={`page-wrapper ${locale === "en" ? "direction-ltr" : "direction-rtl"}`}
     >
-      <Header />
+      {!pathname.includes("404") && <Header />}
 
       <slot />
 
       {
         !currentPath.includes("/sign-in") &&
-          !currentPath.includes("/sign-up") && <Footer />
+          !currentPath.includes("/sign-up") &&
+          !pathname.includes("404") && <Footer />
       }
 
       <ToastContainer
