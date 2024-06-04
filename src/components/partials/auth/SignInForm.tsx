@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import qs from "qs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoadingTwo from "../../../components/features/LoadingTwo";
 
 interface Props {
@@ -40,6 +40,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
   const [identifier, setIdentifier] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState<string>("");
   const [verifiedCode, setVerifiedCode] = useState<any>(0);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
 
   const handleLogin = async (data: any) => {
     setLoading(true);
@@ -129,7 +130,26 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
     }
   };
 
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  useEffect(() => {
+    if (modalIsOpen) {
+      setTimeout(() => {
+        setIsOpen(false);
+        setVerifiedCode(0);
+        setLoading(false)
+
+        toast.warn("Session timeout!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }, 12000);
+    }
+  }, [modalIsOpen]);
 
   function closeModal() {
     setIsOpen(false);
@@ -257,8 +277,6 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
           />
         </div>
       </form>
-
-
 
       <Modal
         isOpen={modalIsOpen}
