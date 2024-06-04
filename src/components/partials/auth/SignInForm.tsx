@@ -135,7 +135,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
       setTimeout(() => {
         setIsOpen(false);
         setVerifiedCode(0);
-        setLoading(false)
+        setLoading(false);
 
         toast.warn("Session timeout!", {
           position: "top-right",
@@ -159,7 +159,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
     setLoading(true);
 
     if (verificationCode === verifiedCode) {
-      Cookies.set("reef_token", token);
+      Cookies.set("reef_token", token, { expires: 30 });
       closeModal();
 
       console.log("Login successful");
