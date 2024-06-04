@@ -252,7 +252,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
                 data-name="Checkbox"
                 style={{ display: "none" }}
               />
-              <span className="text-408 color-neutral-600 w-form-label">
+              <span className="text-408 color-neutral-600 w-form-label ml-2">
                 {data?.rememberMeTitle}
               </span>
             </label>
