@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import LoadingTwo from "../../../components/features/LoadingTwo";
 
 interface Props {
+  locale: any;
   apiUrl: string;
   apiToken: string;
   data: any;
@@ -28,7 +29,23 @@ const customStyles = {
   },
 };
 
-const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
+const customStylesTwo = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    padding: "30px 50px",
+    borderRadius: "20px",
+    maxWidth: "500px",
+    width: "100%"
+  },
+};
+
+
+const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
   const {
     register,
     handleSubmit,
@@ -41,12 +58,16 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
   const [verificationCode, setVerificationCode] = useState<string>("");
   const [verifiedCode, setVerifiedCode] = useState<any>(0);
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [users, setUsers] = useState([]);
+  const [forgotPassword, setForgotPassword] = useState<boolean>(false);
 
   const handleLogin = async (data: any) => {
     setLoading(true);
 
     const identifier = data.email;
     const password = data.password;
+
+    setIdentifier(identifier);
 
     const urlParamsObject = {
       populate: {
@@ -87,7 +108,6 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
 
         if (data.jwt) {
           setToken(data.jwt);
-          setIdentifier(identifier);
 
           // Request Verification
           const res = await fetch(`${apiUrl}/api/auth/request-verification`, {
@@ -129,6 +149,22 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
       console.error("Error occurred during login:", error);
     }
   };
+
+  useEffect(() => {
+    getUsers();
+  }, [])
+
+  const getUsers = async () => {
+    const requestUrl = `${apiUrl}/api/users?populate=*`;
+
+    try {
+      const response = await fetch(requestUrl);
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     if (modalIsOpen) {
@@ -195,6 +231,71 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
     }
   };
 
+  const handleForgetPassword = async (e:any) => {
+    e.preventDefault();
+    setLoading(true);
+    setForgotPassword(false);
+    const email = e.target.email.value;
+
+    if(users?.find((user:any) => user?.email === email )) {
+      const user:any = users?.find((user:any) => user?.email === email );
+      localStorage.setItem("userID", user?.id);
+    } else {
+      toast.error("Not registered user", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+
+      setTimeout(() => {
+        setLoading(false);
+      }, 1500);
+
+      return;
+    }
+
+    try {
+      const req = await fetch(`${apiUrl}/api/auth/reset-password`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `bearer ${apiToken}`,
+        },
+        body: JSON.stringify({
+          identifier,
+        }),
+      });
+
+      if(req?.ok) {
+        const res = await req.json();
+        Cookies.set("resetPasswordToken", res?.resetPasswordToken, {expires: 10/1440})
+
+        toast.success("Sent the request to the email", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
+      }
+    } catch (error) {
+        console.error(error);
+    } 
+  }
+
   return (
     <>
       {loading && <LoadingTwo />}
@@ -258,7 +359,7 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
             </label>
           </div>
 
-          <a href="#" className="text-decoration-none">
+          <a href="#" className="text-decoration-none" onClick={(e) => {e.preventDefault(); setForgotPassword(true)}}>
             {data?.forgetPasswordTitle}
           </a>
         </div>
@@ -277,6 +378,43 @@ const SignInForm = ({ apiUrl, apiToken, data }: Props) => {
           />
         </div>
       </form>
+
+      <Modal
+        isOpen={forgotPassword}
+        onRequestClose={() => setForgotPassword(false)}
+        style={customStylesTwo}
+        contentLabel="Example Modal"
+        overlayClassName={"overlay"}
+      >
+        <div className="mb-0" style={{ textAlign: "center" }}>
+          <h4 className="text-3xl font-bold mb-4">
+            {
+              locale === "ar" ? "هل نسيت كلمة السر" : "Forgot Password"
+            }
+          </h4>
+
+          <form action="#" onSubmit={handleForgetPassword}>
+            <input
+              name="email"
+              className="input-2 w-input w-full"
+              type="email"
+              placeholder={`${locale === "ar" ? "رجاءا أدخل بريدك الإلكتروني" : "Please enter your email"}`}
+              required
+            />
+
+          <button
+            type="submit"
+            className="f-form-button next w-button inline-block mt-7"
+            style={{ display: "inline-flex" }}
+          >
+            
+            {
+              locale === "ar" ? "إرسال إعادة تعيين البريد الإلكتروني":"Send Reset Email"
+            }
+          </button>
+          </form>
+        </div>
+      </Modal>
 
       <Modal
         isOpen={modalIsOpen}

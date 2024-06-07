@@ -1,39 +1,40 @@
 import qs from "qs";
 
-export const getCurrentUser = async (reef_token: string) => {
+export const getCurrentUser = async (
+  reef_token: string,
+  apiUrl: string,
+) => {
   const urlParamsObject = {
     populate: {
       avatar: {
-        populate: "*",
+        populate: "*"
       },
       background: {
-        populate: "*",
+        populate: "*"
       },
       brand: {
-        populate: "*",
+        populate: "*"
       },
       serviceOrderRequestIDs: {
-        populate: "*",
+        populate: "*"
       },
       attachedFile: {
-        populate: "*",
+        populate: "*"
       }
-    },
+    }
   };
 
   const queryString = qs.stringify(urlParamsObject);
 
-  const requestUrl = `${
-    import.meta.env.STRAPI_URL
-  }/api/users/me?${queryString}`;
+  const requestUrl = `${apiUrl}/api/users/me?${queryString}`;
 
   const userData = await fetch(`${requestUrl}`, {
     headers: {
-      Authorization: `bearer ${reef_token}`,
-    },
+      Authorization: `bearer ${reef_token}`
+    }
   });
 
   const data = await userData.json();
 
- return data;
+  return data;
 };

@@ -21,6 +21,8 @@ interface Props {
 const { title } = Astro.props;
 const currentPath = Astro.url.pathname;
 
+const apiUrl = import.meta.env.STRAPI_URL;
+
 if (!Astro.cookies.has("locale")) {
   Astro.cookies.set("locale", "ar");
 }
@@ -29,7 +31,8 @@ if (Astro.cookies.has("reef_token")) {
   isLoggedIn.set(true);
 
   const data: any = await getCurrentUser(
-    Astro.cookies.get("reef_token")?.value as string
+    Astro.cookies.get("reef_token")?.value as string,
+    apiUrl
   );
 
   console.log(data, "Loaded");
@@ -38,7 +41,6 @@ if (Astro.cookies.has("reef_token")) {
   isLoggedIn.set(false);
 }
 
-const pathname = Astro.url.pathname;
 const locale = Astro.cookies.get("locale")?.value;
 ---
 
@@ -66,14 +68,13 @@ const locale = Astro.cookies.get("locale")?.value;
     <div
       class={`page-wrapper ${locale === "en" ? "direction-ltr" : "direction-rtl"}`}
     >
-      {!pathname.includes("404") && <Header />}
+      <Header />
 
       <slot />
 
       {
         !currentPath.includes("/sign-in") &&
-          !currentPath.includes("/sign-up") &&
-          !pathname.includes("404") && <Footer />
+          !currentPath.includes("/sign-up") && <Footer />
       }
 
       <ToastContainer

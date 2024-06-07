@@ -46,9 +46,10 @@ const authPageData: any = await fetchApi<any[]>({
                   class="sign-in-form-block w-form"
                 >
                   <SignInForm
+                    locale={locale}
                     apiUrl={import.meta.env.STRAPI_URL}
                     apiToken={import.meta.env.STRAPI_Token}
-                    client:load
+                    client:only="react"
                     data={authPageData?.attributes}
                   />
 
