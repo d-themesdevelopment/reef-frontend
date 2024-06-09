@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const CategoryPageContent = ({ categories, servicesData }: any) => {
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState<any>();
+
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const searchParams = new URLSearchParams(url.search);
+    const item = searchParams.get('item');
+    setSearchValue(item as string);
+    setCategory(categories?.find((value:any) => value?.attributes?.value === item ));
+  }, []);
 
   return (
     <>
@@ -38,17 +48,14 @@ const CategoryPageContent = ({ categories, servicesData }: any) => {
                         className="categories-badges-item-wrapper center w-dyn-item"
                       >
                         <a
-                          href="#"
+                          onClick={() => setCategory(item)}
+                          href={`/category?item=${item?.attributes?.value}`}
                           className={`badge-secondary small category-badges center w-inline-block ${
                             item?.attributes?.value ===
-                            category?.attributes?.value
+                            searchValue
                               ? "w--current"
                               : ""
                           }`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setCategory(item);
-                          }}
                         >
                           <div className="flex-horizontal gap-4px">
                             <>
@@ -84,13 +91,12 @@ const CategoryPageContent = ({ categories, servicesData }: any) => {
                 role="list"
                 className="grid-3-columns gap-row-32px w-dyn-items"
               >
-                {servicesData
+                { (searchValue ? servicesData
                   ?.filter(
                     (value: any) =>
                       value?.attributes?.category?.data?.attributes?.value ===
                       category?.attributes?.value
-                  )
-                  .map((item: any, index: number) => (
+                  ) : servicesData )?.map((item: any, index: number) => (
                     <div role="listitem" className="w-dyn-item" key={index}>
                       <a
                         data-w-id="4ef36aa9-69ab-043c-c626-baafa095a585"

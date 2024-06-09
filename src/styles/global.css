@@ -1853,3 +1853,7 @@ textarea.w-select {
 .Toastify {
   position: relative;
 }
+
+.underline-none {
+  text-decoration: none;
+}
