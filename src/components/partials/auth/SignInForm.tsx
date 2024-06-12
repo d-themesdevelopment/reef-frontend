@@ -57,7 +57,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
   const [identifier, setIdentifier] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState<string>("");
   const [verifiedCode, setVerifiedCode] = useState<any>(0);
-  const [modalIsOpen, setIsOpen] = useState<boolean>(true);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   const [users, setUsers] = useState([]);
   const [forgotPassword, setForgotPassword] = useState<boolean>(false);
   const input1Ref = useRef<any>(null);
