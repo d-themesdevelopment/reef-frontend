@@ -81,16 +81,16 @@ const { blocks } = Astro.props;
             <ArticleSection fields={{ ...rest }} />
           </Fragment>
         );
-      case "partials.faq":
-        return (
-          <Fragment key={index}>
-            {type !== "type2" ? (
-              <FaqSection fields={{ ...rest }} />
-            ) : (
-              <FaqTwoSection fields={{ ...rest }} />
-            )}
-          </Fragment>
-        );
+      // case "partials.faq":
+      //   return (
+      //     <Fragment key={index}>
+      //       {type !== "type2" ? (
+      //         <FaqSection fields={{ ...rest }} />
+      //       ) : (
+      //         <FaqTwoSection fields={{ ...rest }} />
+      //       )}
+      //     </Fragment>
+      //   );
       case "partials.page-header":
         return (
           <Fragment key={index}>

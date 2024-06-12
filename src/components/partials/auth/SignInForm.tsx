@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import Modal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import qs from "qs";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LoadingTwo from "../../../components/features/LoadingTwo";
 
 interface Props {
@@ -57,10 +57,31 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
   const [identifier, setIdentifier] = useState<string>("");
   const [verificationCode, setVerificationCode] = useState<string>("");
   const [verifiedCode, setVerifiedCode] = useState<any>(0);
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
+  const [modalIsOpen, setIsOpen] = useState<boolean>(true);
   const [users, setUsers] = useState([]);
   const [forgotPassword, setForgotPassword] = useState<boolean>(false);
+  const input1Ref = useRef<any>(null);
+  const input2Ref = useRef<any>(null);
+  const input3Ref = useRef<any>(null);
+  const input4Ref = useRef<any>(null);
 
+  const handleKeyUp = (index: number, e:any) => {
+    if (e.key) {
+      switch (index) {
+        case 0:
+          input2Ref?.current.focus();
+          break;
+        case 1:
+          input3Ref?.current.focus();
+          break;
+        case 2:
+          input4Ref?.current.focus();
+          break;
+        default:
+          break;
+      }
+    }
+  };
   const handleLogin = async (data: any) => {
     setLoading(true);
 
@@ -172,6 +193,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
         setIsOpen(false);
         setVerifiedCode(0);
         setLoading(false);
+        setVerificationCode("");
 
         toast.warn("Session timeout!", {
           position: "top-right",
@@ -202,7 +224,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
 
       toast.success("👌 Login successful!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -218,7 +240,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
     } else {
       toast.error("Verification Failed", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -227,7 +249,11 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
         theme: "colored",
       });
 
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+        setVerificationCode("");
+        setIsOpen(false);
+      }, 1500);
     }
   };
 
@@ -243,7 +269,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
     } else {
       toast.error("Not registered user", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -433,6 +459,8 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
                 setVerificationCode(verificationCode.concat(e.target.value));
               }}
               maxLength={1}
+              ref={input1Ref}
+              onKeyUp={(e) => handleKeyUp(0, e)}
               type="text"
             />
 
@@ -442,6 +470,8 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
                 setVerificationCode(verificationCode.concat(e.target.value));
               }}
               maxLength={1}
+              ref={input2Ref}
+              onKeyUp={(e) => handleKeyUp(1, e)}
               type="text"
             />
 
@@ -451,6 +481,8 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
                 setVerificationCode(verificationCode.concat(e.target.value));
               }}
               maxLength={1}
+              ref={input3Ref}
+              onKeyUp={(e) => handleKeyUp(2, e)}
               type="text"
             />
 
@@ -460,6 +492,8 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
                 setVerificationCode(verificationCode.concat(e.target.value));
               }}
               maxLength={1}
+              ref={input4Ref}
+              onKeyUp={(e) => handleKeyUp(3, e)}
               type="text"
             />
           </div>

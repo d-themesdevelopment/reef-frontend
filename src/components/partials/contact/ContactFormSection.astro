@@ -59,14 +59,14 @@ const locale = Astro.cookies.get("locale")?.value;
                   </div>
 
                   <h1 class="display-1 mg-bottom-12px">{title}</h1><div
-                    class="inner-container _400px---tablet"
+                    class="inner-container _400px---tablet flex items-center justify-center sm:justify-start "
                   >
                     <div class="inner-container _300px---mbl">
-                      <p class="mg-bottom-24px">
+                      <p class="mg-bottom-24px !text-center sm:!text-left">
                         {desc}
                       </p>
 
-                      <div class="w-layout-grid social-media-grid-top alt">
+                      <div class="w-layout-grid social-media-grid-top alt !flex">
                         <a
                           href="https://www.facebook.com/"
                           target="_blank"

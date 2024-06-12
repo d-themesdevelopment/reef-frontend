@@ -7,64 +7,64 @@ import { jobStore } from "../../store/job";
 const urlParamsObject = {
   populate: {
     job_category: {
-      populate: "*",
+      populate: "*"
     },
     applyButton: {
-      populate: "*",
+      populate: "*"
     },
     postOwnerName: {
-      populate: "*",
+      populate: "*"
     },
     timeline: {
-      populate: "*",
+      populate: "*"
     },
     mainDutiesAndTasks: {
-      populate: "*",
+      populate: "*"
     },
     jobDescription: {
-      populate: "*",
+      populate: "*"
     },
     practicalExperience: {
-      populate: "*",
+      populate: "*"
     },
     job_section: {
-      populate: "*",
+      populate: "*"
     },
     job_type: {
-      populate: "*",
-    },
-  },
+      populate: "*"
+    }
+  }
 };
 
 const queryJobSidebar = {
   populate: {
     apply: {
-      populate: "*",
+      populate: "*"
     },
     institution: {
-      populate: "*",
-    },
-  },
+      populate: "*"
+    }
+  }
 };
 
 const queryJobModal = {
   populate: {
     fullName: {
-      populate: "*",
+      populate: "*"
     },
     email: {
-      populate: "*",
+      populate: "*"
     },
     phoneNumber: {
-      populate: "*",
+      populate: "*"
     },
     coverLetter: {
-      populate: "*",
+      populate: "*"
     },
     portfolioLink: {
-      populate: "*",
-    },
-  },
+      populate: "*"
+    }
+  }
 };
 
 const locale = Astro.cookies.get("locale")?.value;
@@ -72,19 +72,19 @@ const locale = Astro.cookies.get("locale")?.value;
 const jobData: any = await fetchApi<any[]>({
   endpoint: "jobs", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
-  locale: locale,
+  locale: locale
 });
 
 const jobSidebar: any = await fetchApi<any[]>({
   endpoint: "job-sidebar", // the content type to fetch
   query: queryJobSidebar, // the key to unwrap the response
-  locale: locale,
+  locale: locale
 });
 
 const jobModal: any = await fetchApi<any[]>({
   endpoint: "job-modal", // the content type to fetch
   query: queryJobModal, // the key to unwrap the response
-  locale: locale,
+  locale: locale
 });
 
 const { slug } = Astro.params;
@@ -157,8 +157,9 @@ const apiToken = import.meta.env.STRAPI_Token;
           <div class="job-flex">
             <div class="job-left">
               <div class="job-card">
-                <div class="spacer-30"></div><div class="job-body">
-                  <div class="job_labels-wrap">
+                <div class="spacer-30"></div>
+                <div class="job-body">
+                  <div class="job_labels-wrap !flex-wrap">
                     <div class="job_label-card">
                       <div class="job_label-flex">
                         <div class="embed-icon w-embed">

@@ -27332,3 +27332,37 @@ Preloader Area CSS
   font-weight: 700;
   line-height: 1.156em;
 }
+
+@media(max-width: 991px) {
+  .hero .card.card-contact-info {
+    position: relative;
+  }
+}
+
+@media(max-width: 575px) {
+  .slider-wrapper .btn-navigation-ltr {
+    right: 21% !important;
+  }
+
+  .profile_section {
+    width: 100% !important;
+  }
+
+  .profile_flex .w-form,
+  .profile_flex .profile_column {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+
+@media(max-width: 479px) {
+  .careers .buttons-row-2 {
+    flex-direction: row;
+  }
+
+  .careers .grid-3-columns-3.career-item-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

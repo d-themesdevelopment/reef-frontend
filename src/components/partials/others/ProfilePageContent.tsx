@@ -607,7 +607,7 @@ const ProfilePageContent = ({
           </div>
           <div className="profile_flex">
             <div className="profile_column !w-full">
-              <div className="ms-profile-image-row">
+              <div className="ms-profile-image-row flex flex-col lg:flex-row">
                 <img
                   className="mb-4 w-28 h-28 sm:mb-0 xl:mb-4 2xl:mb-0 object-cover rounded-full"
                   src={`${

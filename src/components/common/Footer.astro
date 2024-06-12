@@ -5,31 +5,31 @@ import type Link from "../../interfaces/Link";
 const urlParamsObject = {
   populate: {
     footerLogo: {
-      populate: "*",
+      populate: "*"
     },
     image: {
-      populate: "*",
+      populate: "*"
     },
     mainMenu: {
-      populate: "*",
+      populate: "*"
     },
     utilityMenu: {
-      populate: "*",
+      populate: "*"
     },
     contactUsForm: {
       populate: {
         icon: {
-          populate: "*",
+          populate: "*"
         },
         contactButton: {
-          populate: "*",
+          populate: "*"
         },
         addressButton: {
-          populate: "*",
-        },
-      },
-    },
-  },
+          populate: "*"
+        }
+      }
+    }
+  }
 };
 
 const locale = Astro.cookies.get("locale")?.value;
@@ -37,8 +37,8 @@ const locale = Astro.cookies.get("locale")?.value;
 const footerData: any = await fetchApi<any[]>({
   endpoint: "footer", // the content type to fetch
   query: urlParamsObject, // the key to unwrap the response
-  locale: locale,
-});                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+  locale: locale
+});
 ---
 
 <footer class="footer">
@@ -72,23 +72,21 @@ const footerData: any = await fetchApi<any[]>({
                 href={footerData?.attributes?.contactUsForm?.addressButton
                   ?.value}
                 class="btn-secondary white w-button"
-                >{
-                  footerData?.attributes?.contactUsForm?.addressButton?.title
-                }</a
-              >
+                >{footerData?.attributes?.contactUsForm?.addressButton?.title}
+              </a>
 
               <a
                 data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c20"
                 href={footerData?.attributes?.contactUsForm?.contactButton
                   ?.value}
-                class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 ml-4" : "ml-en-space"}`}
+                class={`btn-primary button-row w-button ${locale === "ar" ? "mr-0 lg:ml-4" : "!ml-4"}`}
                 >{
                   footerData?.attributes?.contactUsForm?.contactButton?.title
                 }<span
                   class={`line-rounded-icon link-icon-right ${locale === "ar" ? "mr-2 rotate-180" : ""}`}
                   ></span
-                ></a
-              >
+                >
+              </a>
             </div>
           </div>
         </div>
@@ -100,9 +98,7 @@ const footerData: any = await fetchApi<any[]>({
         data-w-id="7003ae01-3690-713f-a2ae-f7c090a04c27"
         class="z-index-1"
       >
-        <div
-          class="container-default w-container"
-        >
+        <div class="container-default w-container">
           <div class="footer-top newfooter">
             <div class="w-layout-grid grid-footer-3-col">
               <div

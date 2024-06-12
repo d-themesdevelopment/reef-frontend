@@ -25,6 +25,9 @@ const urlParamsObject = {
     applyButton: {
       populate: "*",
     },
+    jobDescription: {
+      populate: "*",
+    }
   },
 };
 
@@ -117,7 +120,7 @@ const jobData: any = await fetchApi<any[]>({
                         </h3>
                         <p class="mg-bottom-32px-6">
                           <strong class="bold-text-3">
-                            {item?.attributes?.desc}
+                            {item?.attributes?.jobDescription?.value}
                           </strong>
                         </p>
                         <div class="career-item-details">
@@ -137,12 +140,21 @@ const jobData: any = await fetchApi<any[]>({
                             </div>
                           </>
                         </div>
+
+                        <a
+                          href={`/job-post/${item?.attributes.slug}`}
+                          class="btn-primary-7 width-100---mbl w-button lg:!hidden mt-5"
+                        >
+                          {
+                            locale === "ar" ? "قدم الآن" : "Apply Now"
+                          }
+                        </a>
                       </>
                     </div>
 
                     <div
                       id="w-node-_12c2dd47-3cd5-b6e2-fae2-035b4ba5cc47-4ba5cc14"
-                      class="career-item-button"
+                      class="career-item-button !hidden lg:!block"
                     >
                       <div
                         id="w-node-_12c2dd47-3cd5-b6e2-fae2-035b4ba5cc48-4ba5cc14"
@@ -152,7 +164,9 @@ const jobData: any = await fetchApi<any[]>({
                           href={`/job-post/${item?.attributes.slug}`}
                           class="btn-primary-7 width-100---mbl w-button"
                         >
-                          {item?.attributes?.applyButton?.title}
+                          {
+                            locale === "ar" ? "قدم الآن" : "Apply Now"
+                          }
                         </a>
                       </div>
                     </div>

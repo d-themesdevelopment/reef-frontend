@@ -160,7 +160,7 @@ console.log(singleService?.attributes, "singleService");
               data-w-id="5054fd6b-35a2-c60b-2b6d-752bf8dfeebd"
               class="service-registration badge-primary w-button"
               >{singlePageData?.attributes?.serviceRequestBtn?.title}<span
-                class="line-rounded-icon link-icon-right rotate-180 mr-2"
+                class={`line-rounded-icon link-icon-right mr-2 ${locale === "ar" ? "rotate-180" : ""}`}
                 ></span
               >
             </button>

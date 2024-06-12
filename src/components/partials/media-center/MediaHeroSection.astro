@@ -156,7 +156,9 @@ const { fields } = Astro.props;
                                 >
                                   <>
                                     <div class="link-text">
-                                      {article?.attributes?.browseBtn?.title}
+                                      {
+                                        locale === "ar" ? "اقرأ أكثر" : "Read More"
+                                      }
                                     </div>
                                     <div
                                       class={`line-rounded-icon card-arrow-right ${locale === "en" ? "rotate-180" : ""}`}
