@@ -286,6 +286,8 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
     }
 
     try {
+      const identifier = email;
+
       const req = await fetch(`${apiUrl}/api/auth/reset-password`, {
         method: "POST",
         headers: {
@@ -428,16 +430,16 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
               required
             />
 
-          <button
-            type="submit"
-            className="f-form-button next w-button inline-block mt-7"
-            style={{ display: "inline-flex" }}
-          >
-            
-            {
-              locale === "ar" ? "إرسال إعادة تعيين البريد الإلكتروني":"Send Reset Email"
-            }
-          </button>
+            <button
+              type="submit"
+              className="f-form-button next w-button inline-block mt-7"
+              style={{ display: "inline-flex" }}
+            >
+              
+              {
+                locale === "ar" ? "إرسال إعادة تعيين البريد الإلكتروني":"Send Reset Email"
+              }
+            </button>
           </form>
         </div>
       </Modal>
