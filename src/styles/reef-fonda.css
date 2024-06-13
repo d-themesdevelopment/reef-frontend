@@ -27312,8 +27312,8 @@ Preloader Area CSS
   border-radius: 7px;
 }
 
-.verification-form input:not(:last-child) {
-  margin-right: 10px;
+.verification-form input {
+  margin: 0 5px;
 }
 
 .Toastify {

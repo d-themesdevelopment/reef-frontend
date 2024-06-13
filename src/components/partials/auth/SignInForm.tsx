@@ -454,7 +454,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
         <div className="mb-0" style={{ textAlign: "center" }}>
           <label>{data?.verificationCodeTitle}</label>
 
-          <div className="verification-form">
+          <div className={`verification-form ${locale === "ar" ? "direction-rtl" : ""}`}>
             <input
               className="input-2 w-input"
               onChange={(e: any) => {
