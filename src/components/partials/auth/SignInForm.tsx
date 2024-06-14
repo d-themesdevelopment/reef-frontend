@@ -205,7 +205,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
           progress: undefined,
           theme: "colored",
         });
-      }, 120000);
+      }, 60000);
     }
   }, [modalIsOpen]);
 
