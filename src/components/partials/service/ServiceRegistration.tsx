@@ -125,8 +125,44 @@ const ServiceRegistration = ({
     createNewServiceToStrapi();
   };
 
+  const generateRandomString = () => {
+    // Define the characters to be used in the random string
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  
+    // Generate a random string of length 8
+    let result = '';
+    for (let i = 0; i < 8; i++) {
+      result += characters[Math.floor(Math.random() * characters.length)];
+    }
+  
+    return result;
+  }
+
+  const getCurrentDate = () => {
+    // Get the current date
+    const currentDate = new Date();
+
+    // Extract the year, month, and day
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    const result = `${year}/${month}/${day}`;
+    // Format the date as "YYYY/MM/DD"
+    return result;
+  }
+
   const createNewServiceToStrapi = async () => {
     console.log(user, "useruseruser!!");
+    const serviceSlug = services?.find((item: any) => item?.attributes.title === serviceData?.serviceName)?.slug
+    const serviceID = serviceSlug.split("-").reduce((arr:any, cur:any) => {
+      cur.charAt(0);
+
+      arr.push(cur);
+
+      return arr;
+    }, []).toString().toUppercase();
+
     try {
       const response = await fetch(`${apiUrl}/api/service-orders`, {
         method: "POST",
@@ -137,7 +173,7 @@ const ServiceRegistration = ({
         },
         body: JSON.stringify({
           data: {
-            serviceID: uuidv4(),
+            serviceID: serviceID + getCurrentDate() + generateRandomString(),
             serviceName: serviceData?.serviceName,
             personalInformation: {
               firstName: serviceData?.firstNameEn,
