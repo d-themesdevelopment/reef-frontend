@@ -154,7 +154,7 @@ const ServiceRegistration = ({
 
   const createNewServiceToStrapi = async () => {
     console.log(user, "useruseruser!!");
-    const serviceSlug = services?.find((item: any) => item?.attributes.title === serviceData?.serviceName)?.slug
+    const serviceSlug = services?.find((item: any) => item?.attributes.title === serviceData?.serviceName)?.attributes.slug
     const serviceID = serviceSlug.split("-").reduce((arr:any, cur:any) => {
       cur.charAt(0);
 
