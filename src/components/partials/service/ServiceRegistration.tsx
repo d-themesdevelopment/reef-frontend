@@ -36,8 +36,6 @@ const ServiceRegistration = ({
   registerPageData,
   locale,
 }: any) => {
-  console.log(currentService, "datadata");
-
   const [step, setStep] = useState<number>(0);
   const [serviceData, setServiceData] = useState<UserType>();
   const [category, setCategory] = useState<string>(
@@ -56,7 +54,6 @@ const ServiceRegistration = ({
     ),
   });
 
-  console.log(serviceData, "serviceDataserviceDataserviceData");
 
   // Function to check the correctness and validity of a Saudi Arabian phone number
   function isValidSaudiArabianPhoneNumber(phoneNumber: any) {
@@ -153,15 +150,15 @@ const ServiceRegistration = ({
   }
 
   const createNewServiceToStrapi = async () => {
-    console.log(user, "useruseruser!!");
-    const serviceSlug = services?.find((item: any) => item?.attributes.title === serviceData?.serviceName)?.attributes.slug
-    const serviceID = serviceSlug.split("-").reduce((arr:any, cur:any) => {
-      cur.charAt(0);
+    const serviceSlug = services?.find((item: any) => item?.attributes.title === serviceData?.serviceName)?.attributes.slug.replaceAll(" ", "")
 
-      arr.push(cur);
+    const serviceID = serviceSlug.split("-")?.reduce((arr:any, cur:any) => {
+      const temp = cur.charAt(0);
+
+      arr.push(temp);
 
       return arr;
-    }, []).toString().toUppercase();
+    }, []).toString().replaceAll(",", "").toUpperCase();
 
     try {
       const response = await fetch(`${apiUrl}/api/service-orders`, {
@@ -173,7 +170,7 @@ const ServiceRegistration = ({
         },
         body: JSON.stringify({
           data: {
-            serviceID: serviceID + getCurrentDate() + generateRandomString(),
+            serviceID: serviceID + "-" + getCurrentDate() + "-" + generateRandomString(),
             serviceName: serviceData?.serviceName,
             personalInformation: {
               firstName: serviceData?.firstNameEn,
