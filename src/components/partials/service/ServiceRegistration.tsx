@@ -36,6 +36,10 @@ const ServiceRegistration = ({
   registerPageData,
   locale,
 }: any) => {
+  console.log(currentService, "datadata");
+
+  console.log(services, "servicesservices")
+
   const [step, setStep] = useState<number>(0);
   const [serviceData, setServiceData] = useState<UserType>();
   const [category, setCategory] = useState<string>(
@@ -54,6 +58,7 @@ const ServiceRegistration = ({
     ),
   });
 
+  console.log(serviceData, "serviceDataserviceDataserviceData");
 
   // Function to check the correctness and validity of a Saudi Arabian phone number
   function isValidSaudiArabianPhoneNumber(phoneNumber: any) {
@@ -135,6 +140,10 @@ const ServiceRegistration = ({
     return result;
   }
 
+  const generateRandomNumber = () => {
+    return Math.floor(Math.random() * 9000000000) + 1000000000;
+  };
+
   const getCurrentDate = () => {
     // Get the current date
     const currentDate = new Date();
@@ -150,15 +159,19 @@ const ServiceRegistration = ({
   }
 
   const createNewServiceToStrapi = async () => {
-    const serviceSlug = services?.find((item: any) => item?.attributes.title === serviceData?.serviceName)?.attributes.slug.replaceAll(" ", "")
+    const serviceSlug = services?.find((item: any) => item?.attributes.title === serviceData?.serviceName)?.attributes.slug.replaceAll(" ", "");
 
     const serviceID = serviceSlug.split("-")?.reduce((arr:any, cur:any) => {
       const temp = cur.charAt(0);
+
+      console.log(serviceSlug.split("-"), cur, "adsfdf");
 
       arr.push(temp);
 
       return arr;
     }, []).toString().replaceAll(",", "").toUpperCase();
+
+    console.log(serviceID, "serviceSlug!!");
 
     try {
       const response = await fetch(`${apiUrl}/api/service-orders`, {
@@ -170,7 +183,7 @@ const ServiceRegistration = ({
         },
         body: JSON.stringify({
           data: {
-            serviceID: serviceID + "-" + getCurrentDate() + "-" + generateRandomString(),
+            serviceID: serviceID + "-" + getCurrentDate() + "-" + generateRandomNumber(),
             serviceName: serviceData?.serviceName,
             personalInformation: {
               firstName: serviceData?.firstNameEn,

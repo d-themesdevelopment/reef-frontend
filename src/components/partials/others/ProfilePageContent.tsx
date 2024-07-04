@@ -322,7 +322,7 @@ const ProfilePageContent = ({
                                 >
                                   <h3
                                     className="heading-h4-size-3 mg-bottom-0"
-                                    title={`Service ID: ${service?.serviceID}`}
+                                    title={`Service ID: ${service?.serviceID.slice(-10)}`}
                                   >
                                     <strong className="bold-text-5">
                                       {service?.serviceName}
@@ -332,8 +332,8 @@ const ProfilePageContent = ({
                                   <h3
                                     style={{ fontSize: "16px", color: "#999" }}
                                   >
-                                    #{service?.serviceID}
-                                    <CopyToClipboard text={service?.serviceID}>
+                                    #{service?.serviceID.slice(-10)}
+                                    <CopyToClipboard text={service?.serviceID.slice(-10)}>
                                       <button>
                                         <img
                                           src="./images/icons/copy-icon.svg"

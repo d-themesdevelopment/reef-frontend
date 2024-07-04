@@ -205,12 +205,13 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
           progress: undefined,
           theme: "colored",
         });
-      }, 60000);
+      }, 120000);
     }
   }, [modalIsOpen]);
 
   function closeModal() {
     setIsOpen(false);
+    setVerificationCode("");
   }
 
   const handleVerification = async () => {
@@ -454,7 +455,7 @@ const SignInForm = ({ locale, apiUrl, apiToken, data }: Props) => {
         <div className="mb-0" style={{ textAlign: "center" }}>
           <label>{data?.verificationCodeTitle}</label>
 
-          <div className={`verification-form ${locale === "ar" ? "direction-rtl" : ""}`}>
+          <div className={`verification-form`}>
             <input
               className="input-2 w-input"
               onChange={(e: any) => {
